@@ -54,13 +54,18 @@ function selectTab(i: number) {
 
 function onTablistKeydown(e: KeyboardEvent) {
   const total = tabs.length;
+  // Roving tabindex 以「实际具有 DOM 焦点的标签」为移动基准：
+  // 点击切换后若用户再把焦点放到另一标签（或编程聚焦），箭头应围绕当前聚焦项移动，
+  // 而不是围绕上一次激活/聚焦的内部索引（QA Agent L / Issue #14 收敛）。
+  const currentFocus = tabEls.value.findIndex((el) => el === document.activeElement);
+  const base = currentFocus === -1 ? focusIndex.value : currentFocus;
   let target = -1;
   switch (e.key) {
     case 'ArrowRight':
-      target = (focusIndex.value + 1) % total;
+      target = (base + 1) % total;
       break;
     case 'ArrowLeft':
-      target = (focusIndex.value - 1 + total) % total;
+      target = (base - 1 + total) % total;
       break;
     case 'Home':
       target = 0;

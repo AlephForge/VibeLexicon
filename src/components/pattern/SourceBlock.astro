@@ -17,7 +17,7 @@ const { source } = Astro.props;
 
 <footer class="flex flex-col gap-1.5 border-t border-border pt-4">
   <span class="section-label">来源 · Source</span>
-  <p class="text-sm leading-relaxed text-muted">
+  <p class="text-sm leading-relaxed text-muted-strong">
     <span class="font-medium text-ink">{source.author}</span>
     {source.note && <span> — {source.note}</span>}
   </p>

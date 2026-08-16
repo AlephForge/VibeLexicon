@@ -182,13 +182,26 @@ function drawerEl(): HTMLElement | null {
   return document.getElementById('docs-sidebar');
 }
 
+function lockScroll(): void {
+  const body = document.body;
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+  if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+  body.classList.add('docs-drawer-open');
+}
+
+function unlockScroll(): void {
+  document.body.classList.remove('docs-drawer-open');
+  document.body.style.paddingRight = '';
+}
+
 function setOpen(next: boolean): void {
   const drawer = drawerEl();
   if (!drawer) return;
 
   drawer.classList.toggle('is-open', next);
   open.value = next;
-  document.body.classList.toggle('docs-drawer-open', next);
+  if (next) lockScroll();
+  else unlockScroll();
 
   // 焦点管理：打开聚焦关闭按钮（抽屉内第一个可聚焦项），关闭归还触发者
   if (next) {

@@ -1,0 +1,66 @@
+# VibeLexicon CI — Pull Request quality gate (GitHub Issue #16)
+#
+# Runs on every pull request:
+#   pnpm install --frozen-lockfile
+#   → pnpm check      (Astro + TS type check)
+#   → pnpm validate   (Content Validator, full mode: 40 patterns / references / preview keys)
+#   → pnpm build      (production build + postbuild Pagefind index)
+#   → Playwright E2E  (chromium smoke + interaction regression)
+#
+# Least-privilege: only `contents: read` is required.
+
+name: CI
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+# Cancel superseded CI runs for the same ref after a new push.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify (type / content / build / e2e)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Astro / TypeScript check
+        run: pnpm check
+
+      - name: Content validation (full mode)
+        run: pnpm validate
+
+      - name: Production build (incl. Pagefind index)
+        run: pnpm build
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright chromium (with system deps)
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Playwright E2E
+        run: pnpm test:e2e

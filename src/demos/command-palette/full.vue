@@ -250,7 +250,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onGlobalKeydown));
             ]"
             @keydown="onPanelKeydown"
           >
-            <div class="flex items-center gap-2 border-b border-border px-4 py-3">
+            <div class="palette-input-row flex items-center gap-2 border-b border-border px-4 py-3">
               <span class="text-sm text-muted">⌕</span>
               <input
                 ref="inputRef"
@@ -343,5 +343,11 @@ onBeforeUnmount(() => document.removeEventListener('keydown', onGlobalKeydown));
 .palette-enter-from .palette-panel,
 .palette-leave-to .palette-panel {
   transform: translateY(-8px);
+}
+
+/* 输入行 focus 可见指示（QA Agent L / Issue #14）：input 自身 outline-none，用
+   :focus-within 在输入行上给出可见焦点环 */
+.palette-input-row:focus-within {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 </style>

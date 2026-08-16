@@ -72,7 +72,7 @@ onUnmounted(() => window.clearTimeout(timer));
       role="status"
       aria-live="polite"
       class="min-w-0 text-sm"
-      :class="state === 'error' ? 'font-medium text-accent-deep' : 'text-muted'"
+      :class="state === 'error' ? 'font-medium text-accent-deep' : 'text-muted-strong'"
     >
       {{
         state === 'success'

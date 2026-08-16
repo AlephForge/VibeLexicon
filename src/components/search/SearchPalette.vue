@@ -88,7 +88,7 @@ async function openPalette(): Promise<void> {
 
   open.value = true;
   closing.value = false;
-  document.body.classList.add('palette-open');
+  lockScroll();
 
   await nextTick();
   requestAnimationFrame(() => {
@@ -96,6 +96,27 @@ async function openPalette(): Promise<void> {
   });
   inputEl.value?.focus();
   void runSearch(query.value);
+}
+
+/** 滚动锁 + 滚动条宽度补偿（QA Agent L / Issue #14）：打开面板时锁定背景滚动，
+ *  并用滚动条宽度补 padding-right，避免内容横向跳动；关闭时恢复原值。
+ *  与现代浏览器视口滚动一致，body + html 双锁（与 demos/_shared/useScrollLock 同策略）。 */
+function lockScroll(): void {
+  const body = document.body;
+  const html = document.documentElement;
+  const scrollbarWidth = window.innerWidth - html.clientWidth;
+  if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+  body.style.overflow = 'hidden';
+  html.style.overflow = 'hidden';
+  body.classList.add('palette-open');
+}
+
+function unlockScroll(): void {
+  const body = document.body;
+  document.documentElement.style.overflow = '';
+  body.style.overflow = '';
+  body.style.paddingRight = '';
+  body.classList.remove('palette-open');
 }
 
 function closePalette(): void {
@@ -108,7 +129,7 @@ function closePalette(): void {
   window.setTimeout(() => {
     open.value = false;
     closing.value = false;
-    document.body.classList.remove('palette-open');
+    unlockScroll();
     restoreTarget?.focus();
     restoreTarget = null;
   }, CLOSE_ANIMATION_MS);
@@ -336,6 +357,11 @@ onBeforeUnmount(() => {
   z-index: 80;
 }
 
+/* 面板打开时锁定背景滚动（QA Agent L / Issue #14；scrollbar 补偿见 lockScroll()） */
+:global(body.palette-open) {
+  overflow: hidden;
+}
+
 /* client:visible 水合锚点（始终在视口内，见文件头注释） */
 .palette-anchor {
   position: fixed;
@@ -407,6 +433,11 @@ onBeforeUnmount(() => {
   font-size: 1rem;
   line-height: 1.4;
   color: var(--color-ink);
+}
+/* 输入行 focus 可见指示（QA Agent L / Issue #14）：input 自身 outline:none，
+   用 :focus-within 在整行上给出可见焦点环 */
+.palette__input-row:focus-within {
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-accent) 45%, transparent);
 }
 .palette__input::placeholder {
   color: var(--color-muted);

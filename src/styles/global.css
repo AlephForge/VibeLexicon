@@ -14,8 +14,17 @@
    - .section-label   小号 UI 标签文字
    - .focus-ring      显式 Focus Ring 引用
    - .text-display / .text-lead   排版辅助
+   - .text-muted-strong   可读 Muted（QA Agent L 新增，对比度契约，见下方说明）
    - .skip-link       键盘跳转主内容
    ──────────────────────────────────────────────────────────── */
+
+/* 可读 Muted 变量：--color-muted(#746E67) 在 canvas(#F5F0E8) 上仅 4.44:1、
+   tag-bg 上仅 4.29:1（WCAG AA 正文需 ≥4.5）。正文级 muted 统一加深为
+   muted 78% × ink 22% 混色（canvas 上 ≈5.66:1），不改 @theme 基线值。
+   QA Agent L（Issue #14）加入。 */
+:root {
+  --color-muted-strong: color-mix(in srgb, var(--color-muted) 78%, var(--color-ink));
+}
 
 /* 顶部暖色光晕背景（设计参考：radial-gradient 暖光） */
 body {
@@ -79,6 +88,10 @@ body {
    组件契约类（W3 页面 Agent 依赖以下类名，改动需谨慎）
    ──────────────────────────────────────────────── */
 @layer components {
+  /* 正文级可读 Muted（见文件头说明）：供 canvas/tag-bg 上的 muted 正文使用 */
+  .text-muted-strong {
+    color: var(--color-muted-strong);
+  }
   /* 页面容器：max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 */
   .container-lexicon {
     width: 100%;
@@ -211,14 +224,14 @@ body {
     border-radius: var(--radius-panel);
   }
 
-  /* Pattern 标签：TagBg 底、小圆角、小字 */
+  /* Pattern 标签：TagBg 底、小圆角、小字（muted 加深保证 tag-bg 上 ≥4.5:1） */
   .tag {
     display: inline-flex;
     align-items: center;
     padding: 0.1875rem 0.5rem;
     border-radius: var(--radius-tag);
     background: var(--color-tag-bg);
-    color: var(--color-muted);
+    color: var(--color-muted-strong);
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1.4;
@@ -241,7 +254,7 @@ body {
     outline-offset: 2px;
   }
 
-  /* 排版辅助：display 用 Serif；lead 段落用 muted 灰 */
+  /* 排版辅助：display 用 Serif；lead 段落用「可读 muted」（canvas 上 ≥4.5:1） */
   .text-display {
     font-family: var(--font-serif);
     font-weight: 700;
@@ -251,7 +264,7 @@ body {
   .text-lead {
     font-size: 1.125rem;
     line-height: 1.75;
-    color: var(--color-muted);
+    color: var(--color-muted-strong);
   }
 
   /* 键盘跳转主内容（BaseLayout 内使用） */

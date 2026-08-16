@@ -142,7 +142,7 @@ onMounted(() => {
       </div>
       <!-- 命中计数：a11y 时用 aria-live 播报过滤结果变化 -->
       <p
-        class="ml-auto hidden shrink-0 text-xs tabular-nums text-muted sm:block"
+        class="ml-auto hidden shrink-0 text-xs tabular-nums text-muted-strong sm:block"
         aria-live="polite"
       >
         命中 {{ count }} / {{ props.patterns.length }}

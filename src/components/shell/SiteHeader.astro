@@ -417,13 +417,27 @@ const isActive = (href: string) => pathname === href;
     const desktopMq = window.matchMedia('(min-width: 48rem)');
     let lastFocused: HTMLElement | null = null;
 
+    // 背景滚动锁 + 滚动条宽度补偿（QA Agent L / Issue #14）：
+    // 避免打开抽屉时页面因滚动条消失而横向跳动；关闭时恢复原 padding。
+    const lockScroll = (): void => {
+      const body = document.body;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+      body.classList.add('nav-open');
+    };
+    const unlockScroll = (): void => {
+      document.body.classList.remove('nav-open');
+      document.body.style.paddingRight = '';
+    };
+
     // 注意：必须用 const 箭头函数 —— 函数声明会被提升，
     // 无法捕获上方 guard 之后的 null 收窄（TS 18047）
     const setOpen = (open: boolean): void => {
       nav.classList.toggle('is-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
-      document.body.classList.toggle('nav-open', open);
+      if (open) lockScroll();
+      else unlockScroll();
 
       if (open) {
         lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
