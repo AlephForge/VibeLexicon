@@ -1,6 +1,8 @@
 ---
 import '@/styles/tokens.css';
 import '@/styles/global.css';
+import SiteHeader from '@/components/shell/SiteHeader.astro';
+import SiteFooter from '@/components/shell/SiteFooter.astro';
 
 interface Props {
   title?: string;
@@ -14,9 +16,9 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('/VibeLexicon/og-cover.png', Astro.site);
 const BASE = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(`${BASE}og-cover.png`, Astro.site);
 ---
 
 <!doctype html>
@@ -24,6 +26,7 @@ const BASE = import.meta.env.BASE_URL;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f0e8" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -37,10 +40,11 @@ const BASE = import.meta.env.BASE_URL;
     <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
   </head>
   <body class="min-h-screen flex flex-col">
-    <slot name="header" />
-    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <SiteHeader />
+    <main id="main-content" class="container-lexicon w-full flex-1" tabindex="-1">
       <slot />
     </main>
-    <slot name="footer" />
+    <SiteFooter />
   </body>
 </html>

@@ -1,0 +1,76 @@
+---
+title: Drawer
+titleZh: 抽屉
+slug: drawer
+category: components
+order: 32
+summary: 从屏幕侧边滑出的面板，用于承载次级导航或操作内容，而不打断当前页面的主任务。
+tags:
+  - 侧边面板
+  - 导航
+  - 移动端
+  - 操作面板
+preview: drawer
+whatIs: |
+  抽屉（Drawer）是一种从屏幕边缘滑入的侧边面板，通常从右侧或左侧进入，并覆盖在
+  部分内容之上。它用于在不离开当前页面的前提下，承载导航、筛选、操作项或设置等
+  次级内容；与模态框不同，抽屉的宽面板更适合容纳列表式内容，用户在关闭前仍能保留
+  当前页面的语境。
+useCases:
+  - 移动端收起主导航，打开时滑出菜单面板
+  - 展示筛选器或高级设置，不离开当前页面
+  - 承载与当前任务相关的操作清单
+  - 需要比模态框更大横向空间的内容
+limitations:
+  - 只适合单一面板，不适合多层级深度导航
+  - 内容过多时依赖滚动，层级与可达性容易失控
+  - 会遮挡页面内容，不适合需要对照上下文的操作
+prompt: |
+  请在页面右侧实现一个 Drawer 抽屉面板：
+
+  - 结构位置：面板从视口右缘滑入，宽度约 320px，遮罩覆盖其余区域；触发按钮位于页面右上角。
+  - 行为：打开时面板带遮罩滑入，关闭时反向滑出；点击遮罩、按 Esc 或点击关闭按钮均可关闭；打开期间锁定背景滚动。
+  - Desktop / Mobile 差异：桌面端可叠加在内容之上；窄屏下可占满约 85% 宽度，避免完全遮住上下文。
+  - 可访问性：面板使用 role="dialog" 与 aria-modal="true"，初始焦点移入面板，焦点限制在面板内，关闭后焦点归还触发按钮。
+  - 易错点：不要忘记背景滚动锁定与焦点陷阱；动画时长 220–280ms 且尊重 prefers-reduced-motion；内容过多时面板内部需可滚动。
+related:
+  - modal
+  - sidebar-navigation
+  - hamburger-menu
+compare:
+  - modal
+source:
+  author: Material Design
+  url: https://m3.material.io/components/navigation-drawer/overview
+  note: 示例来源占位，W2 内容 Agent 需按实际参考来源替换
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->
+
+<!--
+  ============================================================
+  W1 示例 fixture —— 也是 W2 内容 Agent 的参考模板
+  ============================================================
+
+  本文件承担两个角色：
+  1. 合法内容样例：frontmatter 全部字段通过 `pnpm validate -- --incomplete`（0 FAIL）；
+  2. W2 撰写规范的可执行示例（配合 scripts/validate-patterns.ts 使用）。
+
+  —— 块标量（多行字符串）格式约定 ——
+  - whatIs / prompt 使用 YAML 块标量 `|`（保留末尾换行；想去掉末尾换行用 `|-`）；
+  - 块标量内容每行必须缩进至少 2 个空格，且**顶格对齐**、**禁止使用制表符（Tab）**；
+  - 块标量结束后，下一个 frontmatter 键必须回到第 0 列；
+  - 普通短字段（title / titleZh / summary）用单行纯量即可，不要滥用引号。
+
+  —— 字段约定 ——
+  - slug 必须与文件名一致（validator 对不一致直接 FAIL，路由依赖 data.slug）；
+  - category 必须取 src/lib/categories.ts 的四个 key 之一，order 在分类内唯一；
+  - preview 必须取 src/demos/registry.ts 的 PREVIEW_KEYS（本项目约定 slug 与 preview 同名）；
+  - related / compare 引用其他词条的 slug，禁止自引用；建议成对引用以利导航；
+  - 长度约束：summary 10–200 字符、whatIs ≥30 字符、prompt ≥50 字符（中文字符按 1 计）；
+  - source.url 必须是合法 URL，来源需可追溯（版权策略见 AGENTS.md §9）。
+
+  ⚠ W2 注意：本文件的 related / compare 引用了尚未创建的词条
+  （modal / sidebar-navigation / hamburger-menu）。--incomplete 模式下会以 WARN
+  提示（不阻断）；W2 完成全部 40 个词条后，CI 使用完整模式 `pnpm validate` 必须 0 FAIL。
+-->

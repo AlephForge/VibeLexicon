@@ -19,6 +19,8 @@
   --color-secondary: #7c876d;
   --color-tag-bg: #f2ece5;
   --color-dark-bg: #2c2520;
+  --color-dark-bg-hover: #000000;
+  --color-panel: #fdfbf7;
 
   /* Typography */
   --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -29,12 +31,30 @@
   --radius-stage: 20px;
   --radius-control: 12px;
   --radius-pill: 9999px;
+  --radius-panel: 24px;
+  --radius-tag: 6px;
+
+  /* Shadows — 克制：轻阴影 + hover 加深，禁止全局夸张阴影 */
+  --shadow-card: 0 4px 6px -1px rgba(44, 37, 32, 0.05);
+  --shadow-card-hover: 0 10px 15px -3px rgba(44, 37, 32, 0.1);
 
   /* Motion */
   --ease-feedback: cubic-bezier(0.2, 0.6, 0.2, 1);
   --duration-feedback: 180ms;
   --duration-drawer: 260ms;
   --duration-modal: 210ms;
+}
+
+/* Header 高度契约：SiteHeader 与其同步，锚点 offset / scroll-padding 依赖 */
+@layer base {
+  :root {
+    --header-h: 3.5rem;
+  }
+  @media (min-width: 48rem) {
+    :root {
+      --header-h: 4rem;
+    }
+  }
 }
 
 /* Base layer */
@@ -71,11 +91,11 @@
   }
 }
 
-/* Focus ring 全局基线：键盘可见、不被视觉重置吞掉 */
+/* Focus ring 全局基线：键盘可见、不被视觉重置吞掉。
+   outline 自动跟随元素自身圆角，无需额外 border-radius */
 @layer base {
   :focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
-    border-radius: 2px;
   }
 }

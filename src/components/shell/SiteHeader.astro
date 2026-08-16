@@ -1,0 +1,468 @@
+---
+// VibeLexicon 全站 Header（Shell）
+// 契约：
+// - 搜索按钮挂载点 [data-search-trigger]（W4 Search Agent 监听，勿自行实现搜索）
+// - 移动导航按钮 [data-nav-toggle] ↔ #site-nav（aria-expanded / aria-controls）
+// - --header-h 与 :root 同步（tokens.css），锚点 scroll-padding 依赖
+const BASE = import.meta.env.BASE_URL;
+const pathname = Astro.url.pathname;
+const GH_URL = 'https://github.com/AlephForge/VibeLexicon';
+const GITHUB_PATH =
+  'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12';
+
+const navItems = [
+  { href: `${BASE}`, label: '图鉴' },
+  { href: `${BASE}docs/`, label: '文档' },
+  { href: `${BASE}docs/stream/`, label: '连续阅读' },
+  { href: `${BASE}about/`, label: '关于' },
+];
+
+const isActive = (href: string) => pathname === href;
+---
+
+<header class="site-header">
+  <div class="container-lexicon site-header__inner">
+    <a class="site-header__logo" href={BASE}>
+      VibeLexicon<span class="site-header__logo-dot" aria-hidden="true">.</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="主导航">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['site-header__link', { 'site-header__link--active': isActive(item.href) }]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="site-header__actions">
+      <a
+        href={GH_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="site-header__icon-btn"
+        aria-label="GitHub 仓库（在新窗口打开）"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+          <path d={GITHUB_PATH} />
+        </svg>
+      </a>
+
+      <button type="button" data-search-trigger class="site-header__search" aria-label="打开搜索（⌘K）">
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <span class="site-header__search-text">搜索</span>
+        <kbd class="site-header__kbd">⌘K</kbd>
+      </button>
+
+      <button
+        type="button"
+        class="site-header__icon-btn site-header__burger"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="site-nav"
+        aria-haspopup="dialog"
+        aria-label="打开导航"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- 移动端抽屉：必须是 <header> 的兄弟节点，
+     backdrop-filter 会为 fixed 后代创建包含块，放进 header 会导致全屏失效 -->
+<div id="site-nav" class="mobile-nav" role="dialog" aria-modal="true" aria-label="站点导航">
+  <div class="mobile-nav__backdrop" data-nav-backdrop></div>
+  <div class="mobile-nav__panel">
+    <div class="mobile-nav__panel-head">
+      <span class="mobile-nav__brand">
+        VibeLexicon<span class="site-header__logo-dot" aria-hidden="true">.</span>
+      </span>
+      <button type="button" class="site-header__icon-btn mobile-nav__close" data-nav-close aria-label="关闭导航">
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-nav__links" aria-label="移动端导航">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={['mobile-nav__link', { 'mobile-nav__link--active': isActive(item.href) }]}
+            aria-current={isActive(item.href) ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <a
+      href={GH_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mobile-nav__github"
+    >
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+        <path d={GITHUB_PATH} />
+      </svg>
+      GitHub 仓库
+    </a>
+  </div>
+</div>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: color-mix(in srgb, var(--color-canvas) 85%, transparent);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-line);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+  }
+  .site-header__logo {
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--duration-feedback) var(--ease-feedback);
+  }
+  .site-header__logo:hover {
+    color: var(--color-accent-deep);
+  }
+  .site-header__logo-dot {
+    color: var(--color-accent);
+  }
+
+  /* 桌面导航：居中于 Logo 与右侧操作之间 */
+  .site-header__nav {
+    display: none;
+    align-items: stretch;
+    gap: 0.25rem;
+    height: 100%;
+  }
+  .site-header__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.875rem;
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition:
+      color var(--duration-feedback) var(--ease-feedback),
+      border-color var(--duration-feedback) var(--ease-feedback);
+  }
+  .site-header__link:hover {
+    color: var(--color-ink);
+  }
+  .site-header__link--active {
+    color: var(--color-ink);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  .site-header__icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-muted);
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+      color var(--duration-feedback) var(--ease-feedback),
+      background-color var(--duration-feedback) var(--ease-feedback);
+  }
+  .site-header__icon-btn:hover {
+    color: var(--color-ink);
+    background: var(--color-surface);
+  }
+  .site-header__search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    background: var(--color-surface);
+    color: var(--color-muted);
+    font-family: inherit;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+      border-color var(--duration-feedback) var(--ease-feedback),
+      color var(--duration-feedback) var(--ease-feedback),
+      background-color var(--duration-feedback) var(--ease-feedback);
+  }
+  .site-header__search:hover {
+    border-color: var(--color-accent);
+    color: var(--color-ink);
+    background: var(--color-card);
+  }
+  .site-header__search-text,
+  .site-header__kbd {
+    display: none;
+  }
+  .site-header__kbd {
+    padding: 0.125rem 0.375rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-tag);
+    background: var(--color-card);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 48rem) {
+    .site-header__nav {
+      display: flex;
+      margin-inline: auto;
+    }
+    .site-header__actions {
+      margin-left: 0;
+    }
+    .site-header__search {
+      padding: 0 1rem;
+    }
+    .site-header__search-text,
+    .site-header__kbd {
+      display: inline;
+    }
+    .site-header__burger {
+      display: none;
+    }
+  }
+
+  /* ── 移动端抽屉 ── */
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity var(--duration-drawer) var(--ease-feedback),
+      visibility 0s linear var(--duration-drawer);
+  }
+  .mobile-nav.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity var(--duration-drawer) var(--ease-feedback);
+  }
+  .mobile-nav__backdrop {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--color-dark-bg) 40%, transparent);
+  }
+  .mobile-nav__panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    width: min(20rem, 88vw);
+    background: var(--color-surface);
+    border-left: 1px solid var(--color-line);
+    transform: translateX(100%);
+    transition: transform var(--duration-drawer) var(--ease-feedback);
+  }
+  .mobile-nav.is-open .mobile-nav__panel {
+    transform: translateX(0);
+  }
+  .mobile-nav__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .mobile-nav__brand {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .mobile-nav__links {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding: 0.75rem;
+    overflow-y: auto;
+  }
+  .mobile-nav__link {
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-control);
+    font-size: 1rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition:
+      background-color var(--duration-feedback) var(--ease-feedback),
+      color var(--duration-feedback) var(--ease-feedback);
+  }
+  .mobile-nav__link:hover {
+    background: var(--color-tag-bg);
+  }
+  .mobile-nav__link--active {
+    background: var(--color-tag-bg);
+    color: var(--color-accent-deep);
+    font-weight: 600;
+  }
+  .mobile-nav__github {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color var(--duration-feedback) var(--ease-feedback);
+  }
+  .mobile-nav__github:hover {
+    color: var(--color-ink);
+  }
+
+  /* 抽屉打开时锁定背景滚动 */
+  :global(body.nav-open) {
+    overflow: hidden;
+  }
+
+  @media (min-width: 48rem) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // 包一层 IIFE：内联 script 被 Astro 打包为模块，不允许顶层 return
+  (() => {
+    const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+    const nav = document.getElementById('site-nav');
+    if (!toggle || !nav) return;
+
+    const closeBtn = nav.querySelector<HTMLButtonElement>('[data-nav-close]');
+    const backdrop = nav.querySelector<HTMLElement>('[data-nav-backdrop]');
+    if (!closeBtn || !backdrop) return;
+
+    const openLabel = '打开导航';
+    const closeLabel = '关闭导航';
+    const desktopMq = window.matchMedia('(min-width: 48rem)');
+    let lastFocused: HTMLElement | null = null;
+
+    // 注意：必须用 const 箭头函数 —— 函数声明会被提升，
+    // 无法捕获上方 guard 之后的 null 收窄（TS 18047）
+    const setOpen = (open: boolean): void => {
+      nav.classList.toggle('is-open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
+      document.body.classList.toggle('nav-open', open);
+
+      if (open) {
+        lastFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        closeBtn.focus();
+      } else {
+        lastFocused?.focus();
+        lastFocused = null;
+      }
+    };
+
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+    closeBtn.addEventListener('click', () => setOpen(false));
+    backdrop.addEventListener('click', () => setOpen(false));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+        event.preventDefault();
+        setOpen(false);
+      }
+    });
+
+    // 简单焦点圈：Tab / Shift+Tab 在抽屉内循环
+    nav.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const focusables = Array.from(nav.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'));
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
+
+    desktopMq.addEventListener('change', () => {
+      if (desktopMq.matches) setOpen(false);
+    });
+  })();
+</script>
