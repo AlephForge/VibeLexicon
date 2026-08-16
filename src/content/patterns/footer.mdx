@@ -1,0 +1,56 @@
+---
+title: Footer
+titleZh: 页脚
+slug: footer
+category: page-structure
+order: 20
+summary: 页面底部的收尾区块，承载品牌、联系、导航与版权等补充信息，是浏览路径的终点。
+tags:
+  - 页面底部
+  - 版权信息
+  - 次级导航
+  - 联系入口
+preview: footer
+whatIs: |
+  页脚（Footer）是页面最底部的收尾区块，通常收纳品牌标志、联系与社会入口、次级导航、版权与
+  法律声明等不适合占用导航栏的内容。它让滚动到页面终点的用户仍能找到「去向哪里、如何联系、
+  这是什么站点」的答案；一个有效的页脚应保持结构简洁、层级清楚，避免变成第二个导航栏或堆放
+  无关信息的杂物区。
+useCases:
+  - 全站统一承载版权、隐私与法律声明
+  - 提供联系、社交与订阅等品牌触点
+  - 收纳主导航之外的次级链接与站点地图入口
+  - 长单页或落地页在结尾给用户留一个收束出口
+limitations:
+  - 链接堆砌过多会让页脚失去信息层级
+  - 与主导航重复度过高时反而增加认知负担
+  - 移动端折叠不足会拖长页面滚动的收尾体验
+prompt: |
+  请实现一个 Footer 页脚区块，作为页面底部的信息收束：
+
+  - 结构位置：区块位于 body 的末尾，与主导航、正文并列；自左至右（或自上而下）包含品牌与
+    简介、联系信息、次级导航分组、社交入口与版权行；整体用 <footer> 语义包裹。
+  - 关键行为：链接都带真实 href 且目标合理；版权与法律文本可读但克制；重要联系入口在移动端
+    也可一键触达；页脚不随正文交互滚动而消失。
+  - Desktop / Mobile 差异：桌面端常以 3–4 列分组展示；窄屏折叠成纵向堆叠，必要时用手风琴或
+    可展开分组收纳次级链接。
+  - 可访问性：<footer> 中同一区块次级导航数量多时用 <nav> 并提供 aria-label 区分；链接文本
+    表意清晰；对比度与正文一致。
+  - 易错点：不要让页脚喧宾夺主地塞满所有页面信息；避免版权行之外放大量无功能的装饰内容；
+    不要把关键的可访问联系信息埋藏在页脚深处。
+related:
+  - multi-page-website
+  - sticky-navbar
+  - back-to-top
+  - faq-section
+  - form
+compare:
+  - sticky-navbar
+  - sidebar-navigation
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer
+  note: 页脚语义与结构参考 MDN <footer>，定义、场景与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

@@ -1,0 +1,56 @@
+---
+title: Hero Section
+titleZh: 首屏
+slug: hero-section
+category: page-structure
+order: 15
+summary: 页面顶部承载主标题、副文案与行动入口的区域，在数秒内交代主题并引导继续浏览或转化。
+tags:
+  - 页面首屏
+  - 主标题
+  - 行动入口
+  - 视觉焦点
+preview: hero-section
+whatIs: |
+  首屏（Hero Section）是页面加载后第一眼可见的顶部区块，通常由大标题、简短副文案、一个主要
+  行动按钮与背景视觉组成。它的任务是极其高效地交代「这是哪里、提供什么、下一步做什么」，
+  同时与下方内容形成连续叙事；克制、信息密度合理的 Hero 的价值远大于占满屏幕却空洞的横幅。
+useCases:
+  - 主页或落地页用首屏传达价值主张与主 CTA
+  - 产品页用首屏点明卖点并承接浏览入口
+  - 内容站用首屏交代主题、作者与阅读动作
+  - 活动页快速传递时间、地点与参与入口
+limitations:
+  - 占满全屏会把正文关键信息推到折叠线之下
+  - 装饰性视觉多过信息时反噬扫描效率
+  - 动画与重背景图会拖慢首屏加载并加重移动端负担
+prompt: |
+  请实现一个 Hero Section 页面首屏区块，置于页面最顶部：
+
+  - 结构位置：h1 主标题、一句话副文案、主要行动按钮（CTA）自上而下排列；背景视觉可延伸至
+    整屏，但内容区对齐到与下方正文相同的容器宽度。
+  - 关键行为：CTA 指向真实可用的目标且视觉上是唯一主按钮；滚动后 Hero 正常让位给内容，
+    首屏内部不做自动轮播；内容首屏即呈现，不依赖动画后才显示。
+  - Desktop / Mobile 差异：桌面端控制首屏高度避免占满整屏；窄屏下标题字号收缩、背景图
+    使用低权重资源并保留主体内容的可读性。
+  - 可访问性：标题严格按 h1 开始且每页唯一；背景图提供替代文本或标记为装饰；文本与背景
+    对比度满足可读要求；动画尊重 prefers-reduced-motion。
+  - 易错点：不要把整个 Hero 做成一次性宣传横幅而忽略下方内容入口；避免多个等权重按钮并列；
+    不要让 Hero 的高度导致首屏看不到任何正文线索。
+related:
+  - landing-page
+  - full-bleed-layout
+  - feature-grid
+  - split-screen-layout
+  - single-page-website
+compare:
+  - landing-page
+  - split-screen-layout
+  - carousel
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header
+  note: 页面顶部的语义组织参考 MDN <header>，定义、场景与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

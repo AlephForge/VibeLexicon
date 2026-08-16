@@ -1,0 +1,55 @@
+---
+title: FAQ Section
+titleZh: 常见问题区
+slug: faq-section
+category: page-structure
+order: 19
+summary: 把用户高频问题与答案集中组织的页面区块，用问答形式辅助决策并降低重复咨询成本。
+tags:
+  - 常见问题
+  - 问答区块
+  - 自助答疑
+  - 折叠面板
+preview: faq-section
+whatIs: |
+  常见问题区（FAQ Section）把用户最常提出的问题连同简短答案集中到一个区块，通常与手风琴或
+  锚点跳转配合，让访客按需展开相关条目。它一方面缓解重复的客服咨询，另一方面承接用户决策前
+  的疑虑；好的 FAQ 从真实问题出发、答案克制直接，而不是堆砌营销话术，并且结构上保证问答
+  对可被单独定位与分享。
+useCases:
+  - 产品页、活动页承接高频咨询并辅助转化决策
+  - 帮助中心将常见疑问组织成可检索的条目
+  - 文档站或工具页以问答方式补充操作细节
+  - 落地页用三五个回答消除首屏之后的关键顾虑
+limitations:
+  - 问答过多或答案冗长会让区块流动滞重
+  - 提问角度千篇一律时对真实用户帮助有限
+  - 全部收起默认态会降低内容可发现性
+prompt: |
+  请实现一个 FAQ Section 常见问题区区块，集中呈现高频问答：
+
+  - 结构位置：区块有可见的 h2 标题；下方为一组问答条目，每个条目含问题按钮与对应的答案内容；
+    可置于正文之后、footer 之前，也可挂在页面侧边。
+  - 关键行为：默认仅显示问题行，点击或键盘激活后展开答案；可使用手风琴分组并支持同一组内
+    只展开一项；每条问答可加锚点 id 以支持单独分享与定位。
+  - Desktop / Mobile 差异：桌面端可两列并排提升密度；窄屏保持单列并使用足够大的触控目标。
+  - 可访问性：问题用 button 表达并带 aria-expanded 与 aria-controls；答案可用 disclosure 语义
+    或用 role="region" + aria-labelledby；键盘方向键可在条目间导航。
+  - 易错点：不要用 div 冒充可交互按钮；避免默认展开全部条目使区块失去折叠价值；不要把答案
+    写成没有信息增量的重复宣传。
+related:
+  - accordion
+  - anchor-link
+  - footer
+  - form
+  - command-palette
+compare:
+  - accordion
+  - tabs
+source:
+  author: W3C WAI-ARIA Authoring Practices Guide（APG）
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+  note: 问答展开的交互与 ARIA 参考 APG Disclosure 模式，定义、示例与场景为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

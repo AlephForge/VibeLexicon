@@ -1,0 +1,56 @@
+---
+title: Sticky Storytelling
+titleZh: 固定叙事区
+slug: sticky-storytelling
+category: page-structure
+order: 17
+summary: 滚动时让文本或画面固定在视口一侧、随滚动逐段推进内容的叙事式页面区块。
+tags:
+  - 滚动叙事
+  - 固定定位
+  - 沉浸体验
+  - 时序内容
+preview: sticky-storytelling
+whatIs: |
+  固定叙事区（Sticky Storytelling）利用 position: sticky 或滚动驱动的动画，让某幅画面或文本
+  在滚动进程中停留在视口中，同时邻近区域的内容逐段替换，形成「滚动即翻页」的沉浸节奏。它擅长
+  把时间、过程或变化可视化，常用于品牌故事、产品演示与创作过程展示；由于以滚动进度为唯一驱动，
+  必须为键盘、读屏与 prefers-reduced-motion 提供可替代的线性阅读路径。
+useCases:
+  - 品牌故事或产品发布页的沉浸式叙事
+  - 把制作过程、时间线拆成可逐段呈现的章节
+  - 长案例如案例研究页中的要点连播
+  - 需要「滚动有反馈」的增长式体验场景
+limitations:
+  - 长滚动会拉长页体温并增加阅读惰性
+  - 移动端小屏上固定元素容易遮挡正文
+  - 过度为叙事牺牲扫读效率，信息查找变难
+prompt: |
+  请实现一个 Sticky Storytelling 固定叙事区，用滚动驱动的方式展开一段过程性内容：
+
+  - 结构位置：左侧（或上方）为随滚动切换的固定视觉区，右侧（或下方）为逐段出现的文本；
+    区块插入在页面之中，前后与常规内容正常衔接。
+  - 关键行为：使用 CSS position: sticky 或 ScrollDriven Animations 固定视觉区；文本段落配合
+    滚动进度切换并高亮当前步；滚动方向回退时内容同步回退，不额外嵌套复杂手势。
+  - Desktop / Mobile 差异：桌面端并排图文；窄屏下固定区收缩为顶部小图或改为普通滚动段，
+    不得让固定元素遮挡互动目标。
+  - 可访问性：全部文本在 DOM 中按顺序可读，读屏用户不依赖滚动进度；动画尊重
+    prefers-reduced-motion，必要时退化为一次性展示完整内容。
+  - 易错点：不要用滚动劫持或长时间锁死滚动；避免关键结论只存在于动画中途；不要把整页都
+    做成固定叙事而抹掉信息层级。
+related:
+  - single-page-website
+  - anchor-link
+  - timeline
+  - hero-section
+  - back-to-top
+compare:
+  - timeline
+  - carousel
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations
+  note: 滚动驱动动画的实现基础参考 MDN 文档，定义、场景与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->
