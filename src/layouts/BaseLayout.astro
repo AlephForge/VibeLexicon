@@ -1,0 +1,46 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: string;
+}
+
+const {
+  title = 'VibeLexicon · 界面视觉词典',
+  description = '把 UI 术语，变成看得见的灵感。收录常见布局、页面结构、导航方式与界面组件。',
+  ogType = 'website',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/VibeLexicon/og-cover.png', Astro.site);
+const BASE = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="VibeLexicon" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <slot name="header" />
+    <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>
