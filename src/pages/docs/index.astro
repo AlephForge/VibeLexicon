@@ -1,0 +1,461 @@
+---
+// Docs 文档索引页（Issue #8 / Docs Agent F）—— 面向熟手的「查」模式。
+//
+// 结构（桌面三栏，Warm Editorial Token，非第三方文档主题）：
+//   1. 左 DocsSidebar：筛选框 + 四分类目录（≥64rem sticky；<64rem 转抽屉）
+//   2. 中主区：当前分类标题 + 高密度词条索引（PatternIndexRow，无大预览图，可进 Detail）
+//   3. 右栏（≥80rem）：本页目录快速锚点
+//
+// URL 状态（URL as Shareable State，无 JS 也正确）：
+//   - readViewState(Astro.url) 解析 ?q= / ?category=（非法分类归一化 null → 显示全部，不 404）
+//   - 服务端预过滤：不匹配的词条行渲染 hidden；目录链接同样预过滤
+//   - 客户端唯一交互（两个轻量 Vue 挂载）：
+//       DocsLayout mode="filter"  client:idle   实时筛选 + replaceState ?q=
+//       DocsLayout mode="drawer"  client:visible 移动抽屉（开/关、Esc、滚动锁、焦点、aria）
+//   - 视图切换：「索引 / 连续阅读」（stream 带 context query）+ Gallery 上下文链接
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import DocsSidebar from '@/components/docs/DocsSidebar.astro';
+import PatternIndexRow from '@/components/docs/PatternIndexRow.astro';
+import DocsLayout from '@/components/docs/DocsLayout.vue';
+
+import { getCollection } from 'astro:content';
+import { CATEGORIES, getCategory } from '@/lib/categories';
+import { filterPatterns, sortPatterns, type PatternIndex } from '@/lib/patterns';
+import { buildContextLink, readViewState } from '@/lib/url';
+
+const entries = await getCollection('patterns');
+
+// 最小索引投影（PatternIndex）—— 与 Gallery / Stream 同一形态（One Source, Four Views）
+const patternIndex: PatternIndex[] = sortPatterns(
+  entries.map((p) => ({
+    slug: p.data.slug,
+    title: p.data.title,
+    titleZh: p.data.titleZh,
+    category: p.data.category,
+    order: p.data.order,
+    summary: p.data.summary,
+    tags: p.data.tags,
+    preview: p.data.preview,
+  })),
+);
+
+const { q, category } = readViewState(Astro.url);
+const filtered = filterPatterns(patternIndex, q, category);
+const matchedSlugs = new Set(filtered.map((p) => p.slug));
+const activeCat = category ? getCategory(category) : undefined;
+
+const BASE = import.meta.env.BASE_URL;
+const detailHref = (slug: string): string => `${BASE}patterns/${slug}/`;
+const galleryHref = buildContextLink('/', Astro.url);
+const streamHref = buildContextLink('/docs/stream', Astro.url);
+const indexHref = q ? `${BASE}docs/?q=${encodeURIComponent(q)}` : `${BASE}docs/`;
+
+// Docs 页「一句分类说明」（页级文案，不反写共享 lib）
+const CATEGORY_DESC: Record<string, string> = {
+  layout: '页面排布的骨架：栅格、卡片与流式如何组织内容的空间与密度。',
+  'page-structure': '站点级结构模式：从单页到多页，从落地页、案例页到 FAQ 与页脚。',
+  navigation: '移动与切换的模式：用户如何到达、返回，以及在平级视图之间切换。',
+  components: '高频交互组件：弹窗、抽屉、标签、提示与命令式反馈，保证一致可用。',
+};
+const ALL_DESC = '40 个界面模式词条按分类编排；输入关键词快速定位，分类之间可切换，词条可进入详情。';
+
+// 分类元信息（供岛在静态托管下保持标题 / 说明与 URL 状态一致）
+const categoryMeta = CATEGORIES.map((c) => ({
+  key: c.key,
+  name: c.name,
+  nameZh: c.nameZh,
+  desc: CATEGORY_DESC[c.key],
+}));
+
+const totalCount = filtered.length;
+const isEmpty = totalCount === 0;
+
+const pageTitle = activeCat
+  ? `Docs · ${activeCat.name} ${activeCat.nameZh} | VibeLexicon`
+  : 'Docs · 界面模式索引 | VibeLexicon';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description="VibeLexicon 文档索引：面向熟手的界面模式词条检索，支持按分类与关键词快速定位。"
+>
+  <div class="docs-shell" id="docs-top">
+    <!-- 左：目录（移动端抽屉 / 桌面 sticky） -->
+    <DocsSidebar
+      patterns={patternIndex}
+      q={q}
+      category={category}
+      matchedSlugs={matchedSlugs}
+      categoryMeta={categoryMeta}
+    />
+
+    <!-- 中：主区 -->
+    <div class="docs-main">
+      <!-- 工具条：移动端抽屉按钮 + 视图切换 + Gallery 上下文链接 -->
+      <div class="docs-toolbar">
+        <DocsLayout mode="drawer" client:visible />
+
+        <div class="docs-view-switch" role="group" aria-label="视图切换">
+          <a
+            class="docs-view-switch__link is-active"
+            href={indexHref}
+            data-docs-index-link
+            aria-current="page"
+          >
+            索引
+          </a>
+          <a class="docs-view-switch__link" href={streamHref} data-docs-stream-link>
+            连续阅读
+          </a>
+        </div>
+
+        <a class="docs-toolbar__gallery" href={galleryHref} data-docs-gallery-link>
+          图鉴 ↗
+        </a>
+      </div>
+
+      <!-- 页头：当前分类标题 + 一句说明 / 全部说明
+           两个区块各自带数据钩子：SSR 按初始状态显隐；
+           DocsLayout(filter) 岛在 hydration 后按 URL 状态补正（静态托管下 query 由客户端接管） -->
+      <header class="docs-header">
+        <p class="docs-header__crumb" data-docs-head-crumb hidden={activeCat ? undefined : true}>
+          Docs <span aria-hidden="true">/</span> 索引
+        </p>
+
+        <h1 class="docs-header__title">
+          <span data-docs-head-all hidden={activeCat ? true : undefined}>界面模式索引</span>
+          <span data-docs-head-cat hidden={activeCat ? undefined : true}>
+            <span data-docs-head-name>{activeCat?.name}</span>
+            <span class="docs-header__zh" data-docs-head-zh>{activeCat?.nameZh}</span>
+          </span>
+        </h1>
+
+        <p class="docs-header__desc">
+          <span data-docs-head-desc>{activeCat ? CATEGORY_DESC[activeCat.key] : ALL_DESC}</span>
+        </p>
+
+        <p class="docs-header__meta">
+          <span class="section-label">
+            共 <span data-docs-total aria-live="polite">{totalCount}</span> 个词条
+          </span>
+          {q ? <span class="tag">筛选：{q}</span> : null}
+          <span class="tag" data-docs-cat-tag hidden>{activeCat ? `分类：${activeCat.name}` : ''}</span>
+        </p>
+      </header>
+
+      <!-- 高密度词条索引（全静态 SSR；岛只切 hidden） -->
+      <div class="docs-index">
+        {
+          activeCat
+            ? filtered.map((p) => <PatternIndexRow pattern={p} href={detailHref(p.slug)} />)
+            : CATEGORIES.map((cat) => {
+                const rows = filterPatterns(patternIndex, q, cat.key);
+                return (
+                  <section
+                    id={cat.key}
+                    class="docs-index__section"
+                    data-docs-section={cat.key}
+                  >
+                    <h2 class="docs-index__section-title">
+                      <span class="docs-index__section-name">{cat.name}</span>
+                      <span class="docs-index__section-zh">{cat.nameZh}</span>
+                      <span class="docs-index__section-count" data-docs-count={cat.key}>
+                        {rows.length}
+                      </span>
+                    </h2>
+                    <div class="docs-index__rows">
+                      {
+                        patternIndex
+                          .filter((p) => p.category === cat.key)
+                          .map((p) => (
+                            <PatternIndexRow
+                              pattern={p}
+                              href={detailHref(p.slug)}
+                              hidden={!matchedSlugs.has(p.slug)}
+                            />
+                          ))
+                      }
+                    </div>
+                  </section>
+                );
+              })
+        }
+
+        <!-- 空态（服务端按初始状态渲染；客户端由岛接管显隐） -->
+        <div class="docs-empty" data-docs-empty hidden={isEmpty ? undefined : true}>
+          <p class="docs-empty__title">没有命中的词条</p>
+          <p class="docs-empty__text">
+            {q ? `换个关键词，或清除「${q}」后重试。` : '换一个筛选条件试试。'}
+          </p>
+          <button type="button" class="btn btn--primary" data-docs-clear>
+            清除筛选
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：本页目录快速锚点（宽屏 ≥80rem；xl 以下隐藏） -->
+    <aside class="docs-toc" aria-label="本页目录">
+      <div class="docs-toc__inner">
+        <p class="section-label docs-toc__label">本页目录</p>
+        <ul class="docs-toc__list">
+          <li>
+            <a class="docs-toc__link" href="#docs-top">回到顶部</a>
+          </li>
+          {
+            activeCat
+              ? filtered.map((p) => (
+                  <li>
+                    <a
+                      class="docs-toc__link"
+                      href={`#${p.slug}`}
+                      data-docs-anchor
+                      data-slug={p.slug}
+                    >
+                      {p.title}
+                    </a>
+                  </li>
+                ))
+              : CATEGORIES.map((c) => (
+                  <li data-docs-toc-cat={c.key}>
+                    <a class="docs-toc__link" href={`#${c.key}`}>
+                      {c.name}
+                      <span class="docs-toc__zh">{c.nameZh}</span>
+                    </a>
+                  </li>
+                ))
+          }
+        </ul>
+      </div>
+    </aside>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ── 壳：三栏布局（侧栏 ≥64rem；本页目录 ≥80rem） ── */
+  .docs-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    padding-block: 1.25rem 4rem;
+  }
+  @media (min-width: 64rem) {
+    .docs-shell {
+      grid-template-columns: 16.5rem minmax(0, 1fr);
+      gap: 0 2.5rem;
+    }
+  }
+  @media (min-width: 80rem) {
+    .docs-shell {
+      grid-template-columns: 16.5rem minmax(0, 1fr) 12.5rem;
+      gap: 0 2rem;
+    }
+  }
+
+  /* ── 工具条：抽屉按钮 + 视图切换 + Gallery ── */
+  .docs-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .docs-view-switch {
+    display: inline-flex;
+    gap: 0.125rem;
+    padding: 0.1875rem;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-pill);
+    background: var(--color-card);
+  }
+  .docs-view-switch__link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 0.875rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color var(--duration-feedback) var(--ease-feedback),
+      color var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-view-switch__link:hover {
+    color: var(--color-ink);
+  }
+  .docs-view-switch__link.is-active {
+    background: var(--color-dark-bg);
+    color: var(--color-card);
+  }
+  .docs-toolbar__gallery {
+    margin-left: auto;
+    font-size: 0.8125rem;
+    color: var(--color-accent-deep);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-toolbar__gallery:hover {
+    color: var(--color-ink);
+  }
+
+  /* ── 页头 ── */
+  .docs-header {
+    max-width: 46rem;
+    padding: 1.5rem 0 1.25rem;
+  }
+  .docs-header__crumb {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+  }
+  .docs-header__crumb span {
+    margin-inline: 0.25rem;
+    color: var(--color-line);
+  }
+  .docs-header__title {
+    margin-top: 0.375rem;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+  .docs-header__zh {
+    margin-left: 0.625rem;
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  .docs-header__desc {
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: var(--color-muted);
+  }
+  .docs-header__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: 0.875rem;
+  }
+
+  /* ── 高密度索引卡 ── */
+  .docs-index {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-control);
+    overflow: hidden;
+  }
+  .docs-index__section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.625rem 1rem;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    scroll-margin-top: calc(var(--header-h) + 1.5rem);
+  }
+  .docs-index__section-zh {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  .docs-index__section-count {
+    margin-left: auto;
+    padding: 0.125rem 0.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-tag-bg);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── 空态 ── */
+  .docs-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+  .docs-empty__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+  .docs-empty__text {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+  .docs-empty .btn {
+    margin-top: 0.625rem;
+  }
+
+  /* ── 右栏：本页目录（≥80rem；sticky） ── */
+  .docs-toc {
+    display: none;
+  }
+  @media (min-width: 80rem) {
+    .docs-toc {
+      display: block;
+    }
+  }
+  .docs-toc__inner {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    max-height: calc(100vh - var(--header-h) - 3rem);
+    overflow-y: auto;
+  }
+  .docs-toc__label {
+    display: block;
+    margin-bottom: 0.625rem;
+  }
+  .docs-toc__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .docs-toc__link {
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border-left: 2px solid transparent;
+    border-radius: 0 var(--radius-control) var(--radius-control) 0;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition:
+      color var(--duration-feedback) var(--ease-feedback),
+      border-color var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-toc__link:hover {
+    color: var(--color-ink);
+    border-left-color: var(--color-accent-soft);
+  }
+  .docs-toc__zh {
+    margin-left: 0.375rem;
+    font-size: 0.75rem;
+    color: var(--color-line);
+  }
+</style>

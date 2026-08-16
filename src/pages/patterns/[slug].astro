@@ -1,0 +1,187 @@
+---
+// Pattern Detail 页面（Detail Agent G / Issue #10）
+//
+// 标准详情结构（PRD §9.2）：
+//   标题区（breadcrumb + Serif 英文名 + 中文名 + category/tags）
+//   → Summary → Demo Stage（统一 Live Demo Stage）
+//   → 是什么（whatIs）→ 适合场景（useCases）→ 不适合 / 边界（limitations）
+//   → AI Prompt + Copy → Related（related + compare 标「对比相关」）
+//   → Source（克制）→ MDX body 增强区（可选）→ 同分类上下篇导航
+//
+// SEO：
+//   - getStaticPaths 由 getCollection 生成 40 页；
+//   - title：{title} {titleZh}：示例、使用场景与 AI Prompt | VibeLexicon
+//   - description = summary；canonical / OG 由 BaseLayout 负责。
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PatternHero from '@/components/pattern/PatternHero.astro';
+import DemoStage from '@/components/pattern/DemoStage.astro';
+import PromptCopy from '@/components/pattern/PromptCopy.vue';
+import RelatedList from '@/components/pattern/RelatedList.astro';
+import SourceBlock from '@/components/pattern/SourceBlock.astro';
+
+import { getCollection, render } from 'astro:content';
+import { sortPatterns } from '@/lib/patterns';
+
+export async function getStaticPaths() {
+  const patterns = await getCollection('patterns');
+  return patterns.map((pattern) => ({
+    params: { slug: pattern.data.slug },
+    props: { pattern },
+  }));
+}
+
+const { pattern } = Astro.props;
+const { Content } = await render(pattern);
+const data = pattern.data;
+
+const BASE = import.meta.env.BASE_URL;
+const all = await getCollection('patterns');
+
+// 同分类上下篇：先投影为「Category/order 在顶层」的最小形态（sortPatterns 约束），
+// 再按（分类顺序, 分类内 order）稳定排序后取邻居
+interface Sibling {
+  slug: string;
+  title: string;
+  titleZh: string;
+  category: string;
+  order: number;
+}
+
+const siblings: Sibling[] = sortPatterns(
+  all.map((entry) => ({
+    slug: entry.data.slug,
+    title: entry.data.title,
+    titleZh: entry.data.titleZh,
+    category: entry.data.category,
+    order: entry.data.order,
+  })),
+).filter((entry) => entry.category === data.category);
+const index = siblings.findIndex((entry) => entry.slug === data.slug);
+const prevPattern: Sibling | null = index > 0 ? siblings[index - 1] : null;
+const nextPattern: Sibling | null =
+  index >= 0 && index < siblings.length - 1 ? siblings[index + 1] : null;
+
+const pageTitle = `${data.title} ${data.titleZh}：示例、使用场景与 AI Prompt | VibeLexicon`;
+const pageDescription = data.summary;
+
+const headingClass = 'font-serif text-2xl font-bold text-ink';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} ogType="article">
+  <!-- 1. 标题区 -->
+  <PatternHero data={data} />
+
+  <!-- 2. Summary（一句话定义） -->
+  <section aria-labelledby="summary-heading" class="max-w-3xl">
+    <h2 id="summary-heading" class="sr-only">一句话定义</h2>
+    <p class="text-lead">{data.summary}</p>
+  </section>
+
+  <!-- 3. 统一 Live Demo Stage -->
+  <section aria-label="示例演示区域" class="mt-8">
+    <DemoStage title={data.title} titleZh={data.titleZh} preview={data.preview} />
+  </section>
+
+  <!-- 4. 是什么 -->
+  <section aria-labelledby="whatis-heading" class="mt-14">
+    <h2 id="whatis-heading" class={headingClass}>是什么</h2>
+    <div class="prose-lexicon mt-3 max-w-3xl whitespace-pre-line">{data.whatIs}</div>
+  </section>
+
+  <!-- 5+6. 适合场景 / 不适合 · 边界（并排两栏，信息扫描友好） -->
+  <div class="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
+    <section aria-labelledby="usecases-heading">
+      <h2 id="usecases-heading" class={headingClass}>适合场景</h2>
+      <ul class="mt-4 flex flex-col gap-2.5">
+        {
+          data.useCases.map((useCase) => (
+            <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink/90 sm:text-[0.9375rem]">
+              <span aria-hidden="true" class="mt-px font-serif text-base font-bold text-accent">+</span>
+              <span>{useCase}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section aria-labelledby="limitations-heading">
+      <h2 id="limitations-heading" class={headingClass}>不适合 · 边界</h2>
+      <ul class="mt-4 flex flex-col gap-2.5">
+        {
+          data.limitations.map((limitation) => (
+            <li class="flex items-start gap-2.5 text-sm leading-relaxed text-ink/90 sm:text-[0.9375rem]">
+              <span aria-hidden="true" class="mt-px font-serif text-base font-bold text-muted">–</span>
+              <span>{limitation}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+
+  <!-- 7. AI Prompt + Copy（client:load 岛） -->
+  <section aria-labelledby="prompt-heading" class="mt-14">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <h2 id="prompt-heading" class={headingClass}>AI Prompt</h2>
+      <PromptCopy client:load prompt={data.prompt} />
+    </div>
+    <pre
+      class="demo-prompt mt-4 overflow-x-auto whitespace-pre-wrap rounded-control border border-line bg-panel p-4 text-sm leading-relaxed text-ink sm:p-5"
+    >{data.prompt}</pre>
+  </section>
+
+  <!-- 8. Related -->
+  <RelatedList
+    related={data.related}
+    compare={data.compare}
+    patterns={all}
+    currentSlug={data.slug}
+    base={BASE}
+  />
+
+  <!-- 9. Source（克制） -->
+  <section class="mt-14">
+    <SourceBlock source={data.source} />
+  </section>
+
+  <!-- 10. MDX body 增强区（可选渲染；无正文时为空的 prose 容器，不影响视觉） -->
+  <div class="prose-lexicon mt-14">
+    <Content />
+  </div>
+
+  <!-- 11. 同分类上下篇导航（可选） -->
+  {
+    (prevPattern || nextPattern) && (
+      <nav aria-label="同分类上下篇" class="mt-16 grid gap-4 sm:grid-cols-2">
+        {
+          prevPattern ? (
+            <a
+              href={`${BASE}patterns/${prevPattern.slug}/`}
+              class="card-surface group flex flex-col gap-1.5 rounded-card p-5 text-ink no-underline"
+            >
+              <span class="section-label">← 上一篇</span>
+              <span class="text-base font-semibold leading-snug">{prevPattern.title}</span>
+              <span class="text-sm text-muted">{prevPattern.titleZh}</span>
+            </a>
+          ) : (
+            <span aria-hidden="true"></span>
+          )
+        }
+        {
+          nextPattern ? (
+            <a
+              href={`${BASE}patterns/${nextPattern.slug}/`}
+              class="card-surface group flex flex-col items-end gap-1.5 rounded-card p-5 text-right text-ink no-underline"
+            >
+              <span class="section-label">下一篇 →</span>
+              <span class="text-base font-semibold leading-snug">{nextPattern.title}</span>
+              <span class="text-sm text-muted">{nextPattern.titleZh}</span>
+            </a>
+          ) : (
+            <span aria-hidden="true"></span>
+          )
+        }
+      </nav>
+    )
+  }
+</BaseLayout>

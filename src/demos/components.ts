@@ -52,6 +52,18 @@ import FormMini from './form/mini.astro';
 import CommandPaletteMini from './command-palette/mini.astro';
 import FloatingActionButtonMini from './floating-action-button/mini.astro';
 
+// Full Demo 组件（Vue 3，Detail 页按需激活）
+import CardBasedLayoutFull from './card-based-layout/full.vue';
+import MasonryLayoutFull from './masonry-layout/full.vue';
+import BentoGridFull from './bento-grid/full.vue';
+import HeroSectionFull from './hero-section/full.vue';
+import TabsFull from './tabs/full.vue';
+import ModalFull from './modal/full.vue';
+import DrawerFull from './drawer/full.vue';
+import AccordionFull from './accordion/full.vue';
+import LightboxFull from './lightbox/full.vue';
+import CommandPaletteFull from './command-palette/full.vue';
+
 export const miniComponents: Record<PreviewKey, typeof CardBasedLayoutMini> = {
   'card-based-layout': CardBasedLayoutMini,
   'masonry-layout': MasonryLayoutMini,
@@ -96,7 +108,18 @@ export const miniComponents: Record<PreviewKey, typeof CardBasedLayoutMini> = {
 };
 
 /**
- * Full Demo 映射：W3 的 Demo A / Demo B Agent 完成 src/demos/<key>/full.vue 后，
- * 由 Integration 在此统一合并（避免多 Agent 并发写本文件的冲突）。
+ * key → Full Demo 组件映射（W3 Demo A / Demo B 交付后由 Integration 统一合并）。
+ * 仅 Detail 页通过 hasFull + fullComponents 判断并按需 `client:visible` 激活。
  */
-export const fullComponents = {} as Record<FullDemoKey, VueComponent>;
+export const fullComponents: Record<FullDemoKey, VueComponent> = {
+  'card-based-layout': CardBasedLayoutFull,
+  'masonry-layout': MasonryLayoutFull,
+  'bento-grid': BentoGridFull,
+  'hero-section': HeroSectionFull,
+  tabs: TabsFull,
+  modal: ModalFull,
+  drawer: DrawerFull,
+  accordion: AccordionFull,
+  lightbox: LightboxFull,
+  'command-palette': CommandPaletteFull,
+};
