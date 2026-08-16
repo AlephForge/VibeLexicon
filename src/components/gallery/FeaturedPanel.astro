@@ -1,0 +1,103 @@
+---
+// Gallery 精选面板（W3 / Issue #7）
+// - surface-panel 风格；桌面端 sticky（lg:top-24），移动端在 Grid 下方
+// - 展示精选 Pattern：Mini 预览 + 是什么摘要 + 适合场景 + 复制 Prompt + 查看详情
+// - 复制 Prompt 用内联脚本（纯工具脚本，不属于 Vue Island；页面仍只有 1 个 Vue island）
+import { miniComponents } from '@/demos/components';
+import type { PreviewKey } from '@/demos/registry';
+import { getCategory } from '@/lib/categories';
+import { buildContextLink } from '@/lib/url';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  pattern: CollectionEntry<'patterns'>;
+  currentUrl: URL;
+}
+
+const { pattern, currentUrl } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+
+const Mini = miniComponents[pattern.data.preview as PreviewKey];
+const categoryNameZh = getCategory(pattern.data.category)?.nameZh ?? '';
+// trailingSlash: always → 链接以 / 结尾
+const detailHref = `${BASE}patterns/${pattern.data.slug}/`;
+// 跨视图：Docs 入口携带当前 q / category 上下文
+const docsHref = buildContextLink('/docs', currentUrl);
+---
+
+<aside class="surface-panel flex flex-col gap-5 p-5 sm:p-6 lg:sticky lg:top-24">
+  <div class="flex items-center justify-between gap-3">
+    <span class="section-label">精选 · Featured</span>
+    <span class="tag bg-accent-soft text-accent-deep">{categoryNameZh}</span>
+  </div>
+
+  <div class="overflow-hidden rounded-control border border-line">
+    <Mini />
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <h2 class="font-serif text-xl font-bold leading-snug text-ink">
+      {pattern.data.title}
+      <span class="ml-1 font-sans text-sm font-normal text-muted">{pattern.data.titleZh}</span>
+    </h2>
+    <p class="text-sm leading-relaxed text-muted line-clamp-3">{pattern.data.whatIs}</p>
+  </div>
+
+  <div class="flex flex-col gap-2.5">
+    <p class="section-label">适合场景</p>
+    <ul class="flex flex-col gap-1.5">
+      {
+        pattern.data.useCases.slice(0, 3).map((useCase) => (
+          <li class="flex items-start gap-2 text-sm leading-relaxed text-ink/85">
+            <span aria-hidden="true" class="mt-px font-serif text-accent">+</span>
+            <span>{useCase}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <div class="mt-auto flex flex-col gap-2">
+    <button
+      type="button"
+      class="btn btn--primary w-full justify-center"
+      data-copy-prompt
+      data-prompt={pattern.data.prompt}
+    >
+      复制 Prompt
+    </button>
+    <span class="text-xs text-muted" data-copy-status hidden aria-live="polite">已复制到剪贴板</span>
+    <a class="btn btn--ghost w-full justify-center" href={detailHref}>查看详情 →</a>
+    <a
+      class="inline-flex items-center justify-center gap-1 pt-1 text-sm font-medium text-accent-deep no-underline transition-colors duration-feedback ease-feedback hover:text-ink"
+      href={docsHref}
+    >
+      在文档视图中浏览 →
+    </a>
+  </div>
+</aside>
+
+<script>
+  // 复制 Prompt 工具脚本：复用 src/lib/clipboard.ts（Detail 页同源实现），独立于过滤岛
+  import { copyText } from '@/lib/clipboard';
+
+  (() => {
+    const btn = document.querySelector<HTMLButtonElement>('[data-copy-prompt]');
+    if (!btn) return;
+
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    const promptText = btn.getAttribute('data-prompt') ?? '';
+    const originalLabel = btn.textContent?.trim() ?? '复制 Prompt';
+
+    btn.addEventListener('click', async () => {
+      await copyText(promptText);
+
+      if (status) status.hidden = false;
+      btn.textContent = '已复制';
+      window.setTimeout(() => {
+        if (status) status.hidden = true;
+        btn.textContent = originalLabel;
+      }, 1600);
+    });
+  })();
+</script>

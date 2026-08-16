@@ -1,0 +1,44 @@
+---
+// Pattern Detail 来源块（Detail / Issue #10）
+// PRD §9.2「Source（author/url/note，克制）」—— 版权与出处，保持克制：
+// 不放大字号，不加卡片，只有一行作者说明 + 一个外链。
+interface Source {
+  author: string;
+  url: string;
+  note?: string;
+}
+
+interface Props {
+  source: Source;
+}
+
+const { source } = Astro.props;
+---
+
+<footer class="flex flex-col gap-1.5 border-t border-border pt-4">
+  <span class="section-label">来源 · Source</span>
+  <p class="text-sm leading-relaxed text-muted">
+    <span class="font-medium text-ink">{source.author}</span>
+    {source.note && <span> — {source.note}</span>}
+  </p>
+  <a
+    class="inline-flex w-fit items-center gap-1.5 rounded-sm text-sm font-medium text-accent-deep no-underline transition-colors duration-feedback ease-feedback hover:text-ink focus-ring"
+    href={source.url}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    查看参考材料
+    <svg
+      class="h-3.5 w-3.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M7 17 17 7M8 7h9v9" />
+    </svg>
+  </a>
+</footer>
