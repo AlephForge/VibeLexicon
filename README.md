@@ -53,6 +53,16 @@ tests/              # Playwright E2E
 
 ## 搜索说明
 
-- MVP 使用 **Pagefind** 静态索引（构建时生成，支持中英文检索）。
-- 若 Pagefind 在特定环境不可用，可切换为内置 JSON 静态索引 fallback（见 `src/lib/search` 相关开关）。
+- MVP 使用 **Pagefind** 静态索引（构建时生成，支持中英文检索：英文按词、中文按分词，`drawer` 与 `抽屉` 均可命中）。
+- 全站 Command Palette：`Ctrl+K` / `Cmd+K` 或 Header 搜索按钮打开；支持方向键选择、Enter 打开、Esc 关闭。
+- **自动降级**：Pagefind 索引不可用（如仅 `pnpm dev` 未构建）时，搜索自动回退到内置本地索引（40 词条级子串匹配），无空白页。
+- 搜索与分类状态通过 URL Query（`?q=` / `?category=`）在 Gallery ↔ Docs 之间共享，刷新可恢复、链接可分享。
 - TypeScript 锁定 `~5.9.x`：`@astrojs/check` 暂不支持 TS 7，**禁止升级到 7.x**。
+
+## v0.1 发布信息
+
+- **范围**：四种视图（Gallery / Docs / Stream / Detail）、40 个 Seed Pattern、10 个可交互 Full Demo、中英文静态搜索、Content Validator、Playwright 回归、GitHub Actions CI 与 GitHub Pages 部署。
+- **非目标**（有意排除）：登录、数据库、CMS、后端 API、评论系统、收藏同步、多语言国际化。
+- **质量证据**（本地验证）：`pnpm check` 0 errors；`pnpm validate` 40 词条 0 FAIL；`pnpm build` 成功（含 Pagefind 索引）；`pnpm test:e2e` 40/40 通过。
+- **首次部署**：仓库 Settings → Pages → Source 选择 **"GitHub Actions"**，之后每次 push main 自动构建部署到 `https://alephforge.github.io/VibeLexicon/`。
+- 界面截图见 [`docs/screenshots/`](docs/screenshots/)（Gallery 桌面/移动、Docs、Stream、Detail、搜索面板）。

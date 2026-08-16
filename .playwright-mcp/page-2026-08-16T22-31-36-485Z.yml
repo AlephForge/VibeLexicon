@@ -1,0 +1,737 @@
+- generic [active] [ref=f101e1]:
+  - link "跳到主要内容":
+    - /url: "#main-content"
+  - banner [ref=f101e2]:
+    - generic [ref=f101e3]:
+      - link "VibeLexicon" [ref=f101e4] [cursor=pointer]:
+        - /url: /VibeLexicon/
+        - text: VibeLexicon.
+      - navigation "主导航" [ref=f101e5]:
+        - link "图鉴" [ref=f101e6] [cursor=pointer]:
+          - /url: /VibeLexicon/
+        - link "文档" [ref=f101e7] [cursor=pointer]:
+          - /url: /VibeLexicon/docs/
+        - link "连续阅读" [ref=f101e8] [cursor=pointer]:
+          - /url: /VibeLexicon/docs/stream/
+        - link "关于" [ref=f101e9] [cursor=pointer]:
+          - /url: /VibeLexicon/about/
+      - generic [ref=f101e10]:
+        - link "GitHub 仓库（在新窗口打开）" [ref=f101e11] [cursor=pointer]:
+          - /url: https://github.com/AlephForge/VibeLexicon
+        - button "打开搜索（⌘K）" [ref=f101e14] [cursor=pointer]:
+          - generic [ref=f101e18]: 搜索
+          - generic [ref=f101e19]: ⌘K
+  - main [ref=f101e20]:
+    - generic [ref=f101e22]:
+      - generic [ref=f101e23] [cursor=pointer]: 界面视觉词典 · 40+ 模式收录中
+      - heading "把 UI 术语， 变成看得见的灵感" [level=1] [ref=f101e24]: 把 UI 术语，变成看得见的灵感
+      - paragraph [ref=f101e25]: 每一种布局、页面结构、导航方式与界面组件，都配有一张微型视觉预览——看见即认识，认识即可用。
+      - generic [ref=f101e27]:
+        - generic [ref=f101e28]:
+          - searchbox "搜索图鉴" [ref=f101e29]
+          - generic [ref=f101e30]: ⌘K
+        - generic [ref=f101e31]:
+          - group "按分类筛选" [ref=f101e32]:
+            - button "全部" [pressed] [ref=f101e33] [cursor=pointer]
+            - button "页面布局" [ref=f101e34] [cursor=pointer]
+            - button "页面结构" [ref=f101e35] [cursor=pointer]
+            - button "导航与切换" [ref=f101e36] [cursor=pointer]
+            - button "常用组件" [ref=f101e37] [cursor=pointer]
+          - paragraph [ref=f101e38]: 命中 40 / 40
+    - generic [ref=f101e40]:
+      - generic [ref=f101e41]:
+        - heading "模式图鉴" [level=2] [ref=f101e42]
+        - generic [ref=f101e43]:
+          - link "Card-based Layout · 卡片式布局" [ref=f101e44] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/card-based-layout/
+            - generic [ref=f101e48]:
+              - generic [ref=f101e49]:
+                - generic [ref=f101e50]: ◧
+                - generic [ref=f101e54]:
+                  - generic [ref=f101e55]: 设计
+                  - generic [ref=f101e56]: 灵感
+              - generic [ref=f101e57]:
+                - generic [ref=f101e58]: ◫
+                - generic [ref=f101e62]: 卡片
+            - generic [ref=f101e64]:
+              - heading "Card-based Layout卡片式布局" [level=3] [ref=f101e65]
+              - paragraph [ref=f101e66]: 以卡片为基本容器，把一组相关的内容、操作或入口聚合为可快速扫读的网格单元。
+              - generic [ref=f101e67]:
+                - generic [ref=f101e68]: 卡片
+                - generic [ref=f101e69]: 网格
+                - generic [ref=f101e70]: 内容容器
+                - generic [ref=f101e71]: 页面布局
+          - link "Masonry Layout · 瀑布流" [ref=f101e72] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/masonry-layout/
+            - generic [ref=f101e98]:
+              - heading "Masonry Layout瀑布流" [level=3] [ref=f101e99]
+              - paragraph [ref=f101e100]: 不同高度的内容块在列的底部依次紧凑堆叠，形成错落有致的瀑布流，适合媒体密集页面。
+              - generic [ref=f101e101]:
+                - generic [ref=f101e102]: 瀑布流
+                - generic [ref=f101e103]: 媒体展示
+                - generic [ref=f101e104]: 网格
+                - generic [ref=f101e105]: 页面布局
+          - link "Bento Grid · 便当盒布局" [ref=f101e106] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/bento-grid/
+            - generic [ref=f101e123]:
+              - heading "Bento Grid便当盒布局" [level=3] [ref=f101e124]
+              - paragraph [ref=f101e125]: 面积大小不一的圆角卡片在同一网格中错落铺满，用面积对比组织页面的主次信息。
+              - generic [ref=f101e126]:
+                - generic [ref=f101e127]: 便当盒
+                - generic [ref=f101e128]: 卡片网格
+                - generic [ref=f101e129]: 不对称
+                - generic [ref=f101e130]: 页面布局
+          - link "Split-screen Layout · 分屏布局" [ref=f101e131] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/split-screen-layout/
+            - generic [ref=f101e132]: ◧
+            - generic [ref=f101e146]:
+              - heading "Split-screen Layout分屏布局" [level=3] [ref=f101e147]
+              - paragraph [ref=f101e148]: 把页面或首屏一分为二，两个区域平行并置，用于制造对比、选择或叙事的张力。
+              - generic [ref=f101e149]:
+                - generic [ref=f101e150]: 分屏
+                - generic [ref=f101e151]: 双栏
+                - generic [ref=f101e152]: 对比
+                - generic [ref=f101e153]: 页面布局
+          - link "CSS Grid Layout · CSS 网格布局" [ref=f101e154] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/css-grid-layout/
+            - paragraph [ref=f101e164]: 轨道对齐与区域划分
+            - generic [ref=f101e165]:
+              - heading "CSS Grid LayoutCSS 网格布局" [level=3] [ref=f101e166]
+              - paragraph [ref=f101e167]: 用行与列组成的二维栅格定位内容，既是页面骨架，也是卡片与区块组合的底层能力。
+              - generic [ref=f101e168]:
+                - generic [ref=f101e169]: CSS Grid
+                - generic [ref=f101e170]: 二维布局
+                - generic [ref=f101e171]: 栅格
+                - generic [ref=f101e172]: 页面布局
+          - link "Flexbox · 弹性布局" [ref=f101e173] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/flexbox/
+            - generic [ref=f101e176]:
+              - generic [ref=f101e177]:
+                - generic [ref=f101e178]: logo
+                - generic [ref=f101e179]: "flex: 1 拉伸"
+                - generic [ref=f101e180]: action
+              - generic [ref=f101e181]:
+                - generic [ref=f101e182]: 主轴：水平排列
+                - generic [ref=f101e183]: 交叉轴
+              - paragraph [ref=f101e184]: 单维度排列：对齐、分布与伸缩
+            - generic [ref=f101e185]:
+              - heading "Flexbox弹性布局" [level=3] [ref=f101e186]
+              - paragraph [ref=f101e187]: 一维弹性排布，让一组元素沿主轴伸缩、对齐与换行，是界面组件排布的常用手段。
+              - generic [ref=f101e188]:
+                - generic [ref=f101e189]: 弹性布局
+                - generic [ref=f101e190]: 一维排布
+                - generic [ref=f101e191]: 对齐
+                - generic [ref=f101e192]: 页面布局
+          - link "Sidebar Layout · 侧边栏布局" [ref=f101e193] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/sidebar-layout/
+            - generic [ref=f101e207]:
+              - heading "Sidebar Layout侧边栏布局" [level=3] [ref=f101e208]
+              - paragraph [ref=f101e209]: 主内容旁常驻一条侧栏承载次级导航或辅助信息，是桌面阅读型界面的经典骨架。
+              - generic [ref=f101e210]:
+                - generic [ref=f101e211]: 侧边栏
+                - generic [ref=f101e212]: 文档布局
+                - generic [ref=f101e213]: 次级导航
+                - generic [ref=f101e214]: 页面布局
+          - link "Dashboard Layout · 仪表盘布局" [ref=f101e215] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/dashboard-layout/
+            - generic [ref=f101e219]:
+              - generic [ref=f101e220]:
+                - generic [ref=f101e221]: 本周访问
+                - generic [ref=f101e222]: 12.4k
+              - generic [ref=f101e223]:
+                - generic [ref=f101e224]: 转化率
+                - generic [ref=f101e225]: 3.2%
+              - generic [ref=f101e226]:
+                - generic [ref=f101e227]: 新用户
+                - generic [ref=f101e228]: +8.1%
+              - generic [ref=f101e229]:
+                - generic [ref=f101e230]: 活跃会话
+                - generic [ref=f101e231]: "891"
+            - generic [ref=f101e239]:
+              - heading "Dashboard Layout仪表盘布局" [level=3] [ref=f101e240]
+              - paragraph [ref=f101e241]: 面向监控与管理的看板式骨架，用导航、指标卡与图表区块组合支撑一屏快速洞察。
+              - generic [ref=f101e242]:
+                - generic [ref=f101e243]: 仪表盘
+                - generic [ref=f101e244]: 看板
+                - generic [ref=f101e245]: 指标
+                - generic [ref=f101e246]: 页面布局
+          - link "Responsive Layout · 响应式布局" [ref=f101e247] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/responsive-layout/
+            - paragraph [ref=f101e268]: 视口变化 → 列数与间距随之调整
+            - generic [ref=f101e269]:
+              - heading "Responsive Layout响应式布局" [level=3] [ref=f101e270]
+              - paragraph [ref=f101e271]: 以视口为变量自适应内容的布局方法，让同一套内容在不同屏幕尺寸上都清晰可用。
+              - generic [ref=f101e272]:
+                - generic [ref=f101e273]: 响应式
+                - generic [ref=f101e274]: 断点
+                - generic [ref=f101e275]: 自适应
+                - generic [ref=f101e276]: 页面布局
+          - link "Full-bleed Layout · 全出血布局" [ref=f101e277] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/full-bleed-layout/
+            - paragraph [ref=f101e286]: 横幅全宽出血，正文回到居中容器
+            - generic [ref=f101e287]:
+              - heading "Full-bleed Layout全出血布局" [level=3] [ref=f101e288]
+              - paragraph [ref=f101e289]: 让背景、图片或色块突破内容宽度延伸到视口边缘，营造沉浸感与留白对比的出血版式。
+              - generic [ref=f101e290]:
+                - generic [ref=f101e291]: 全出血
+                - generic [ref=f101e292]: 沉浸式
+                - generic [ref=f101e293]: 宽度突破
+                - generic [ref=f101e294]: 页面布局
+          - link "Single-page Website · 单页网站" [ref=f101e295] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/single-page-website/
+            - generic [ref=f101e298]:
+              - generic [ref=f101e299]:
+                - generic [ref=f101e300]: 品牌
+                - generic [ref=f101e301]:
+                  - generic [ref=f101e302]: 简介
+                  - generic [ref=f101e303]: 作品
+                  - generic [ref=f101e304]: 联系
+              - generic [ref=f101e305]:
+                - generic [ref=f101e306]: "# 简介"
+                - generic [ref=f101e307]: "# 作品"
+                - generic [ref=f101e308]: "# 联系"
+            - generic [ref=f101e309]:
+              - heading "Single-page Website单页网站" [level=3] [ref=f101e310]
+              - paragraph [ref=f101e311]: 将全部核心内容组织在一个可滚动页面中，通过锚点把叙事串成一条连续阅读路径的网站结构。
+              - generic [ref=f101e312]:
+                - generic [ref=f101e313]: 单页结构
+                - generic [ref=f101e314]: 长滚动
+                - generic [ref=f101e315]: 锚点导航
+                - generic [ref=f101e316]: 页面结构
+          - link "Multi-page Website · 多页网站" [ref=f101e317] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/multi-page-website/
+            - generic [ref=f101e321]:
+              - generic [ref=f101e322]: 首页
+              - generic [ref=f101e326]: 产品页
+              - generic [ref=f101e330]: 关于页
+            - generic [ref=f101e334]:
+              - heading "Multi-page Website多页网站" [level=3] [ref=f101e335]
+              - paragraph [ref=f101e336]: 通过多个独立 URL 页面组织内容，为每条信息提供稳定地址与清晰层级的网站结构。
+              - generic [ref=f101e337]:
+                - generic [ref=f101e338]: 多页结构
+                - generic [ref=f101e339]: 独立 URL
+                - generic [ref=f101e340]: 信息架构
+                - generic [ref=f101e341]: 页面结构
+          - link "Landing Page · 落地页" [ref=f101e342] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/landing-page/
+            - generic [ref=f101e346]:
+              - generic [ref=f101e347]: 产品说明 · 转化目标
+              - generic [ref=f101e350]: 立即试用
+            - generic [ref=f101e358]:
+              - heading "Landing Page落地页" [level=3] [ref=f101e359]
+              - paragraph [ref=f101e360]: 以单一转化目标组织的独立页面，用聚焦的信息与明确行动号召引导访客完成一次具体动作。
+              - generic [ref=f101e361]:
+                - generic [ref=f101e362]: 营销页面
+                - generic [ref=f101e363]: 转化目标
+                - generic [ref=f101e364]: 行动号召
+                - generic [ref=f101e365]: 页面结构
+          - link "Case Study Page · 案例研究页" [ref=f101e366] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/case-study-page/
+            - generic [ref=f101e370]:
+              - generic [ref=f101e371]:
+                - generic [ref=f101e372]: 2.3×
+                - generic [ref=f101e373]: 转化提升
+              - generic [ref=f101e374]:
+                - generic [ref=f101e375]: "-41%"
+                - generic [ref=f101e376]: 加载时间
+              - generic [ref=f101e377]:
+                - generic [ref=f101e378]: "98"
+                - generic [ref=f101e379]: A11y 评分
+            - generic [ref=f101e383]:
+              - heading "Case Study Page案例研究页" [level=3] [ref=f101e384]
+              - paragraph [ref=f101e385]: 以叙事结构完整呈现一个项目从背景、问题到方案与成果的全过程，用证据支撑可信度。
+              - generic [ref=f101e386]:
+                - generic [ref=f101e387]: 案例复盘
+                - generic [ref=f101e388]: 叙事结构
+                - generic [ref=f101e389]: 证据支撑
+                - generic [ref=f101e390]: 页面结构
+          - link "Hero Section · 首屏" [ref=f101e391] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/hero-section/
+            - generic [ref=f101e394]:
+              - generic [ref=f101e395]: 价值主张 · 行动入口
+              - paragraph [ref=f101e396]: 把 UI 术语，变成看得见的灵感
+              - paragraph [ref=f101e397]: 一句清晰说明，告诉访客这个产品解决什么问题。
+              - generic [ref=f101e398]:
+                - generic [ref=f101e399]: 开始浏览
+                - generic [ref=f101e400]: 了解更多
+            - generic [ref=f101e401]:
+              - heading "Hero Section首屏" [level=3] [ref=f101e402]
+              - paragraph [ref=f101e403]: 页面顶部承载主标题、副文案与行动入口的区域，在数秒内交代主题并引导继续浏览或转化。
+              - generic [ref=f101e404]:
+                - generic [ref=f101e405]: 页面首屏
+                - generic [ref=f101e406]: 主标题
+                - generic [ref=f101e407]: 行动入口
+                - generic [ref=f101e408]: 页面结构
+          - link "Feature Grid · 功能网格" [ref=f101e409] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/feature-grid/
+            - generic [ref=f101e413]:
+              - generic [ref=f101e414]: ⚡
+              - generic [ref=f101e419]: ◫
+              - generic [ref=f101e424]: 🛡
+            - generic [ref=f101e429]:
+              - heading "Feature Grid功能网格" [level=3] [ref=f101e430]
+              - paragraph [ref=f101e431]: 用规整网格排布一组功能或特性卡片，让用户快速扫描、比较并吸收核心价值。
+              - generic [ref=f101e432]:
+                - generic [ref=f101e433]: 网格卡片
+                - generic [ref=f101e434]: 功能罗列
+                - generic [ref=f101e435]: 快速扫描
+                - generic [ref=f101e436]: 页面结构
+          - link "Sticky Storytelling · 固定叙事区" [ref=f101e437] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/sticky-storytelling/
+            - generic [ref=f101e440]:
+              - generic [ref=f101e441]: ◫
+              - paragraph [ref=f101e443]: 背景固定，内容滚动讲述
+            - generic [ref=f101e444]:
+              - heading "Sticky Storytelling固定叙事区" [level=3] [ref=f101e445]
+              - paragraph [ref=f101e446]: 滚动时让文本或画面固定在视口一侧、随滚动逐段推进内容的叙事式页面区块。
+              - generic [ref=f101e447]:
+                - generic [ref=f101e448]: 滚动叙事
+                - generic [ref=f101e449]: 固定定位
+                - generic [ref=f101e450]: 沉浸体验
+                - generic [ref=f101e451]: 页面结构
+          - link "Timeline · 时间线" [ref=f101e452] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/timeline/
+            - generic [ref=f101e473]:
+              - heading "Timeline时间线" [level=3] [ref=f101e474]
+              - paragraph [ref=f101e475]: 沿一条时间轴排布事件或节点，用先后顺序清晰呈现进程、沿革与里程碑。
+              - generic [ref=f101e476]:
+                - generic [ref=f101e477]: 时间轴
+                - generic [ref=f101e478]: 事件顺序
+                - generic [ref=f101e479]: 里程碑
+                - generic [ref=f101e480]: 页面结构
+          - link "FAQ Section · 常见问题区" [ref=f101e481] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/faq-section/
+            - generic [ref=f101e484]:
+              - generic [ref=f101e485]:
+                - paragraph [ref=f101e486]: 如何开始使用 VibeLexicon？
+                - paragraph [ref=f101e487]: 打开图鉴，找到想认识的界面模式，进入详情页查看示例、场景与 AI Prompt。
+              - generic [ref=f101e488]:
+                - paragraph [ref=f101e489]: 搜索支持中文吗？
+                - generic [ref=f101e490]: ＋
+              - generic [ref=f101e491]:
+                - paragraph [ref=f101e492]: 内容可以商用吗？
+                - generic [ref=f101e493]: ＋
+            - generic [ref=f101e494]:
+              - heading "FAQ Section常见问题区" [level=3] [ref=f101e495]
+              - paragraph [ref=f101e496]: 把用户高频问题与答案集中组织的页面区块，用问答形式辅助决策并降低重复咨询成本。
+              - generic [ref=f101e497]:
+                - generic [ref=f101e498]: 常见问题
+                - generic [ref=f101e499]: 问答区块
+                - generic [ref=f101e500]: 自助答疑
+                - generic [ref=f101e501]: 页面结构
+          - link "Footer · 页脚" [ref=f101e502] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/footer/
+            - generic [ref=f101e521]:
+              - heading "Footer页脚" [level=3] [ref=f101e522]
+              - paragraph [ref=f101e523]: 页面底部的收尾区块，承载品牌、联系、导航与版权等补充信息，是浏览路径的终点。
+              - generic [ref=f101e524]:
+                - generic [ref=f101e525]: 页面底部
+                - generic [ref=f101e526]: 版权信息
+                - generic [ref=f101e527]: 次级导航
+                - generic [ref=f101e528]: 页面结构
+          - link "Sticky Navbar · 固定导航" [ref=f101e529] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/sticky-navbar/
+            - generic [ref=f101e532]:
+              - generic [ref=f101e533]:
+                - generic [ref=f101e534]: 品牌
+                - generic [ref=f101e535]:
+                  - generic [ref=f101e536]: 首页
+                  - generic [ref=f101e537]: 图鉴
+                  - generic [ref=f101e538]: 文档
+                - generic [ref=f101e539]: 投稿
+              - paragraph [ref=f101e543]: 滚动时导航保持可见
+            - generic [ref=f101e544]:
+              - heading "Sticky Navbar固定导航" [level=3] [ref=f101e545]
+              - paragraph [ref=f101e546]: 始终固定在视口顶部的导航栏，让用户在任意滚动位置都能访问主导航与关键操作。
+              - generic [ref=f101e547]:
+                - generic [ref=f101e548]: 主导航
+                - generic [ref=f101e549]: 固定定位
+                - generic [ref=f101e550]: 全局可达
+                - generic [ref=f101e551]: 导航与切换
+          - link "Hamburger Menu · 汉堡菜单" [ref=f101e552] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/hamburger-menu/
+            - generic [ref=f101e555]:
+              - generic [ref=f101e556]: 移动端页面
+              - generic [ref=f101e564]:
+                - generic [ref=f101e565]:
+                  - generic [ref=f101e566]: 菜单
+                  - generic [ref=f101e567]: ×
+                - generic [ref=f101e568]: 登录
+            - generic [ref=f101e569]:
+              - heading "Hamburger Menu汉堡菜单" [level=3] [ref=f101e570]
+              - paragraph [ref=f101e571]: 由三条横线图标发起的折叠菜单按钮，通常在移动端或窄屏下收起并展开导航面板。
+              - generic [ref=f101e572]:
+                - generic [ref=f101e573]: 菜单按钮
+                - generic [ref=f101e574]: 移动导航
+                - generic [ref=f101e575]: 折叠导航
+                - generic [ref=f101e576]: 导航与切换
+          - link "Breadcrumb · 面包屑" [ref=f101e577] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/breadcrumb/
+            - generic [ref=f101e580]:
+              - navigation [ref=f101e581]:
+                - generic [ref=f101e582]: 首页
+                - generic [ref=f101e583]: /
+                - generic [ref=f101e584]: 图鉴
+                - generic [ref=f101e585]: /
+                - generic [ref=f101e586]: 导航与切换
+                - generic [ref=f101e587]: /
+                - generic [ref=f101e588]: 面包屑
+              - paragraph [ref=f101e591]: 当前位置路径，深链可导航
+            - generic [ref=f101e592]:
+              - heading "Breadcrumb面包屑" [level=3] [ref=f101e593]
+              - paragraph [ref=f101e594]: 展示当前页面在站点层级中位置的导航路径，帮助用户理解所在位置并逐级向上返回。
+              - generic [ref=f101e595]:
+                - generic [ref=f101e596]: 层级路径
+                - generic [ref=f101e597]: 当前位置
+                - generic [ref=f101e598]: 辅助导航
+                - generic [ref=f101e599]: 导航与切换
+          - link "Anchor Link · 锚点跳转" [ref=f101e600] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/anchor-link/
+            - generic [ref=f101e603]:
+              - generic [ref=f101e604]:
+                - generic [ref=f101e605]: 简介
+                - generic [ref=f101e606]: 作品
+                - generic [ref=f101e607]: 联系
+              - generic [ref=f101e608]:
+                - generic [ref=f101e609]: "# 简介"
+                - generic [ref=f101e610]: "# 作品"
+                - generic [ref=f101e611]: "# 联系 ← 跳转目标"
+            - generic [ref=f101e612]:
+              - heading "Anchor Link锚点跳转" [level=3] [ref=f101e613]
+              - paragraph [ref=f101e614]: 链接到本页或本站指定区块的跳转方式，借助 URL 片段标识定位，是单页站点的导航骨架。
+              - generic [ref=f101e615]:
+                - generic [ref=f101e616]: 页内跳转
+                - generic [ref=f101e617]: 单页导航
+                - generic [ref=f101e618]: 长页面
+                - generic [ref=f101e619]: 导航与切换
+          - link "Tabs · 标签切换" [ref=f101e620] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/tabs/
+            - generic [ref=f101e623]:
+              - generic [ref=f101e624]:
+                - button "概览" [ref=f101e625]
+                - button "分析" [ref=f101e626]
+                - button "设置" [ref=f101e627]
+              - paragraph [ref=f101e633]: 相同内容区域，不同标签对应不同内容
+            - generic [ref=f101e634]:
+              - heading "Tabs标签切换" [level=3] [ref=f101e635]
+              - paragraph [ref=f101e636]: 在同一页面内以一组标签切换相关视图或内容分组，节省空间并让用户保持单一焦点。
+              - generic [ref=f101e637]:
+                - generic [ref=f101e638]: 视图切换
+                - generic [ref=f101e639]: 内容分组
+                - generic [ref=f101e640]: 节省空间
+                - generic [ref=f101e641]: 导航与切换
+          - link "Sidebar Navigation · 侧边导航" [ref=f101e642] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/sidebar-navigation/
+            - generic [ref=f101e646]:
+              - generic [ref=f101e647]: 课程> 文档
+              - generic [ref=f101e648]: 简介
+              - generic [ref=f101e650]: 安装
+              - generic [ref=f101e652]: 快速上手
+              - generic [ref=f101e654]: 进阶
+            - generic [ref=f101e659]:
+              - heading "Sidebar Navigation侧边导航" [level=3] [ref=f101e660]
+              - paragraph [ref=f101e661]: 常驻页面或应用侧边的垂直导航栏，长期展示多级导航、目录与当前会话状态。
+              - generic [ref=f101e662]:
+                - generic [ref=f101e663]: 垂直导航
+                - generic [ref=f101e664]: 目录
+                - generic [ref=f101e665]: 多级结构
+                - generic [ref=f101e666]: 导航与切换
+          - link "Mega Menu · 超级菜单" [ref=f101e667] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/mega-menu/
+            - generic [ref=f101e670]:
+              - generic [ref=f101e671]:
+                - generic [ref=f101e672]: 品牌
+                - generic [ref=f101e673]:
+                  - generic [ref=f101e674]: 导航 ▼
+                  - generic [ref=f101e675]: 图鉴
+                  - generic [ref=f101e676]: 文档
+              - generic [ref=f101e677]:
+                - generic [ref=f101e678]: 产品
+                - generic [ref=f101e683]: 开发者
+                - generic [ref=f101e688]: 资源
+            - generic [ref=f101e693]:
+              - heading "Mega Menu超级菜单" [level=3] [ref=f101e694]
+              - paragraph [ref=f101e695]: 从导航项展开的大型多列面板，把该入口下全部子分类与跳转集中展示，适合信息密集型站点。
+              - generic [ref=f101e696]:
+                - generic [ref=f101e697]: 大型导航
+                - generic [ref=f101e698]: 多列面板
+                - generic [ref=f101e699]: 信息密集
+                - generic [ref=f101e700]: 导航与切换
+          - link "Bottom Navigation · 底部导航" [ref=f101e701] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/bottom-navigation/
+            - generic [ref=f101e708]:
+              - generic [ref=f101e709]: 首页
+              - generic [ref=f101e712]: 发现
+              - generic [ref=f101e715]: 消息
+              - generic [ref=f101e718]: 我的
+            - generic [ref=f101e721]:
+              - heading "Bottom Navigation底部导航" [level=3] [ref=f101e722]
+              - paragraph [ref=f101e723]: 固定在移动端屏幕底部的导航栏，把 3–5 个最重要目的地放在拇指可及的范围。
+              - generic [ref=f101e724]:
+                - generic [ref=f101e725]: 移动端
+                - generic [ref=f101e726]: 拇指可达
+                - generic [ref=f101e727]: 一级导航
+                - generic [ref=f101e728]: 导航与切换
+          - link "Pagination · 分页" [ref=f101e729] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/pagination/
+            - generic [ref=f101e737]:
+              - generic [ref=f101e738]: ‹
+              - generic [ref=f101e739]: "1"
+              - generic [ref=f101e740]: "2"
+              - generic [ref=f101e741]: "3"
+              - generic [ref=f101e742]: …
+              - generic [ref=f101e743]: "8"
+              - generic [ref=f101e744]: ›
+            - generic [ref=f101e745]:
+              - heading "Pagination分页" [level=3] [ref=f101e746]
+              - paragraph [ref=f101e747]: 把长列表或内容序列切分成单页、以页码与上一页/下一页导航的模式，常用于结果列表与归档。
+              - generic [ref=f101e748]:
+                - generic [ref=f101e749]: 分页
+                - generic [ref=f101e750]: 页码
+                - generic [ref=f101e751]: 列表分块
+                - generic [ref=f101e752]: 导航与切换
+          - link "Back to Top · 返回顶部" [ref=f101e753] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/back-to-top/
+            - generic [ref=f101e756]:
+              - generic [ref=f101e762]: ↑
+              - paragraph [ref=f101e764]: 长页面末尾，一键回顶
+            - generic [ref=f101e765]:
+              - heading "Back to Top返回顶部" [level=3] [ref=f101e766]
+              - paragraph [ref=f101e767]: 长页面上出现的固定按钮，一键将用户滚动回页面顶部，减少手动长距离滚动成本。
+              - generic [ref=f101e768]:
+                - generic [ref=f101e769]: 滚动辅助
+                - generic [ref=f101e770]: 长页面
+                - generic [ref=f101e771]: 快捷操作
+                - generic [ref=f101e772]: 导航与切换
+          - link "Modal · 模态框" [ref=f101e773] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/modal/
+            - generic [ref=f101e781]:
+              - generic [ref=f101e782]: ×
+              - paragraph [ref=f101e785]: 确认要删除这个项目吗？此操作无法撤销。
+              - generic [ref=f101e786]:
+                - generic [ref=f101e787]: 取消
+                - generic [ref=f101e788]: 确认删除
+            - generic [ref=f101e789]:
+              - heading "Modal模态框" [level=3] [ref=f101e790]
+              - paragraph [ref=f101e791]: 覆盖在主内容之上的居中对话框，通过遮罩阻断背景交互，让用户先完成当前任务再关闭。
+              - generic [ref=f101e792]:
+                - generic [ref=f101e793]: 对话框
+                - generic [ref=f101e794]: 浮层
+                - generic [ref=f101e795]: 焦点管理
+                - generic [ref=f101e796]: 常用组件
+          - link "Drawer · 抽屉" [ref=f101e797] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/drawer/
+            - generic [ref=f101e798]: 操作
+            - generic [ref=f101e813]:
+              - heading "Drawer抽屉" [level=3] [ref=f101e814]
+              - paragraph [ref=f101e815]: 从屏幕侧边滑出的面板，用于承载次级导航或操作内容，而不打断当前页面的主任务。
+              - generic [ref=f101e816]:
+                - generic [ref=f101e817]: 侧边面板
+                - generic [ref=f101e818]: 导航
+                - generic [ref=f101e819]: 移动端
+                - generic [ref=f101e820]: 常用组件
+          - link "Accordion · 手风琴" [ref=f101e821] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/accordion/
+            - generic [ref=f101e824]:
+              - generic [ref=f101e825]:
+                - generic [ref=f101e826]: 什么是响应式布局？
+                - generic [ref=f101e827]: −
+              - generic [ref=f101e828]: 根据视口宽度调整列数、字号与间距，让内容在手机、平板与桌面都可读。
+              - generic [ref=f101e829]:
+                - generic [ref=f101e830]: 为什么需要断点？
+                - generic [ref=f101e831]: ＋
+              - generic [ref=f101e832]:
+                - generic [ref=f101e833]: 适合哪些项目？
+                - generic [ref=f101e834]: ＋
+            - generic [ref=f101e835]:
+              - heading "Accordion手风琴" [level=3] [ref=f101e836]
+              - paragraph [ref=f101e837]: 把一组相关内容折叠为可展开与收起的面板，用较小空间承载更多信息，用户按需逐条展开。
+              - generic [ref=f101e838]:
+                - generic [ref=f101e839]: 折叠面板
+                - generic [ref=f101e840]: 展开收起
+                - generic [ref=f101e841]: FAQ
+                - generic [ref=f101e842]: 常用组件
+          - link "Tooltip · 气泡提示" [ref=f101e843] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/tooltip/
+            - generic [ref=f101e847]:
+              - generic [ref=f101e848]: 将鼠标悬停在此按钮…
+              - generic [ref=f101e849]: 保存
+              - generic [ref=f101e850]: 保存到收藏夹（Ctrl+S）
+            - generic [ref=f101e852]:
+              - heading "Tooltip气泡提示" [level=3] [ref=f101e853]
+              - paragraph [ref=f101e854]: 悬停或键盘聚焦元素时出现在其附近的小气泡，用于提供不加打断的补充说明。
+              - generic [ref=f101e855]:
+                - generic [ref=f101e856]: 气泡提示
+                - generic [ref=f101e857]: 悬停交互
+                - generic [ref=f101e858]: 补充信息
+                - generic [ref=f101e859]: 常用组件
+          - link "Toast · 轻提示" [ref=f101e860] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/toast/
+            - generic [ref=f101e863]:
+              - generic [ref=f101e864]:
+                - generic [ref=f101e865]: 触发操作后短暂出现…
+                - generic [ref=f101e866]: 复制 Prompt
+              - generic [ref=f101e868]:
+                - generic [ref=f101e869]: ✓
+                - text: 已复制到剪贴板
+              - paragraph [ref=f101e870]: 非阻断反馈，自动消失
+            - generic [ref=f101e871]:
+              - heading "Toast轻提示" [level=3] [ref=f101e872]
+              - paragraph [ref=f101e873]: 短暂出现后自动消失的非阻断提示条，用于反馈操作结果，不打断用户的当前任务。
+              - generic [ref=f101e874]:
+                - generic [ref=f101e875]: 轻提示
+                - generic [ref=f101e876]: 操作反馈
+                - generic [ref=f101e877]: 自动消失
+                - generic [ref=f101e878]: 常用组件
+          - link "Carousel · 轮播图" [ref=f101e879] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/carousel/
+            - generic [ref=f101e897]:
+              - heading "Carousel轮播图" [level=3] [ref=f101e898]
+              - paragraph [ref=f101e899]: 在固定区域内轮番展示多张图片或卡片，让有限空间承载更多内容的浏览组件。
+              - generic [ref=f101e900]:
+                - generic [ref=f101e901]: 轮播
+                - generic [ref=f101e902]: 滑动切换
+                - generic [ref=f101e903]: 图片展示
+                - generic [ref=f101e904]: 常用组件
+          - link "Lightbox · 图片灯箱" [ref=f101e905] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/lightbox/
+            - generic [ref=f101e908]:
+              - generic [ref=f101e909]: ◫ 缩略图
+              - generic [ref=f101e912]:
+                - generic [ref=f101e913]: ◱ 大图浏览
+                - generic [ref=f101e915]: ‹
+                - generic [ref=f101e916]: ›
+                - generic [ref=f101e917]: ×
+            - generic [ref=f101e918]:
+              - heading "Lightbox图片灯箱" [level=3] [ref=f101e919]
+              - paragraph [ref=f101e920]: 点击缩略图后在深色遮罩中放大查看原图的浮层，聚焦单张图片并支持前后切换。
+              - generic [ref=f101e921]:
+                - generic [ref=f101e922]: 图片查看
+                - generic [ref=f101e923]: 放大原图
+                - generic [ref=f101e924]: 浮层画廊
+                - generic [ref=f101e925]: 常用组件
+          - link "Form · 表单" [ref=f101e926] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/form/
+            - generic [ref=f101e930]:
+              - generic [ref=f101e932]:
+                - generic [ref=f101e933]: 邮箱地址
+                - generic [ref=f101e934]: you@example.com
+              - generic [ref=f101e935]:
+                - generic [ref=f101e936]: 密码
+                - generic [ref=f101e937]: ••••••••
+              - generic [ref=f101e938]:
+                - generic [ref=f101e939]: 记住我
+                - generic [ref=f101e941]: 忘记密码？
+              - generic [ref=f101e942]: 登录
+            - generic [ref=f101e943]:
+              - heading "Form表单" [level=3] [ref=f101e944]
+              - paragraph [ref=f101e945]: 由标签、输入控件、校验规则与提交流程组成的界面集合，用于收集和处理用户输入。
+              - generic [ref=f101e946]:
+                - generic [ref=f101e947]: 表单
+                - generic [ref=f101e948]: 用户输入
+                - generic [ref=f101e949]: 校验反馈
+                - generic [ref=f101e950]: 常用组件
+          - link "Command Palette · 命令面板" [ref=f101e951] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/command-palette/
+            - generic [ref=f101e956]:
+              - generic [ref=f101e957]:
+                - generic [ref=f101e958]: ⌕
+                - generic [ref=f101e959]: 搜索模式、页面与命令…
+                - generic [ref=f101e960]: ESC
+              - generic [ref=f101e961]:
+                - generic [ref=f101e962]:
+                  - generic [ref=f101e963]: 打开 抽屉（Drawer）
+                  - generic [ref=f101e964]: 组件
+                - generic [ref=f101e965]:
+                  - generic [ref=f101e966]: 打开 瀑布流（Masonry）
+                  - generic [ref=f101e967]: 布局
+                - generic [ref=f101e968]:
+                  - generic [ref=f101e969]: 打开 面包屑（Breadcrumb）
+                  - generic [ref=f101e970]: 导航
+            - generic [ref=f101e971]:
+              - heading "Command Palette命令面板" [level=3] [ref=f101e972]
+              - paragraph [ref=f101e973]: 通过快捷键或按钮唤起的输入式面板，键入时实时过滤命令与页面并在选择后执行。
+              - generic [ref=f101e974]:
+                - generic [ref=f101e975]: 命令面板
+                - generic [ref=f101e976]: 全局搜索
+                - generic [ref=f101e977]: 快捷键
+                - generic [ref=f101e978]: 常用组件
+          - link "Floating Action Button · 悬浮操作按钮" [ref=f101e979] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/floating-action-button/
+            - generic [ref=f101e982]:
+              - generic [ref=f101e986]:
+                - generic [ref=f101e987]: 新建文档
+                - generic [ref=f101e988]: ✎
+              - generic [ref=f101e989]: ＋
+              - paragraph [ref=f101e991]: 页面上浮的常驻主操作
+            - generic [ref=f101e992]:
+              - heading "Floating Action Button悬浮操作按钮" [level=3] [ref=f101e993]
+              - paragraph [ref=f101e994]: 悬浮在页面角落的圆形主要操作按钮，为当前场景提供最常用动作的一键入口。
+              - generic [ref=f101e995]:
+                - generic [ref=f101e996]: 悬浮按钮
+                - generic [ref=f101e997]: 主要操作
+                - generic [ref=f101e998]: 快捷入口
+                - generic [ref=f101e999]: 常用组件
+      - complementary [ref=f101e1001]:
+        - generic [ref=f101e1002]:
+          - generic [ref=f101e1003]: 精选 · Featured
+          - generic [ref=f101e1004]: 页面布局
+        - generic [ref=f101e1007]:
+          - generic [ref=f101e1008]:
+            - generic [ref=f101e1009]: ◧
+            - generic [ref=f101e1013]:
+              - generic [ref=f101e1014]: 设计
+              - generic [ref=f101e1015]: 灵感
+          - generic [ref=f101e1016]:
+            - generic [ref=f101e1017]: ◫
+            - generic [ref=f101e1021]: 卡片
+        - generic [ref=f101e1023]:
+          - heading "Card-based Layout卡片式布局" [level=2] [ref=f101e1024]
+          - paragraph [ref=f101e1025]: 卡片式布局（Card-based Layout）以卡片作为基本内容容器，将标题、摘要、图片与操作分组 到一个个边界清晰的矩形单元中，再以网格形式排列。它让长短不一的内容获得统一的视觉 节奏，用户可以通过扫读快速定位感兴趣的信息，也适合在有限的区域内承载大量同质条目， 是现代信息密集型界面的常见骨架。
+        - generic [ref=f101e1026]:
+          - paragraph [ref=f101e1027]: 适合场景
+          - list [ref=f101e1028]:
+            - listitem [ref=f101e1029]:
+              - generic [ref=f101e1030]: +
+              - generic [ref=f101e1031]: 展示一组同类型的条目，如文章、商品或文档列表
+            - listitem [ref=f101e1032]:
+              - generic [ref=f101e1033]: +
+              - generic [ref=f101e1034]: 在首页聚合不同频道的内容入口
+            - listitem [ref=f101e1035]:
+              - generic [ref=f101e1036]: +
+              - generic [ref=f101e1037]: 需要固定容器边界的媒体缩略图展示
+        - generic [ref=f101e1038]:
+          - button "复制 Prompt" [ref=f101e1039] [cursor=pointer]
+          - link "查看详情 →" [ref=f101e1040] [cursor=pointer]:
+            - /url: /VibeLexicon/patterns/card-based-layout/
+          - link "在文档视图中浏览 →" [ref=f101e1041] [cursor=pointer]:
+            - /url: /VibeLexicon/docs/
+  - contentinfo [ref=f101e1042]:
+    - generic [ref=f101e1043]:
+      - generic [ref=f101e1044]:
+        - generic [ref=f101e1045]:
+          - paragraph [ref=f101e1046]: VibeLexicon.
+          - paragraph [ref=f101e1047]: 把 UI 术语，变成看得见的灵感。
+        - navigation "页脚导航" [ref=f101e1048]:
+          - paragraph [ref=f101e1049]: 浏览
+          - list [ref=f101e1050]:
+            - listitem [ref=f101e1051]:
+              - link "图鉴" [ref=f101e1052] [cursor=pointer]:
+                - /url: /VibeLexicon/
+            - listitem [ref=f101e1053]:
+              - link "文档" [ref=f101e1054] [cursor=pointer]:
+                - /url: /VibeLexicon/docs/
+            - listitem [ref=f101e1055]:
+              - link "连续阅读" [ref=f101e1056] [cursor=pointer]:
+                - /url: /VibeLexicon/docs/stream/
+            - listitem [ref=f101e1057]:
+              - link "关于" [ref=f101e1058] [cursor=pointer]:
+                - /url: /VibeLexicon/about/
+        - generic [ref=f101e1059]:
+          - paragraph [ref=f101e1060]: 项目
+          - link "GitHub 仓库" [ref=f101e1061] [cursor=pointer]:
+            - /url: https://github.com/AlephForge/VibeLexicon
+      - generic [ref=f101e1064]:
+        - paragraph [ref=f101e1065]: © 2026 VibeLexicon · 内容为项目重新整理，保留来源 Attribution
+        - link "设计规格 · docs/PRD.md" [ref=f101e1066] [cursor=pointer]:
+          - /url: https://github.com/AlephForge/VibeLexicon/blob/main/docs/PRD.md
