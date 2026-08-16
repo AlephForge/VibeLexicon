@@ -3,6 +3,10 @@ import '@/styles/tokens.css';
 import '@/styles/global.css';
 import SiteHeader from '@/components/shell/SiteHeader.astro';
 import SiteFooter from '@/components/shell/SiteFooter.astro';
+import SearchPalette from '@/components/search/SearchPalette.vue';
+
+import { getCollection } from 'astro:content';
+import { sortPatterns } from '@/lib/patterns';
 
 interface Props {
   title?: string;
@@ -19,6 +23,21 @@ const {
 const BASE = import.meta.env.BASE_URL;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(`${BASE}og-cover.png`, Astro.site);
+
+// 本地搜索索引（SearchAgent K #13）：构建期从单一 Content Collection 投影，
+// 作为全站 Palette 的 slug 校验源与 Pagefind 不可用时的本地 JSON 过滤兜底。
+const patternIndex = sortPatterns(
+  (await getCollection('patterns')).map((p) => ({
+    slug: p.data.slug,
+    title: p.data.title,
+    titleZh: p.data.titleZh,
+    category: p.data.category,
+    order: p.data.order,
+    summary: p.data.summary,
+    tags: p.data.tags,
+    preview: p.data.preview,
+  })),
+);
 ---
 
 <!doctype html>
@@ -46,5 +65,6 @@ const ogImage = new URL(`${BASE}og-cover.png`, Astro.site);
       <slot />
     </main>
     <SiteFooter />
+    <SearchPalette client:visible patterns={patternIndex} />
   </body>
 </html>
