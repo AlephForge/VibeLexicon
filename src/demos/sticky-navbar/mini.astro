@@ -1,0 +1,20 @@
+---
+// Mini Preview: sticky-navbar（固定导航）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative flex flex-col">
+  <div class="absolute inset-x-4 top-4 bg-card border border-line shadow-card rounded-control px-3 py-2 flex items-center justify-between z-10">
+    <span class="text-[10px] font-medium text-ink">品牌</span>
+    <div class="flex gap-2">
+      <span class="text-[9px] text-ink border-b border-accent">首页</span>
+      <span class="text-[9px] text-muted">图鉴</span>
+      <span class="text-[9px] text-muted">文档</span>
+    </div>
+    <span class="btn btn--primary rounded-control px-2 py-0.5 text-[9px]">投稿</span>
+  </div>
+  <!-- 下方滚动内容（示意固定效果） -->
+  <div class="mt-10 flex-1 flex flex-col gap-1.5 overflow-hidden">
+    <div class="flex-1 rounded-control bg-card border border-line p-2"></div>
+    <div class="flex-1 rounded-control bg-card border border-line p-2"></div>
+  </div>
+  <p class="absolute bottom-2 inset-x-0 text-center text-[9px] text-muted">滚动时导航保持可见</p>
+</div>

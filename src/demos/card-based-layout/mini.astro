@@ -1,0 +1,28 @@
+---
+// Mini Preview: card-based-layout（卡片式布局）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4">
+  <div class="grid grid-cols-2 gap-2 h-full">
+    <div class="card-surface rounded-control p-2 flex flex-col gap-1.5">
+      <div class="flex-1 rounded-md bg-tag-bg flex items-center justify-center">
+        <span class="text-2xl leading-none opacity-50">◧</span>
+      </div>
+      <div class="h-1.5 w-3/4 rounded-full bg-line"></div>
+      <div class="h-1.5 w-1/2 rounded-full bg-line"></div>
+      <div class="mt-auto flex gap-1">
+        <span class="tag">设计</span>
+        <span class="tag">灵感</span>
+      </div>
+    </div>
+    <div class="card-surface rounded-control p-2 flex flex-col gap-1.5">
+      <div class="flex-1 rounded-md bg-tag-bg flex items-center justify-center">
+        <span class="text-2xl leading-none opacity-50">◫</span>
+      </div>
+      <div class="h-1.5 w-2/3 rounded-full bg-line"></div>
+      <div class="h-1.5 w-1/2 rounded-full bg-line"></div>
+      <div class="mt-auto flex gap-1">
+        <span class="tag">卡片</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+---
+// Mini Preview: tabs（标签切换）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 flex flex-col gap-3">
+  <div class="flex gap-1 border-b border-line pb-0">
+    <button class="px-3 py-1.5 text-xs font-medium text-ink border-b-2 border-accent -mb-px">概览</button>
+    <button class="px-3 py-1.5 text-xs font-medium text-muted hover:text-ink">分析</button>
+    <button class="px-3 py-1.5 text-xs font-medium text-muted hover:text-ink">设置</button>
+  </div>
+  <div class="flex-1 card-surface rounded-control p-3 flex flex-col gap-2">
+    <div class="h-2 w-1/3 rounded-full bg-accent"></div>
+    <div class="flex-1 rounded-md bg-tag-bg"></div>
+    <div class="flex gap-1.5">
+      <div class="h-1.5 w-2/3 rounded-full bg-line"></div>
+      <div class="h-1.5 w-1/4 rounded-full bg-line"></div>
+    </div>
+  </div>
+  <p class="text-[10px] text-muted leading-tight">相同内容区域，不同标签对应不同内容</p>
+</div>

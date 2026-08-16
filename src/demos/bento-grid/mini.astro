@@ -1,0 +1,24 @@
+---
+// Mini Preview: bento-grid（便当盒布局）-- 纯静态，零 JS，Gallery/Stream 用
+// 不同面积模块建立主次层级 —— 不是平均九宫格
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4">
+  <div class="grid grid-cols-3 grid-rows-2 gap-2 h-full">
+    <div class="col-span-2 row-span-2 card-surface rounded-control p-3 flex flex-col gap-2">
+      <div class="h-2 w-1/3 rounded-full bg-accent"></div>
+      <div class="flex-1 rounded-md bg-accent-soft/60"></div>
+      <div class="flex gap-1.5">
+        <div class="h-1.5 w-1/2 rounded-full bg-line"></div>
+        <div class="h-1.5 w-1/3 rounded-full bg-line"></div>
+      </div>
+    </div>
+    <div class="card-surface rounded-control p-2.5 flex flex-col gap-1.5">
+      <div class="flex-1 rounded-md bg-tag-bg"></div>
+      <div class="h-1.5 w-2/3 rounded-full bg-line"></div>
+    </div>
+    <div class="card-surface rounded-control p-2.5 flex flex-col gap-1.5">
+      <div class="flex-1 rounded-md bg-tag-bg"></div>
+      <div class="h-1.5 w-1/2 rounded-full bg-line"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+---
+// Mini Preview: responsive-layout（响应式布局）-- 纯静态，零 JS，Gallery/Stream 用
+// 三档断点示意：桌面 / 平板 / 手机
+---
+<div class="relative w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 pb-6 flex items-end justify-center gap-3">
+  <div class="w-1/3 bg-card border border-line rounded-control p-2 flex flex-col gap-1.5" style="height: 80%">
+    <div class="grid grid-cols-3 gap-1 flex-none">
+      <div class="h-2 rounded-sm bg-tag-bg"></div>
+      <div class="h-2 rounded-sm bg-tag-bg"></div>
+      <div class="h-2 rounded-sm bg-tag-bg"></div>
+    </div>
+    <div class="h-1.5 w-2/3 rounded-full bg-accent flex-none"></div>
+    <div class="flex-1 rounded bg-tag-bg"></div>
+  </div>
+  <div class="w-1/4 bg-card border border-line rounded-control p-2 flex flex-col gap-1.5" style="height: 68%">
+    <div class="grid grid-cols-2 gap-1 flex-none">
+      <div class="h-2 rounded-sm bg-tag-bg"></div>
+      <div class="h-2 rounded-sm bg-tag-bg"></div>
+    </div>
+    <div class="h-1.5 w-2/3 rounded-full bg-accent flex-none"></div>
+    <div class="flex-1 rounded bg-tag-bg"></div>
+  </div>
+  <div class="w-1/6 bg-card border border-line rounded-control p-1.5 flex flex-col gap-1.5" style="height: 52%">
+    <div class="h-2 rounded-sm bg-tag-bg flex-none"></div>
+    <div class="h-1.5 w-full rounded-full bg-accent flex-none"></div>
+    <div class="flex-1 rounded bg-tag-bg"></div>
+  </div>
+  <p class="absolute bottom-1 inset-x-0 text-center text-[9px] text-muted">视口变化 → 列数与间距随之调整</p>
+</div>
