@@ -1,0 +1,56 @@
+---
+title: Hamburger Menu
+titleZh: 汉堡菜单
+slug: hamburger-menu
+category: navigation
+order: 22
+summary: 由三条横线图标发起的折叠菜单按钮，通常在移动端或窄屏下收起并展开导航面板。
+tags:
+  - 菜单按钮
+  - 移动导航
+  - 折叠导航
+  - 图标入口
+preview: hamburger-menu
+whatIs: |
+  汉堡菜单（Hamburger Menu）以三条水平线图标代表“菜单”，通常放置在顶栏左侧或右侧。
+  点击后从侧边、下方或对齐按钮处展开导航面板，把大量导航项折叠进一个小按钮，是小屏
+  界面节省顶栏空间的经典做法，并常与 Drawer、下拉面板或侧边导航组合使用。
+useCases:
+  - 移动端或窄屏下收起多个导航项，避免顶栏拥挤
+  - 顶栏空间不足但导航层级较多时收纳入口
+  - 作为 Drawer 或侧边导航面板的触发按钮
+  - 把不常用的次要操作归入菜单的场景
+limitations:
+  - 图标本身不表意，依赖用户经验与平台先例
+  - 关键导航被折叠后被发现性明显下降
+  - 展开面板层级过深时键盘与焦点管理变复杂
+  - 不应把高频操作也全部藏进菜单
+prompt: |
+  请在页面顶栏实现一个 Hamburger Menu 汉堡菜单，作为移动端主导航的折叠开关：
+
+  - 结构位置：三条横线图标按钮位于顶栏左侧或右侧，点击后从视口边缘展开 320px 左右
+    的导航面板（配合 Drawer 或侧边面板实现），遮罩覆盖其余区域。
+  - 行为：点击图标开合面板，动画时长约 200–260ms；打开期间锁定背景滚动；点击遮罩、
+    按 Esc 或再次点击按钮均可关闭。
+  - Desktop / Mobile 差异：窄屏下始终显示汉堡按钮并默认收起导航；桌面端则以展开状态
+    平铺主导航，汉堡按钮仅用于极窄视口（如 <768px）。
+  - 可访问性：使用真实 <button>（不能用 <div> 伪装）承载三条横线图标并附 aria-label
+    （如「打开菜单」）；以 aria-expanded 同步开合状态、aria-controls 指向面板 id；打开后
+    焦点移入面板，关闭后焦点归还按钮；面板内导航为键盘可聚焦的链接列表。
+  - 易错点：不要只依赖图标颜色变化表达状态；动画尊重 prefers-reduced-motion；面板
+    内部需可滚动，并避免与其他模态同时打开造成焦点混乱。
+related:
+  - sticky-navbar
+  - drawer
+  - sidebar-navigation
+  - mega-menu
+  - bottom-navigation
+compare:
+  - mega-menu
+source:
+  author: Nielsen Norman Group
+  url: https://www.nngroup.com/articles/hamburger-menus/
+  note: 关于汉堡菜单隐藏导航的利弊参考 NN/g 研究，定义与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

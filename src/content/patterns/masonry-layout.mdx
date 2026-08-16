@@ -1,0 +1,49 @@
+---
+title: Masonry Layout
+titleZh: 瀑布流
+slug: masonry-layout
+category: layout
+order: 2
+summary: 不同高度的内容块在列的底部依次紧凑堆叠，形成错落有致的瀑布流，适合媒体密集页面。
+tags:
+  - 瀑布流
+  - 媒体展示
+  - 网格
+  - 图片墙
+preview: masonry-layout
+whatIs: |
+  瀑布流（Masonry Layout）是一种按列堆叠的网格布局：各列自上而下连续摆放内容块，块的
+  高度可以各不相同，新块总是被放进当前最短的列中，从而填满底部空隙。它让大量尺寸不一
+  的媒体以紧凑、错落的节奏呈现，在相册、灵感板与新闻流中最为常见，也让浏览长页面的
+  整个过程保持较高的内容密度。
+useCases:
+  - 图片为主的画廊、灵感板与照片墙
+  - 电商或社交信息流中长度不一的条目
+  - 需要紧凑排布、避免整齐横排留下缝隙的媒体区
+  - 保持浏览密度的大批量同类媒体块
+limitations:
+  - 阅读顺序不直观，不适合有明确先后逻辑的文本
+  - 高度差异过大时视觉上容易显得混乱
+  - 缺少浏览器原生支持时需要脚本测量，实现与性能要谨慎
+  - 不适合要求严格结构对齐的后台数据界面
+prompt: |
+  请实现一个 Masonry Layout 瀑布流布局：
+
+  - 结构位置：主内容区按 3–4 列排列高度不等的媒体卡片（图片加简短说明），卡片宽度统一、高度各异。
+  - 关键行为：卡片尽量填满列底，滚动加载时新卡片接入当前最短的列；优先使用纯 CSS 方案（如 CSS 多列或网格），确需精确控制时再引入脚本测量。
+  - Desktop / Mobile 差异：桌面端多列展开，移动端降为 1–2 列；图片提前用 aspect-ratio 预留尺寸，避免布局跳动。
+  - 可访问性：卡片用语义化链接包裹，图片必须提供 alt 文本；懒加载图片要保留占位空间与清晰的回退样式。
+  - 易错点：不要硬性统一每张卡片的高度；不要用脚本重排 DOM 顺序破坏键盘与朗读顺序；动画需克制并尊重 prefers-reduced-motion。
+related:
+  - card-based-layout
+  - lightbox
+  - responsive-layout
+  - full-bleed-layout
+compare: []
+source:
+  author: MDN contributors（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Masonry_Layout
+  note: 定义与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

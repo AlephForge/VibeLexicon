@@ -1,0 +1,57 @@
+---
+title: Anchor Link
+titleZh: 锚点跳转
+slug: anchor-link
+category: navigation
+order: 24
+summary: 链接到本页或本站指定区块的跳转方式，借助 URL 片段标识定位，是单页站点的导航骨架。
+tags:
+  - 页内跳转
+  - 单页导航
+  - 长页面
+  - URL 片段
+preview: anchor-link
+whatIs: |
+  锚点跳转（Anchor Link）通过链接跳转到当前页或本站的指定区块，目标位置以 URL 片段
+  （#id）表达，点击后浏览器滚动到对应元素。它天然可分享、可刷新后直达，是单页网站
+  目录跳转与长文作者定位的标准手段，也是「URL as Shareable State」在页内导航上的体现。
+useCases:
+  - 长文、FAQ 页提供目录式的快速跳转
+  - 单页站点作为栏目之间的页内导航
+  - 借助 URL 片段分享页内指定位置
+  - 文档与教程中「跳至某节」的入口
+limitations:
+  - 长页面锚点过多会让目录本身变得臃肿
+  - 目标区块依赖渲染结果，异步内容下可能跳转失效
+  - 与吸顶导航叠加时目标会被遮挡，需要偏移补偿
+  - 不能替代完整的页面级导航与搜索
+prompt: |
+  请在长页文档中实现 Anchor Link 锚点跳转导航：
+
+  - 结构位置：页面顶部提供一组目录链接（列表包裹）指向各内容区块，目标区块带稳定且
+   唯一的 id，链接形如 /#section-a。
+  - 行为：使用原生 hash 链接而非 JS 劫持；点击后平滑滚动到目标（250–350ms）；希望
+   平滑滚动时用 CSS scroll-behavior: smooth，并尊重 prefers-reduced-motion 自动降级；
+   首次加载带 hash 或页面内新渲染目标时应主动校正滚动位置。
+  - 吸顶导航适配：与固定导航栏配合时，所有带 id 的目标区块设置
+   scroll-margin-top（约等于导航栏高度），避免目标被顶栏遮挡。
+  - 可访问性：锚点目标元素加 tabindex="-1" 以便键盘跳转后接收焦点；目录用 <nav> 包裹；
+   链接文本清晰表意；不要把无 href="#" 的占位链接当锚点使用。
+  - 易错点：不要用 div 模拟链接跳转；不要在所有 hash 上执行平滑滚动而不区分用户偏好；
+   焦点管理（跳转后是否聚焦目标）应保持一致策略。
+related:
+  - single-page-website
+  - sticky-navbar
+  - breadcrumb
+  - sticky-storytelling
+  - back-to-top
+compare:
+  - tabs
+  - back-to-top
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+  note: 链接与目标定位的语义参考 MDN，定义、场景与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

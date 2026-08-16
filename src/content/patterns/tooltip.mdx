@@ -1,0 +1,44 @@
+---
+title: Tooltip
+titleZh: 气泡提示
+slug: tooltip
+category: components
+order: 34
+summary: 悬停或键盘聚焦元素时出现在其附近的小气泡，用于提供不加打断的补充说明。
+tags:
+  - 气泡提示
+  - 悬停交互
+  - 补充信息
+preview: tooltip
+whatIs: |
+  气泡提示（Tooltip）是一种当用户悬停或键盘聚焦某个元素时，在其附近出现的短小
+  气泡文本，用于解释图标按钮的含义、补充表单字段的说明或揭示被截断的文字全文。
+  它属于"按需出现"的信息补充层，不占据页面布局空间，因此不会扰乱主内容的排版。
+useCases:
+  - 纯图标按钮的功能说明
+  - 表单字段的简短填表提示
+  - 展示被省略号截断的完整文本
+  - 为键盘快捷方式补充说明
+limitations:
+  - 移动端没有悬停状态，主要信息不应依赖气泡提示
+  - 内容过长时气泡可读性差，也不适合承载错误信息
+  - 出现位置容易被遮挡或被视口裁切
+prompt: |
+  请在页面实现一个 Tooltip 气泡提示：
+
+  - 结构位置：触发元素下方或上方的小气泡，宽约 200–260px，由触发元素外层的相对定位容器承载；悬停或聚焦时显示，移开或失去焦点时隐藏。
+  - 行为：显示有约 150ms 的小延迟以避免鼠标掠过时的闪烁；气泡不随鼠标移动；动画为轻量淡入并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端由 hover 与 focus 触发；移动端无 hover，仅限点击场景且应避免使用纯 Tooltip 承载关键信息。
+  - 可访问性：由触发元素调用 aria-describedby 关联气泡，气泡使用 role="tooltip"；触发元素本身必须可键盘聚焦；按 Esc 或滚动页面时应能关闭气泡。
+  - 易错点：不要只用 hover 触发而忽略键盘路径；气泡不要溢出视口右缘或底部；避免把 Tooltip 做成可交互控件（不可点击、不可聚焦）。
+related:
+  - form
+  - toast
+  - sticky-navbar
+source:
+  author: Nielsen Norman Group（NN/g）
+  url: https://www.nngroup.com/articles/tooltip-guidelines/
+  note: 定义与示例为本项目重新整理，指南参考 NN/g Tooltip 建议
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

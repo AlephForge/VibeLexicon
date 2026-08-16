@@ -1,0 +1,54 @@
+---
+title: Breadcrumb
+titleZh: 面包屑
+slug: breadcrumb
+category: navigation
+order: 23
+summary: 展示当前页面在站点层级中位置的导航路径，帮助用户理解所在位置并逐级向上返回。
+tags:
+  - 层级路径
+  - 当前位置
+  - 辅助导航
+  - 站内定位
+preview: breadcrumb
+whatIs: |
+  面包屑（Breadcrumb）用一串层级化的链接展示当前页面在站点结构中的位置，通常位于页面
+  顶部或内容区上方，形如「首页 / 分类 / 当前页」。它让用户快速理解自己身处哪里、可以
+  向哪一层返回，是层级明确的多页站点里重要的辅助导航，与主导航互补而不会重复承担
+  横向跳转的任务。
+useCases:
+  - 多级站点的内页，帮助用户理解当前位置
+  - 电商、文档站等层级关系明确的站点
+  - 需要提供一步或两步向上返回的场景
+  - 内容页顶部与标题并列的轻量定位指示
+limitations:
+  - 层级过浅或过平的面包屑价值有限
+  - 首页导航本身足够清晰时属于冗余信息
+  - 移动端窄屏下过长的路径需要截断或换行
+  - 不能替代层级内的主导航、搜索与分页
+prompt: |
+  请在内容页顶部实现一个 Breadcrumb 面包屑导航：
+
+  - 结构位置：位于页面标题上方或内容区顶部，占一行；路径从站点首页开始逐级展开，最后
+    一项为当前页面，中间用分隔符（如 › 或 /）连接。
+  - 行为：前几级均为可点击链接，当前页一格显示为纯文本（不加链接与 aria-current）；
+    每个分隔符对读屏不可见；层级超过约 3 级时桌面端可完整显示，窄屏下可折叠中间项
+    为省略号并保持首末可见。
+  - 可访问性：整体包裹在 <nav> 中并添加 aria-label="面包屑"；最后一项用
+    aria-current="page" 标注；链接文本清晰表意，不影响键盘顺序。
+  - 易错点：不要用点击不可达的纯文本冒充链接；分隔符不要进入无障碍名称；当前页若
+    可点击，应指向真正有用的目标而不是无操作的空链接。
+related:
+  - multi-page-website
+  - sidebar-navigation
+  - anchor-link
+  - pagination
+compare:
+  - pagination
+source:
+  author: Nielsen Norman Group
+  url: https://www.nngroup.com/articles/breadcrumbs/
+  note: 面包屑设计指南参考 NN/g，定义、场景与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

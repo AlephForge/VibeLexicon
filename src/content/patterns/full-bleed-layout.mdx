@@ -1,0 +1,48 @@
+---
+title: Full-bleed Layout
+titleZh: 全出血布局
+slug: full-bleed-layout
+category: layout
+order: 10
+summary: 让背景、图片或色块突破内容宽度延伸到视口边缘，营造沉浸感与留白对比的出血版式。
+tags:
+  - 全出血
+  - 沉浸式
+  - 宽度突破
+  - 版式
+preview: full-bleed-layout
+whatIs: |
+  全出血布局（Full-bleed Layout）让特定元素，例如背景色、图片或横幅，突破正文内容的最大
+  宽度一直延伸到视口边缘，而正文本身仍停留在居中的阅读列中。这种窄内容与宽媒体的对比，
+  让视觉块与排印块分别获得节奏感，在编辑型网站和营销页面中都很常见。
+useCases:
+  - 文章中的插图、引语或横幅突破内容列全宽呈现
+  - 首屏用背景色块或图片铺满视口，再叠加居中文案
+  - 分节切换时用全宽色带划分章节氛围
+  - 影集与作品集用全出血图像增强沉浸感
+limitations:
+  - 全出血元素过多会稀释其强调效果
+  - 小屏上全宽图像同样有裁切与配重问题
+  - 与阅读窄列的宽度差需要精心设计
+  - 脱离内容策略时容易沦为纯装饰
+prompt: |
+  请实现一个 Full-bleed Layout 全出血布局：
+
+  - 结构位置：正文使用居中窄列（如 min(65ch, 100%)）；需要突出的图片或背景使用全宽容器跨越整个视口，置于正文列前后或之间。
+  - 关键行为：全出血容器宽度延伸到视口边缘（可用 100vw 或网格的 1 / -1 跨轨）；全出血图片要裁剪适配高度而不是无脑撑满；正文列保持最佳阅读行长。
+  - Desktop / Mobile 差异：桌面端出血效果明显、比例可控；移动端出血幅度变小但仍延伸到屏边，注意内部间距与安全区域。
+  - 可访问性：全出血图片按装饰性或内容性图片分别处理替代文本；背景上叠加文字时要保证对比度并预留遮罩；不因出血元素造成横向滚动条。
+  - 易错点：小心视口滚动条导致 100vw 横向溢出；不要把正文也拉成全宽；全出血只应服务于需要强调的少数区域。
+related:
+  - hero-section
+  - masonry-layout
+  - split-screen-layout
+  - landing-page
+compare: []
+source:
+  author: Josh W. Comeau
+  url: https://www.joshwcomeau.com/css/full-bleed/
+  note: 定义与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

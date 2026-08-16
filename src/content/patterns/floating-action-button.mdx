@@ -1,0 +1,49 @@
+---
+title: Floating Action Button
+titleZh: 悬浮操作按钮
+slug: floating-action-button
+category: components
+order: 40
+summary: 悬浮在页面角落的圆形主要操作按钮，为当前场景提供最常用动作的一键入口。
+tags:
+  - 悬浮按钮
+  - 主要操作
+  - 快捷入口
+  - 移动端
+preview: floating-action-button
+whatIs: |
+  悬浮操作按钮（Floating Action Button，FAB）是一个固定在页面角落的圆形按钮，
+  通常位于右下角，用于承载当前场景中最主要的一个操作，如新建内容、发起对话或
+  联系客服。它以常驻的视觉存在替代深藏在菜单中的入口，但要克制使用：一个页面
+  至多保留一个主 FAB，多个操作时考虑展开式 Speed Dial，避免按钮挤压内容区域并
+  遮挡阅读。
+useCases:
+  - 内容页面的"新建/添加"主入口
+  - 即时通讯与协作场景的快捷发起按钮
+  - 替代移动端底部栏之外的快捷操作
+  - 展开式（Speed Dial）承载少量次要操作
+limitations:
+  - 同一页面出现多个悬浮按钮会显著造成困惑
+  - 固定悬浮会遮挡长滚动页面的部分内容
+  - 纯图标没有文字，需要清晰的标签与可发现入口
+prompt: |
+  请在页面实现一个 Floating Action Button（FAB）悬浮操作按钮：
+
+  - 结构位置：固定在视口右下角（距边缘约 16–24px），圆形按钮带图标；点击后可展开为 Speed Dial 并列出 2–4 个次要动作；主要操作通常弹出一个 Modal 或 Drawer 承接后续表单。
+  - 行为：滚动时不随内容滚动，但可通过可选的滚动方向隐藏策略（向下滚动收起、向上滚动浮现）减少遮挡；Speed Dial 展开/收起有轻量过渡动画并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端 FAB 常驻右下角并带 hover 效果；移动端注意与底部导航栏、Toast 的位置避让，避免互相遮挡或触发误点。
+  - 可访问性：按钮必须有可用的文字标签（透出文字或用 aria-label 提供图标语义）；保持键盘可达（Tab 可聚焦、焦点态可见）；Speed Dial 展开后焦点顺序自然落入各动作项；若打开模态承接操作，Modal/Drawer 自行处理焦点陷阱与焦点归还。
+  - 易错点：不要用纯装饰性图标而无语义；不要让其遮挡正文滚动尾部的操作；一个页面只放一个主 FAB，避免与返回顶部等固定控件争夺角落。
+related:
+  - back-to-top
+  - bottom-navigation
+  - modal
+compare:
+  - back-to-top
+source:
+  author: Material Design
+  url: https://m3.material.io/components/floating-action-button/overview
+  note: 定义与示例为本项目重新整理，形态与行为参考 Material Design FAB
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

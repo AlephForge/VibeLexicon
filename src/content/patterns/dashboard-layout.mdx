@@ -1,0 +1,49 @@
+---
+title: Dashboard Layout
+titleZh: 仪表盘布局
+slug: dashboard-layout
+category: layout
+order: 8
+summary: 面向监控与管理的看板式骨架，用导航、指标卡与图表区块组合支撑一屏快速洞察。
+tags:
+  - 仪表盘
+  - 看板
+  - 指标
+  - 后台界面
+preview: dashboard-layout
+whatIs: |
+  仪表盘布局（Dashboard）是一种以监控、管理与快速洞察为目标的看板式骨架，通常由顶部
+  工具条、侧边导航和一片由指标卡、图表与表格组成的主区域构成。它把分散的数据收敛到
+  一屏之中，让用户先扫读概览再按需下钻，是后台系统与数据产品最常见的结构形态，也是
+  信息层级设计最见功力的布局之一。
+useCases:
+  - 后台与数据产品的指标总览页
+  - 运营、分析与设备状态的监控看板
+  - 把 KPI、趋势图与列表聚合到一屏的概览
+  - 需要快速定位并下钻到详情的入口组织
+limitations:
+  - 信息密度过高时一屏装不下，需要精心取舍
+  - 图表与指标缺乏统一口径时难以横向对比
+  - 偏重扫描型任务，不适合承载深阅读内容
+  - 区块越多，越依赖统一的设计系统来收束视觉噪音
+prompt: |
+  请实现一个 Dashboard Layout 仪表盘布局：
+
+  - 结构位置：页面由顶部工具条、左侧导航与主内容区构成；主内容区以响应式网格排列 KPI 指标卡、图表卡与列表卡，关键指标置于上方。
+  - 关键行为：卡片内部各自处理滚动与展开；数据加载前显示骨架屏占位；点击指标卡可下钻到明细，操作完成后用轻提示反馈结果。
+  - Desktop / Mobile 差异：桌面端多列看板；移动端同一组数据改为纵向流或横向滑动标签页，保证图表在窄屏不横向溢出。
+  - 可访问性：图表提供文本摘要或可读的数据表作为替代方案；明细数据使用语义化表格；键盘可以遍历所有卡片操作并聚焦图表中的交互元素。
+  - 易错点：不要把几十个图表一次塞进首屏，先展示最关键的指标；指标卡的口径要保持一致；导航区与内容区的边界要清晰。
+related:
+  - card-based-layout
+  - sidebar-navigation
+  - tabs
+  - responsive-layout
+compare: []
+source:
+  author: Page Laubheimer（Nielsen Norman Group）
+  url: https://www.nngroup.com/articles/dashboards-preattentive/
+  note: 定义与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

@@ -1,0 +1,50 @@
+---
+title: Card-based Layout
+titleZh: 卡片式布局
+slug: card-based-layout
+category: layout
+order: 1
+summary: 以卡片为基本容器，把一组相关的内容、操作或入口聚合为可快速扫读的网格单元。
+tags:
+  - 卡片
+  - 网格
+  - 内容容器
+  - 信息聚合
+preview: card-based-layout
+whatIs: |
+  卡片式布局（Card-based Layout）以卡片作为基本内容容器，将标题、摘要、图片与操作分组
+  到一个个边界清晰的矩形单元中，再以网格形式排列。它让长短不一的内容获得统一的视觉
+  节奏，用户可以通过扫读快速定位感兴趣的信息，也适合在有限的区域内承载大量同质条目，
+  是现代信息密集型界面的常见骨架。
+useCases:
+  - 展示一组同类型的条目，如文章、商品或文档列表
+  - 在首页聚合不同频道的内容入口
+  - 需要固定容器边界的媒体缩略图展示
+  - 后台界面中以卡片组织指标与功能区块
+limitations:
+  - 只有同一视觉层级的内容才适合做成卡片网格
+  - 卡片过多时信息密度下降，扫读成本反而上升
+  - 圆角、阴影与留白不一致会让卡片显得散落
+  - 不适合需要连续阅读的长篇正文
+prompt: |
+  请实现一个 Card-based Layout 卡片式布局：
+
+  - 结构位置：页面主内容区用网格排列卡片，桌面端 3–4 列、平板 2 列、手机单列；每张卡片包含缩略图区域、标题、一行摘要与可选操作按钮。
+  - 关键行为：卡片整体可点击跳转；hover 时仅让卡片内部元素（如图片轻微缩放或标题着色）产生轻量变化；卡片间保持统一间距。
+  - Desktop / Mobile 差异：窄屏下列数递减，允许卡片高度不同，但列内保持对齐；混排大卡片与普通卡片时仍遵守同一网格轨道。
+  - 可访问性：卡片本身是一个可聚焦的链接而非堆叠多个按钮；链接文本必须自然可读，不依赖 title 属性；整组卡片的标题层级保持一致。
+  - 易错点：不要给每张卡片叠加夸张阴影；不要把所有内容塞进同一张卡片；不要出现多个 h1，卡片标题应从 h2 起按层级组织。
+related:
+  - masonry-layout
+  - bento-grid
+  - dashboard-layout
+  - feature-grid
+compare:
+  - bento-grid
+source:
+  author: Material Design
+  url: https://m3.material.io/components/cards/overview
+  note: 定义与示例为本项目重新整理
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->

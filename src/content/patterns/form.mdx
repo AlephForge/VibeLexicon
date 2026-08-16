@@ -1,0 +1,47 @@
+---
+title: Form
+titleZh: 表单
+slug: form
+category: components
+order: 38
+summary: 由标签、输入控件、校验规则与提交流程组成的界面集合，用于收集和处理用户输入。
+tags:
+  - 表单
+  - 用户输入
+  - 校验反馈
+  - 提交
+preview: form
+whatIs: |
+  表单（Form）是页面中用于收集用户输入的结构化界面，通常由字段标签、输入控件、
+  填写提示、校验规则与提交按钮组成。它强调的是字段之间的语义组织：清晰的标签、
+  一致的校验反馈、可预测的提交结果。成功的表单体验取决于校验错误如何呈现、焦点
+  如何引导，以及键盘用户能否顺利走完全程。
+useCases:
+  - 登录、注册与账号设置
+  - 搜索关键词与筛选条件的输入
+  - 下单、预约与信息收集流程
+  - 反馈、留言与联系页面
+limitations:
+  - 字段过多或分组不清会迅速降低完成率
+  - 校验规则过严或提示不力会让用户反复试错
+  - 缺少键盘与读屏支持时会直接拒掉一批用户
+prompt: |
+  请在页面实现一个 Form 表单：
+
+  - 结构位置：字段按逻辑分组纵向排列，每组有标题（fieldset/legend 表达分组语义），标签与控件顶对齐，提交按钮位于末尾；可置于独立页面或模态框中（由父场景决定）。
+  - 行为：字段失去焦点时做即时校验，提交时做整体校验；错误提示在对应字段下方就近出现，成功后给出明确反馈（跳转、Toast 或按钮态变化）；校验失败时首个错误字段获得焦点。
+  - Desktop / Mobile 差异：桌面端可将标签与控件左右并排；移动端保持单列纵向、输入框触控高度不低于 44px，避免虚拟键盘遮挡时错误提示不可见。
+  - 可访问性：每个控件都必须有可编程关联的 label（label 的 for 与控件 id 配对），错误信息用 aria-describedby 挂到控件上并配合 aria-live 或 role="alert" 告知；支持键盘完整走完 Tab 顺序，Enter 可触发默认提交。
+  - 易错点：不要用纯颜色变化作唯一错误暗示；不要在每次按键都报错；不要禁用浏览器原生校验又拿不出替代方案。
+related:
+  - modal
+  - command-palette
+  - tooltip
+  - toast
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation
+  note: 定义与示例为本项目重新整理，校验与无障碍实践参考 MDN 表单章节
+---
+
+<!-- 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't -->
