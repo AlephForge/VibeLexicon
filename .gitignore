@@ -30,3 +30,4 @@ pnpm-debug.log*
 
 # Local gh config (never commit credentials/hosts)
 .config/
+.playwright-mcp/
