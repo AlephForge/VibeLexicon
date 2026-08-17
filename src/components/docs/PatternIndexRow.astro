@@ -1,0 +1,126 @@
+---
+// Docs 高密度词条行（Issue #8 / Docs Agent F）
+// - 无大预览图：突出 English Name + 中文名 + 一句话 summary（PRD §7.2）
+// - 顶层是真实 <a>，跳转 Detail（trailingSlash: always → 链接以 / 结尾）
+// - id={slug} 供右栏「本页目录」快速锚点定位
+// - data-docs-row / data-slug 是 DocsLayout(filter) 岛的过滤锚点（岛只切 hidden，不重渲染）
+// - 服务端初始过滤由宿主页面传 hidden；无 JS 时同样正确
+import { getCategory } from '@/lib/categories';
+import type { PatternIndex } from '@/lib/patterns';
+
+interface Props {
+  pattern: PatternIndex;
+  href: string;
+  hidden?: boolean;
+}
+
+const { pattern, href, hidden = false } = Astro.props;
+const categoryNameZh = getCategory(pattern.category)?.nameZh ?? '';
+const hiddenAttr = hidden ? true : undefined;
+---
+
+<a
+  id={pattern.slug}
+  href={href}
+  data-docs-row
+  data-slug={pattern.slug}
+  hidden={hiddenAttr}
+  aria-label={`${pattern.title} · ${pattern.titleZh}：${pattern.summary}`}
+  class="docs-row"
+>
+  <span class="docs-row__ord" aria-hidden="true">{String(pattern.order).padStart(2, '0')}</span>
+
+  <span class="docs-row__main">
+    <span class="docs-row__title">
+      {pattern.title}
+      <span class="docs-row__zh">{pattern.titleZh}</span>
+    </span>
+    <span class="docs-row__summary">{pattern.summary}</span>
+  </span>
+
+  <span class="docs-row__cat">
+    <span class="tag">{categoryNameZh}</span>
+  </span>
+
+  <span class="docs-row__arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+  .docs-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 0.625rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-row:last-child {
+    border-bottom: 0;
+  }
+  .docs-row:hover {
+    background: var(--color-surface);
+  }
+  .docs-row__ord {
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-line);
+  }
+  .docs-row__main {
+    min-width: 0;
+  }
+  .docs-row__title {
+    display: block;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-ink);
+    transition: color var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-row:hover .docs-row__title {
+    color: var(--color-accent-deep);
+  }
+  .docs-row__zh {
+    margin-left: 0.5rem;
+    font-weight: 400;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+  }
+  .docs-row__summary {
+    margin-top: 0.125rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--color-muted);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .docs-row__cat {
+    display: inline-flex;
+    align-items: center;
+  }
+  .docs-row__arrow {
+    font-size: 0.875rem;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateX(-2px);
+    transition:
+      opacity var(--duration-feedback) var(--ease-feedback),
+      transform var(--duration-feedback) var(--ease-feedback);
+  }
+  .docs-row:hover .docs-row__arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .docs-row__arrow {
+      opacity: 0.6;
+      transform: none;
+    }
+  }
+</style>

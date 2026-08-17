@@ -1,0 +1,29 @@
+---
+// Mini Preview: hamburger-menu（汉堡菜单）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <div class="absolute inset-4 bg-card border border-line rounded-control p-3 flex items-start justify-between">
+    <span class="text-[12px] font-medium text-ink">移动端页面</span>
+    <!-- 关闭态三横线 -->
+    <span class="flex flex-col gap-1 p-1">
+      <span class="w-4 h-0.5 rounded bg-ink"></span>
+      <span class="w-4 h-0.5 rounded bg-ink"></span>
+      <span class="w-4 h-0.5 rounded bg-ink"></span>
+    </span>
+  </div>
+  <!-- 展开菜单面板 -->
+  <div class="absolute inset-0 rounded-card bg-ink/30 flex justify-center items-stretch">
+    <div class="absolute inset-0 bg-ink/30 rounded-card"></div>
+    <div class="relative w-3/5 self-stretch mt-[15%] mb-[18%] bg-surface border border-line rounded-control p-3 flex flex-col gap-2 shadow-card">
+      <div class="flex items-center justify-between">
+        <span class="text-[11px] font-medium text-ink">菜单</span>
+        <span class="w-5 h-5 rounded-full bg-tag-bg flex items-center justify-center text-[10px] text-muted">×</span>
+      </div>
+      <div class="h-1.5 w-full rounded-full bg-line"></div>
+      <div class="h-1.5 w-2/3 rounded-full bg-line"></div>
+      <div class="h-1.5 w-5/6 rounded-full bg-line"></div>
+      <div class="flex-1"></div>
+      <span class="btn btn--primary rounded-control py-1 text-[10px] text-center">登录</span>
+    </div>
+  </div>
+</div>

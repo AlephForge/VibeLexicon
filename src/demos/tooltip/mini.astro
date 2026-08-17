@@ -1,0 +1,14 @@
+---
+// Mini Preview: tooltip（气泡提示）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <div class="absolute inset-4 card-surface rounded-control p-4 flex items-center justify-center gap-3">
+    <span class="text-[11px] text-muted">将鼠标悬停在此按钮…</span>
+    <span class="btn btn--ghost rounded-control px-3 py-1.5 text-[10px] relative">保存</span>
+    <!-- 气泡 -->
+    <div class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 mt-7 bg-dark-bg text-white text-[9px] px-2.5 py-1.5 rounded-control shadow-card">
+      保存到收藏夹（Ctrl+S）
+      <span class="absolute left-1/2 -translate-x-1/2 -top-1 w-0 h-0 border-x-4 border-x-transparent border-b-4 border-b-dark-bg"></span>
+    </div>
+  </div>
+</div>

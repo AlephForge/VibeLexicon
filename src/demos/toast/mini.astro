@@ -1,0 +1,17 @@
+---
+// Mini Preview: toast（轻提示）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <div class="absolute inset-4 card-surface rounded-control p-4 flex items-center justify-center gap-3">
+    <span class="text-[11px] text-muted">触发操作后短暂出现…</span>
+    <span class="btn btn--primary rounded-control px-3 py-1.5 text-[10px]">复制 Prompt</span>
+  </div>
+  <!-- Toast -->
+  <div class="absolute bottom-8 inset-x-0 flex justify-center">
+    <div class="bg-dark-bg text-white text-[10px] px-3.5 py-2 rounded-pill shadow-card flex items-center gap-2">
+      <span class="text-secondary">✓</span>
+      已复制到剪贴板
+    </div>
+  </div>
+  <p class="absolute bottom-2 inset-x-0 text-center text-[9px] text-muted">非阻断反馈，自动消失</p>
+</div>

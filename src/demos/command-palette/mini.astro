@@ -1,0 +1,29 @@
+---
+// Mini Preview: command-palette（命令面板）-- 纯静态，零 JS，Gallery/Stream 用
+// 顶部居中搜索面板 + 结果列表 + ⌘K 快捷键
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <div class="absolute inset-0 rounded-card bg-ink/40 flex items-start justify-center pt-6">
+    <div class="w-3/4 card-surface rounded-control shadow-card overflow-hidden flex flex-col">
+      <div class="flex items-center gap-2 px-3 py-2.5 border-b border-line">
+        <span class="text-xs text-muted">⌕</span>
+        <span class="flex-1 text-[11px] text-muted">搜索模式、页面与命令…</span>
+        <span class="text-[9px] border border-line rounded px-1 bg-tag-bg text-muted">ESC</span>
+      </div>
+      <div class="p-1.5 flex flex-col gap-0.5">
+        <div class="flex items-center justify-between px-2.5 py-1.5 rounded-md bg-accent-soft text-[11px] text-ink">
+          <span>打开 抽屉（Drawer）</span>
+          <span class="tag">组件</span>
+        </div>
+        <div class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-[11px] text-muted">
+          <span>打开 瀑布流（Masonry）</span>
+          <span class="tag">布局</span>
+        </div>
+        <div class="flex items-center justify-between px-2.5 py-1.5 rounded-md text-[11px] text-muted">
+          <span>打开 面包屑（Breadcrumb）</span>
+          <span class="tag">导航</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

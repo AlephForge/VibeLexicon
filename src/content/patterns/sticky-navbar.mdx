@@ -1,0 +1,58 @@
+---
+title: Sticky Navbar
+titleZh: 固定导航
+slug: sticky-navbar
+category: navigation
+order: 21
+summary: 始终固定在视口顶部的导航栏，让用户在任意滚动位置都能访问主导航与关键操作。
+tags:
+  - 主导航
+  - 固定定位
+  - 全局可达
+  - 移动端
+preview: sticky-navbar
+whatIs: |
+  固定导航（Sticky Navbar）是一种页面滚动后仍停留在视口顶部的导航栏。它承载品牌标志、
+  主导航链接与搜索等入口，常通过 position: sticky（或 fixed）实现，并在离开页面顶部后
+  出现阴影或分隔线以建立层级。它用少量持续占用的垂直空间，换取用户在长页面任意位置
+  都能随时切换目的地，是多页站点与单页站点的常见配置。
+useCases:
+  - 多页站点需要在滚动过程中始终保留主导航
+  - 长文章或滚动型页面需要随时切换到其他栏目
+  - 电商或工具站需要常驻搜索与购物入口
+  - 导航转换率重要、位置需稳定可预测的场景
+limitations:
+  - 持续占用顶部垂直空间，压缩正文可视区域
+  - 小屏上与吸顶操作叠加时内容容易被遮挡
+  - 与页内锚点配套时需处理吸顶偏移，否则跳转目标被挡住
+  - 追求沉浸阅读的页面应谨慎使用
+prompt: |
+  请在页面顶部实现一个 Sticky Navbar 固定导航栏：
+
+  - 结构位置：导航栏占满视口宽度、高度约 56–64px，位于最顶层；品牌标志居左，主导航
+    链接居中，搜索与操作按钮居右；滚动后通过 CSS position: sticky（top: 0）保持在视口顶部。
+  - 行为：页面位于顶部时不加阴影，离开顶部后增加浅色阴影或 1px 分隔线建立层级；滚动
+    方向切换时保持可见，可结合手势适度收缩高度以让出正文空间。
+  - Desktop / Mobile 差异：桌面端平铺展示所有一级导航链接；窄屏下链接折叠为菜单按钮
+    （配合 Hamburger Menu / Drawer），仅保留品牌标志与少量核心操作。
+  - 可访问性：使用 <nav> 包裹并提供 aria-label；折叠后的展开面板中，触发按钮用
+    aria-expanded 反映状态并 aria-controls 关联面板，打开后焦点移入面板且支持 Esc 关闭、
+    关闭后焦点归还触发按钮；为正文提供 Skip Link；当前栏目用 aria-current="page" 标注。
+  - 易错点：不要在滚动后把焦点陷阱放进导航栏本身；动画与滑入应当尊重
+    prefers-reduced-motion；页内锚点落地区块需设置 scroll-margin-top 以补偿导航栏高度。
+related:
+  - single-page-website
+  - hamburger-menu
+  - anchor-link
+  - mega-menu
+  - back-to-top
+  - bottom-navigation
+compare:
+  - bottom-navigation
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS/position
+  note: 术语与 sticky 定位原理参考 MDN，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

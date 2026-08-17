@@ -1,0 +1,38 @@
+---
+// Mini Preview: masonry-layout（瀑布流）-- 纯静态，零 JS，Gallery/Stream 用
+// 宽度相近、高度自然错落 —— 不能伪装等高网格
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4">
+  <div class="grid grid-cols-3 gap-2 h-full">
+    <div class="flex flex-col gap-2 h-full">
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 45%">
+        <div class="flex-1 rounded-md bg-accent-soft"></div>
+        <div class="h-1.5 w-3/4 rounded-full bg-line"></div>
+      </div>
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 50%">
+        <div class="flex-1 rounded-md bg-tag-bg"></div>
+        <div class="h-1.5 w-full rounded-full bg-line"></div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 h-full">
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 60%">
+        <div class="flex-1 rounded-md bg-tag-bg"></div>
+        <div class="h-1.5 w-2/3 rounded-full bg-line"></div>
+      </div>
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 35%">
+        <div class="flex-1 rounded-md bg-accent-soft"></div>
+        <div class="h-1.5 w-1/2 rounded-full bg-line"></div>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 h-full">
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 40%">
+        <div class="flex-1 rounded-md bg-tag-bg"></div>
+        <div class="h-1.5 w-3/4 rounded-full bg-line"></div>
+      </div>
+      <div class="rounded-control bg-card border border-line p-2 flex flex-col gap-1 flex-none" style="height: 55%">
+        <div class="flex-1 rounded-md bg-accent-soft"></div>
+        <div class="h-1.5 w-full rounded-full bg-line"></div>
+      </div>
+    </div>
+  </div>
+</div>

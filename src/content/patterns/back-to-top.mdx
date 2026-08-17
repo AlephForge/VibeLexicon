@@ -1,0 +1,56 @@
+---
+title: Back to Top
+titleZh: 返回顶部
+slug: back-to-top
+category: navigation
+order: 30
+summary: 长页面上出现的固定按钮，一键将用户滚动回页面顶部，减少手动长距离滚动成本。
+tags:
+  - 滚动辅助
+  - 长页面
+  - 快捷操作
+  - 移动端
+preview: back-to-top
+whatIs: |
+  返回顶部（Back to Top）是长页面上一个固定的悬浮按钮，在用户滚动超过一定深度后出现，
+  点击后平滑回到页面顶端。它把「从长页面回到起点」这一高频滚动操作压缩为一次点击，是
+  单页站点、长文与内容列表末端的常用兜底导航；适合作为「目录/锚点跳转」体系中的补充，
+  而不是替代清晰的导航结构。
+useCases:
+  - 文章、单页站点与文档等超长页面
+  - 移动端缺少快捷回顶方式的长滚动页面
+  - 与锚点目录并存，作为回到顶部的兜底操作
+  - 滚动深度超过一屏后出现的辅助控件
+limitations:
+  - 页面很短时按钮属多余噪声
+  - 与内容重叠且对比不足时容易被忽略或误触
+  - 不能替代清晰的主导航结构
+  - 频繁被使用往往说明页面信息架构需要改进
+prompt: |
+  请在长页面中实现一个 Back to Top 返回顶部按钮：
+
+  - 结构位置：按钮固定于视口右下角（避开底部导航与安全区手势条），半径 40px 左右，
+    内含向上箭头图标；滚动深度超过一屏（约 400–600px）后淡入显示，回到顶部附近隐藏。
+  - 行为：点击后平滑滚动回页面顶部（约 300–400ms），并重置滚动位置为文档顶部；滚动
+    动画用 CSS scroll-behavior 或 scrollTo 实现，并尊重 prefers-reduced-motion 立即跳转；
+    出现/消失动画同样遵守该偏好。
+  - Desktop / Mobile 差异：桌面端可常驻右下角；移动端需避开底部导航与悬浮操作按钮
+    （FAB）的占位区域，避免互相遮挡。
+  - 可访问性：使用真实 <button> 并附 aria-label="返回顶部"；按钮可 Tab 聚焦且焦点可见；
+    点击后可将焦点移回顶部导航或页面标题（策略一致），避免焦点停留在视口外；不要设置
+    焦点陷阱。
+  - 易错点：不要让按钮遮挡弹窗、提示或内容文本区域；不要仅用装饰性图标无文本语义；
+    出现时机要考虑键盘用户——按钮应始终在 Tab 顺序中其自然位置可达。
+related:
+  - anchor-link
+  - sticky-navbar
+  - floating-action-button
+compare:
+  - anchor-link
+source:
+  author: Nielsen Norman Group
+  url: https://www.nngroup.com/articles/back-to-top/
+  note: 返回顶部按钮的设计指南参考 NN/g，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

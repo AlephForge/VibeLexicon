@@ -1,0 +1,58 @@
+---
+title: Tabs
+titleZh: 标签切换
+slug: tabs
+category: navigation
+order: 25
+summary: 在同一页面内以一组标签切换相关视图或内容分组，节省空间并让用户保持单一焦点。
+tags:
+  - 视图切换
+  - 内容分组
+  - 节省空间
+  - 单一焦点
+preview: tabs
+whatIs: |
+  标签切换（Tabs）在页面或面板顶部提供一组标签，每次只展示与当前选中标签对应的内容
+  区域，其余标签内容在视觉与交互上处于隐藏状态。它把原本需要纵向并列的多组内容折叠
+  进同一水平的选区，减少滚动与页面高度，适合内容量相近、彼此并列相关且用户短时间内
+  只会关注其中一组的场景。
+useCases:
+  - 同一主题下切换多个相关视图或内容组
+  - 移动端或窄面板中折叠并排的内容分组
+  - 设置页、仪表盘等工具界面划分功能区块
+  - 商品详情、对比数据等需要并列呈现的场景
+limitations:
+  - 不适合承载深层级、条目繁多或需要并列阅读的内容
+  - 切换后旧内容视觉消失，用户容易忘记其他标签的存在
+  - 水平空间不足时标签换行或横向溢出
+  - 与页面主导航叠用容易造成层级混乱
+prompt: |
+  请实现一组 Tabs 标签切换，用于在同一页面内切换相关视图：
+
+  - 结构位置：标签行位于内容面板正上方，水平排列，选中标签与面板视觉连通（下划线或
+    背景色）；标签数量控制在 2–7 个，过长时考虑折叠为「更多」或改用其他模式。
+  - 行为：点击或键盘激活标签即切换对应面板，其余面板隐藏；内容切换无整页刷新，动画
+    仅用于面板内容进出（200ms 内），并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端宽面板可并排展示少量分组；窄屏下标签承担更多节省
+    空间的作用，标签文本宜精简、必要时可横向滚动。
+  - 可访问性：按 WAI-ARIA APG 的 Tabs 模式——标签栏用 role="tablist"，标签用
+    role="tab" 与 aria-selected，面板用 role="tabpanel"，tab 以 aria-controls 关联面板 id、
+    面板以 aria-labelledby 关联 tab；使用 roving tabindex（仅焦点标签可聚焦），支持
+    ←/→ 切换（RTL 方向相反）、Home/End 跳首尾；空格/回车激活；不要在面板之间设置
+    焦点陷阱。
+  - 易错点：不要用 hover 自动切换（键盘与读屏无法复现）；不要省略 tabpanel 与
+    tablist 的角色语义；隐藏面板应用 hidden 或等效方式，避免残留可聚焦元素。
+related:
+  - accordion
+  - sidebar-navigation
+  - dashboard-layout
+compare:
+  - accordion
+  - anchor-link
+source:
+  author: W3C WAI-ARIA Authoring Practices
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
+  note: 交互与 ARIA 参考 APG Tabs 模式，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

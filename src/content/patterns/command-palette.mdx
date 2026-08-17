@@ -1,0 +1,47 @@
+---
+title: Command Palette
+titleZh: 命令面板
+slug: command-palette
+category: components
+order: 39
+summary: 通过快捷键或按钮唤起的输入式面板，键入时实时过滤命令与页面并在选择后执行。
+tags:
+  - 命令面板
+  - 全局搜索
+  - 快捷键
+  - 效率工具
+preview: command-palette
+whatIs: |
+  命令面板（Command Palette）是一个输入框包裹的快速操作浮层，通常通过快捷键
+  （如 Ctrl/Cmd + K）唤起，用户在键入时触发对命令、页面、设置项或搜索结果的
+  实时过滤，用方向键选择后回车执行。它把分散在菜单、设置和页面导航里的常用操作
+  收敛到一个统一入口，是桌面工具（如代码编辑器、笔记应用）中效率模式的典型代表。
+useCases:
+  - 在大型应用中执行跳转页面或新建等命令
+  - 快速调用设置项、主题切换等全局操作
+  - 作为全局搜索入口对内容进行即时过滤
+  - 键盘重度用户代替多级菜单的快捷路径
+limitations:
+  - 可发现性弱，并非所有用户都会主动使用
+  - 命令规模增长后需要分组、别名与排序维护
+  - 不适合承载需要复杂录入的表单类操作
+prompt: |
+  请在页面实现一个 Command Palette 命令面板：
+
+  - 结构位置：按快捷键（Ctrl/Cmd + K）或点击触发后，在页面垂直居中或靠近顶部显示输入框与下方结果列表的浮层，半透明遮罩覆盖其余内容。
+  - 行为：每次键入即时过滤结果列表；结果可按分组与空状态（无匹配）呈现；Enter 执行高亮项，方向键在结果间移动；按 Esc 关闭且不产生输入副作用。
+  - Desktop / Mobile 差异：桌面端以快捷键为主入口并展示命令分组与角色；移动端加触屏唤起按钮，虚拟键盘弹出时面板上移避免被遮挡。
+  - 可访问性：浮层使用 role="dialog" 与 aria-modal="true"；结果选中态用 aria-activedescendant 关联活动项并朗读；方向键上下选择、Enter 执行、Esc 关闭；打开后焦点进入搜索输入框，关闭后焦点归还唤起按钮（focus return）。
+  - 易错点：不要用 div 伪造输入框而忽略原生 input 语义；过滤要去抖动避免逐键渲染大列表；不要忽略焦点陷阱，防止 Tab 逃逸到背景页面。
+related:
+  - modal
+  - form
+  - hamburger-menu
+  - mega-menu
+source:
+  author: Visual Studio Code Documentation（Microsoft）
+  url: https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette
+  note: 定义与示例为本项目重新整理，形态参考 VS Code Command Palette 文档
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

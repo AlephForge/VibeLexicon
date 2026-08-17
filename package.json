@@ -1,0 +1,43 @@
+{
+  "name": "vibelexicon",
+  "version": "0.1.0",
+  "private": true,
+  "description": "VibeLexicon — 界面视觉词典：把 UI 术语变成看得见的灵感（Gallery / Docs / Stream / Detail）",
+  "type": "module",
+  "packageManager": "pnpm@10.33.4",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "postbuild": "pagefind --site dist",
+    "preview": "astro preview",
+    "check": "astro check",
+    "validate": "tsx scripts/validate-patterns.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vue": "^7.0.2",
+    "astro": "^7.2.2",
+    "tailwindcss": "^4.3.3",
+    "vue": "^3.5.41"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@playwright/test": "^1.62.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.0.0",
+    "gray-matter": "^4.0.3",
+    "pagefind": "^1.5.2",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

@@ -1,0 +1,49 @@
+---
+title: Flexbox
+titleZh: 弹性布局
+slug: flexbox
+category: layout
+order: 6
+summary: 一维弹性排布，让一组元素沿主轴伸缩、对齐与换行，是界面组件排布的常用手段。
+tags:
+  - 弹性布局
+  - 一维排布
+  - 对齐
+  - 空间分配
+preview: flexbox
+whatIs: |
+  Flexbox（弹性盒布局）专注于一维排布，沿主轴排列一组元素，并负责它们在剩余空间中的
+  伸缩、对齐与换行。它非常适合导航、标签、按钮组这类一行式内容的排布，通过主轴与交叉轴
+  属性可以快速实现居中、均分、贴边等常见需求，是栅格布局的重要补充。
+useCases:
+  - 排列导航栏、标签、按钮组等一行式元素
+  - 实现内容块的水平与垂直居中
+  - 让卡片、表单行在剩余空间内均匀分布
+  - 搭建侧栏加主栏的经典分栏结构
+limitations:
+  - 只擅长单一轴线的排布，复杂二维错位需要交给 Grid
+  - 主轴与交叉轴的伸缩规则对新手有学习成本
+  - 过度嵌套 flex 会让布局变得脆弱
+  - 文本溢出与伸缩基准不一致时布局容易崩坏
+prompt: |
+  请实现一个基于 Flexbox 的弹性布局：
+
+  - 结构位置：用 display: flex 排布一组元素，典型场景是横向导航、按钮组或图片加文本的信息行，主轴方向由内容性质决定。
+  - 关键行为：用 justify-content 控制主轴对齐，用 align-items 控制交叉轴对齐；需要换行时开启 flex-wrap，防止窄屏溢出。
+  - Desktop / Mobile 差异：桌面端元素沿一条主轴展开；窄屏下允许换行，或把 flex-direction 切换为纵向堆叠。
+  - 可访问性：flex 不改变 DOM 顺序，键盘与朗读顺序保持源码顺序即正确；不要使用 order 属性重排视觉顺序造成顺序错位。
+  - 易错点：flex 子项默认可收缩，文本项记得给 min-width: 0 防止溢出；用 gap 与 justify-content 代替 margin 自动对齐的 hack；大段页面骨架优先考虑 Grid。
+related:
+  - css-grid-layout
+  - sidebar-layout
+  - responsive-layout
+  - footer
+compare:
+  - css-grid-layout
+source:
+  author: MDN contributors（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
+  note: 定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

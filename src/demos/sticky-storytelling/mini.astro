@@ -1,0 +1,21 @@
+---
+// Mini Preview: sticky-storytelling（固定叙事区）-- 纯静态，零 JS，Gallery/Stream 用
+// 固定背景 + 滚动文本段落
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <div class="absolute inset-4 rounded-control bg-accent-soft/60 border border-accent-soft flex items-center justify-center">
+    <span class="text-2xl text-accent-deep/70">◫</span>
+  </div>
+  <div class="absolute inset-4 flex flex-col items-center justify-center gap-2 pointer-events-none">
+    <div class="bg-surface/90 border border-line rounded-control px-3 py-1.5 shadow-card">
+      <div class="h-1.5 w-24 rounded-full bg-accent"></div>
+    </div>
+    <div class="bg-surface/80 border border-line rounded-control px-3 py-1.5 shadow-card">
+      <div class="h-1.5 w-20 rounded-full bg-ink/60"></div>
+    </div>
+    <div class="bg-surface/80 border border-line rounded-control px-3 py-1.5 shadow-card">
+      <div class="h-1.5 w-24 rounded-full bg-ink/40"></div>
+    </div>
+  </div>
+  <p class="absolute bottom-2 inset-x-0 text-center text-[9px] text-muted">背景固定，内容滚动讲述</p>
+</div>

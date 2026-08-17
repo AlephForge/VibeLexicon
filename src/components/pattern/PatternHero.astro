@@ -1,0 +1,57 @@
+---
+// Pattern Detail 标题区（Detail / Issue #10）
+// PRD §9.2 标准详情结构的第一块：
+//   breadcrumb → English Name（serif）→ 中文名 → 分类 / Tags
+// 纯静态 SSR，不引入任何 JS。
+import { getCategory } from '@/lib/categories';
+import type { PatternData } from '@/lib/pattern-schema';
+
+interface Props {
+  data: PatternData;
+}
+
+const { data } = Astro.props;
+const BASE = import.meta.env.BASE_URL;
+const category = getCategory(data.category);
+const homeHref = `${BASE}`;
+const categoryHref = `${BASE}?category=${data.category}`;
+---
+
+<header class="flex flex-col gap-5 pt-10 pb-4 lg:pt-14">
+  <!-- 面包屑：首页 / 分类 / 当前项 -->
+  <nav aria-label="面包屑" class="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-strong">
+    <a
+      class="rounded-sm text-muted-strong no-underline transition-colors duration-feedback ease-feedback hover:text-accent-deep focus-ring"
+      href={homeHref}
+    >
+      首页
+    </a>
+    <span aria-hidden="true" class="select-none text-line">/</span>
+    <a
+      class="rounded-sm text-muted-strong no-underline transition-colors duration-feedback ease-feedback hover:text-accent-deep focus-ring"
+      href={categoryHref}
+    >
+      {category?.nameZh ?? data.category}
+    </a>
+    <span aria-hidden="true" class="select-none text-line">/</span>
+    <span class="font-medium text-ink" aria-current="page">{data.titleZh}</span>
+  </nav>
+
+  <!-- 标题：English Name serif + 中文名 sans -->
+  <h1 class="text-display text-3xl leading-tight text-ink sm:text-4xl lg:text-[2.75rem]">
+    {data.title}
+    <span
+      class="mt-1.5 block font-sans text-xl font-normal tracking-normal text-muted-strong sm:mt-2.5 sm:text-2xl"
+    >
+      {data.titleZh}
+    </span>
+  </h1>
+
+  <!-- 分类 + Tags -->
+  <div class="flex flex-wrap items-center gap-1.5">
+    {category && (
+      <span class="tag bg-accent-soft text-accent-deep">{category.nameZh}</span>
+    )}
+    {data.tags.map((tag) => <span class="tag">{tag}</span>)}
+  </div>
+</header>

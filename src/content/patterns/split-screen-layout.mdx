@@ -1,0 +1,49 @@
+---
+title: Split-screen Layout
+titleZh: 分屏布局
+slug: split-screen-layout
+category: layout
+order: 4
+summary: 把页面或首屏一分为二，两个区域平行并置，用于制造对比、选择或叙事的张力。
+tags:
+  - 分屏
+  - 双栏
+  - 对比
+  - 首屏
+preview: split-screen-layout
+whatIs: |
+  分屏布局（Split-screen Layout）把页面或首屏划分为两个并置的区域，通常左右对半分，
+  两侧各自承载独立的内容，例如两款产品、两个方案，或图片与文字的组合。它利用并置关系
+  建立对比与选择的语境，让用户在同一视口内完成信息比较，是落地页和营销页常见的开场
+  结构，也常出现在需要双重视角的工具界面中。
+useCases:
+  - 落地页并排呈现两个方案或套餐供用户比较
+  - 用图片与文本对立构图增强首屏的叙事感
+  - 双端或多角色的工具界面展示不同视角
+  - 需要强对比语境的开场页与案例展示
+limitations:
+  - 两侧内容差异过大时平衡感难以维持
+  - 窄屏下并行区域会挤压内容空间
+  - 对文字密集内容不友好，长文本更适合单栏
+  - 两个区域都出现滚动时会混淆主次
+prompt: |
+  请实现一个 Split-screen Layout 分屏布局：
+
+  - 结构位置：首屏分为左右两个等宽区域，左区放置文案与主按钮，右区放置图片或可视化；两区之间用一条细边或留白分隔。
+  - 关键行为：两区内容各自垂直居中；桌面断点以上保持并排，允许左区固定、右区内部独立滚动；hover 只作用于各区域内部。
+  - Desktop / Mobile 差异：桌面端左右各占一半；平板与手机切换为上下堆叠，文字在前、媒体在后，避免并行导致整行无法阅读。
+  - 可访问性：两个区域是文档流中的相邻区块而非 frame；键盘 Tab 顺序沿文档顺序自然前进；文字与背景的对比度需要达标。
+  - 易错点：除非有明确需求，不要让两个区域各自产生滚动条；不要在一半宽度里挤入过长的句子；注意图片的裁切与替代文本策略。
+related:
+  - hero-section
+  - landing-page
+  - full-bleed-layout
+  - responsive-layout
+compare: []
+source:
+  author: Speckyboy Design Magazine
+  url: https://speckyboy.com/snippets-split-screen-layouts/
+  note: 概念基于公开 UI 模式资料整理，定义与示例为本项目重新书写
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

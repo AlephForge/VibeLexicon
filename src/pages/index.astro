@@ -1,0 +1,118 @@
+---
+// Gallery 首页（W3 / Issue #7）—— 面向新手的视觉图鉴，替换 W0 占位。
+//
+// 结构（自上而下）：
+//   1. 紧凑 Hero：badge + Serif 标题 + 一句说明 + 搜索框 / Filter Chips（GalleryFilters 岛）
+//   2. 两栏主区：左 2/3 Pattern Grid（静态 SSR 40 卡），右 1/3 FeaturedPanel（sticky）
+//   3. Footer 由 BaseLayout 提供
+//
+// URL 状态（URL as Shareable State）：
+//   - 服务端：readViewState(Astro.url) → filterPatterns 计算匹配集，
+//     不匹配的卡片渲染 hidden 属性（global.css 已保证 [hidden] 生效，无 JS 也正确）
+//   - 客户端：唯一 Vue island（GalleryFilters, client:idle）做 q/chips 交互，
+//     history.replaceState 同步 ?q= / ?category=（「全部」移除 category 参数）
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PatternCard from '@/components/gallery/PatternCard.astro';
+import FeaturedPanel from '@/components/gallery/FeaturedPanel.astro';
+import GalleryFilters from '@/components/gallery/GalleryFilters.vue';
+
+import { getCollection } from 'astro:content';
+import { filterPatterns, sortPatterns, type PatternIndex } from '@/lib/patterns';
+import { readViewState } from '@/lib/url';
+import { hasFull, type PreviewKey } from '@/demos/registry';
+
+const entries = await getCollection('patterns');
+
+// 最小索引投影（PatternIndex）—— 排序 / 搜索 / 岛 prop 的单一形态
+const patternIndex: PatternIndex[] = sortPatterns(
+  entries.map((p) => ({
+    slug: p.data.slug,
+    title: p.data.title,
+    titleZh: p.data.titleZh,
+    category: p.data.category,
+    order: p.data.order,
+    summary: p.data.summary,
+    tags: p.data.tags,
+    preview: p.data.preview,
+  })),
+);
+
+const { q, category } = readViewState(Astro.url);
+
+// 服务端初始过滤：匹配保留，其余卡片渲染 hidden（无 JS 也正确）
+const matchedSlugs = new Set(
+  filterPatterns(patternIndex, q, category).map((p) => p.slug),
+);
+
+// 精选规则：排序后第一个 hasFull 的 Pattern（否则回退到第一个）
+const entryBySlug = new Map(entries.map((e) => [e.data.slug, e]));
+const featuredIndex = patternIndex.find((p) => hasFull(p.preview as PreviewKey));
+const featured = entryBySlug.get(featuredIndex?.slug ?? '') ?? entries[0];
+
+const BASE = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="VibeLexicon · 界面视觉词典"
+  description="把 UI 术语，变成看得见的灵感。收录常见布局、页面结构、导航方式与界面组件，每个模式都配有一张微型视觉预览。"
+>
+  <!-- ── 紧凑 Hero：首屏内可见第一排 Pattern Cards ── -->
+  <section class="pt-10 pb-6 lg:pt-14 lg:pb-8">
+    <div class="flex max-w-2xl flex-col gap-5">
+      <span class="chip chip--default w-fit self-start">
+        界面视觉词典 · 40+ 模式收录中
+      </span>
+      <h1 class="text-display text-3xl leading-tight text-ink sm:text-4xl">
+        把 UI 术语，<br />变成看得见的灵感
+      </h1>
+      <p class="text-lead max-w-xl text-[0.9375rem] sm:text-base">
+        每一种布局、页面结构、导航方式与界面组件，都配有一张微型视觉预览——看见即认识，认识即可用。
+      </p>
+      <GalleryFilters
+        client:idle
+        patterns={patternIndex}
+        initialQ={q}
+        initialCategory={category}
+      />
+    </div>
+  </section>
+
+  <!-- ── 两栏主区：Pattern Grid + 精选面板 ── -->
+  <section class="pb-16 lg:pb-20">
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
+      <!-- 左：Pattern Grid（40 张全静态 SSR 卡片） -->
+      <div class="lg:col-span-2">
+        <h2 class="sr-only">模式图鉴</h2>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+          {
+            patternIndex.map((p) => (
+              <PatternCard
+                pattern={p}
+                href={`${BASE}patterns/${p.slug}/`}
+                hidden={!matchedSlugs.has(p.slug)}
+              />
+            ))
+          }
+        </div>
+
+        <!-- 空态：服务端按初始状态渲染；客户端由 GalleryFilters 接管显隐 -->
+        <div
+          data-gallery-empty
+          class="mt-10 flex flex-col items-center justify-center gap-3 rounded-card border border-dashed border-line bg-surface px-6 py-14 text-center"
+          hidden={matchedSlugs.size > 0 ? true : undefined}
+        >
+          <p class="font-serif text-lg font-bold text-ink">未找到匹配的模式</p>
+          <p class="text-sm text-muted">换个关键词试试，或清除当前筛选条件。</p>
+          <button type="button" data-gallery-clear class="btn btn--primary mt-1">
+            清除筛选
+          </button>
+        </div>
+      </div>
+
+      <!-- 右：精选面板（桌面 sticky，移动端在 Grid 下方） -->
+      <div class="lg:col-span-1">
+        <FeaturedPanel pattern={featured} currentUrl={Astro.url} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

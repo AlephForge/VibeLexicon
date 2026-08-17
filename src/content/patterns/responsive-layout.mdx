@@ -1,0 +1,48 @@
+---
+title: Responsive Layout
+titleZh: 响应式布局
+slug: responsive-layout
+category: layout
+order: 9
+summary: 以视口为变量自适应内容的布局方法，让同一套内容在不同屏幕尺寸上都清晰可用。
+tags:
+  - 响应式
+  - 断点
+  - 自适应
+  - 多端
+preview: responsive-layout
+whatIs: |
+  响应式布局是一种让页面随视口大小自适应的设计方法，利用流式列、弹性单位与媒体查询在
+  不同断点下重组内容，使同一套信息在手机、平板与桌面上都保持可用。它以文字流、网格
+  列数与图片尺寸的联动为核心，而不是为每类设备各自维护一套独立页面。
+useCases:
+  - 网站同时面向桌面与移动访问者
+  - 内容相同、信息架构不变的跨端体验
+  - 图文流、卡片墙与表单在窄屏上的重排
+  - 用断点切换侧栏、汉堡菜单等导航形态
+limitations:
+  - 复杂表格与图表在窄屏上的适配成本较高
+  - 断点设计不当会造成中间尺寸的体验断裂
+  - 需要与内容策略配合，不能只做等比缩小
+  - 图片与媒体缺少流式处理时容易产生横向滚动
+prompt: |
+  请实现一个 Responsive Layout 响应式布局：
+
+  - 结构位置：页面主体采用流式栅格，内容宽度随视口变化；在移动优先的基础上设置合理断点（如 640px、1024px）逐级增强。
+  - 关键行为：列数随断点递减，网格用 minmax 与 auto-fit 自动适配；图片与视频保持 max-width: 100% 防止横向溢出；字号可用视口单位与 clamp 平滑过渡。
+  - Desktop / Mobile 差异：桌面端显示常驻侧栏与多列，移动端收为单列并启用抽屉式导航。
+  - 可访问性：在 head 中正确声明 viewport meta；布局不能依赖 JavaScript 才能显示；缩小窗口或放大字号时内容保持完整可读。
+  - 易错点：不要使用固定像素宽度搭建布局；不要复制整页内容做隐藏切换；测试时注意平板等中间尺寸断点的表现。
+related:
+  - css-grid-layout
+  - flexbox
+  - masonry-layout
+  - full-bleed-layout
+compare: []
+source:
+  author: MDN contributors（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design
+  note: 定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

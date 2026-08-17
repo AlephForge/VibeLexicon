@@ -1,0 +1,46 @@
+---
+title: Toast
+titleZh: 轻提示
+slug: toast
+category: components
+order: 35
+summary: 短暂出现后自动消失的非阻断提示条，用于反馈操作结果，不打断用户的当前任务。
+tags:
+  - 轻提示
+  - 操作反馈
+  - 自动消失
+  - 非阻断
+preview: toast
+whatIs: |
+  轻提示（Toast / Snackbar）是在屏幕底部或顶部短暂出现、随后自动消失的小提示条，
+  用于告知操作的即时结果，例如"已保存""复制成功"或表单提交失败。它与模态框的
+  关键区别在于不阻断背景交互：用户无需处理它即可继续手头的工作，信息本身也较
+  轻量，不需要用户做出任何决策。
+useCases:
+  - 保存、复制、删除等操作的即时成功反馈
+  - 多项内容的批量添加或移除提示
+  - 低优先级的系统状态与同步进度提示
+  - 表单提交成功后返回页面的轻量确认
+limitations:
+  - 条数触发过多时会堆叠或互相覆盖
+  - 自动消失不适合承载无法重试的关键错误
+  - 对屏幕阅读器用户而言，突兀的提示可能打断在读内容
+prompt: |
+  请在页面实现一个 Toast 轻提示：
+
+  - 结构位置：提示条固定在视口底部（或顶部）中央，圆角小容器，含文本与可选的动作按钮；由全局容器统一管理单条还是多条排队显示。
+  - 行为：出现后停留约 3–4 秒自动消失，提供可配置的时长；鼠标悬停或聚焦时暂停自动消失；连续触发时新提示排队或替换，避免堆叠遮挡；过渡动画约 200ms 并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端可置于底部中央并留有安全边距；移动端置于底部，注意避开系统导航条与悬浮操作按钮等固定元素的遮挡。
+  - 可访问性：普通提示使用 role="status"（aria-live="polite"），高优或错误提示使用 role="alert"（aria-live="assertive"）；提供关闭按钮时需可键盘操作；自动消失的提示在关闭前应能给足阅读时间。
+  - 易错点：不要用 window.alert 打断流程；不要同时弹出过多提示刷屏；自动消失不要让用户来不及读取关键信息。
+related:
+  - form
+  - modal
+  - tooltip
+source:
+  author: Material Design
+  url: https://m3.material.io/components/snackbar/overview
+  note: 定义与示例为本项目重新整理，行为约定参考 Material Design Snackbar
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

@@ -1,0 +1,70 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import SiteHeader from '@/components/shell/SiteHeader.astro';
+import SiteFooter from '@/components/shell/SiteFooter.astro';
+import SearchPalette from '@/components/search/SearchPalette.vue';
+
+import { getCollection } from 'astro:content';
+import { sortPatterns } from '@/lib/patterns';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogType?: string;
+}
+
+const {
+  title = 'VibeLexicon · 界面视觉词典',
+  description = '把 UI 术语，变成看得见的灵感。收录常见布局、页面结构、导航方式与界面组件。',
+  ogType = 'website',
+} = Astro.props;
+
+const BASE = import.meta.env.BASE_URL;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(`${BASE}og-cover.png`, Astro.site);
+
+// 本地搜索索引（SearchAgent K #13）：构建期从单一 Content Collection 投影，
+// 作为全站 Palette 的 slug 校验源与 Pagefind 不可用时的本地 JSON 过滤兜底。
+const patternIndex = sortPatterns(
+  (await getCollection('patterns')).map((p) => ({
+    slug: p.data.slug,
+    title: p.data.title,
+    titleZh: p.data.titleZh,
+    category: p.data.category,
+    order: p.data.order,
+    summary: p.data.summary,
+    tags: p.data.tags,
+    preview: p.data.preview,
+  })),
+);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f0e8" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="VibeLexicon" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href={`${BASE}favicon.svg`} />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a class="skip-link" href="#main-content">跳到主要内容</a>
+    <SiteHeader />
+    <main id="main-content" class="container-lexicon w-full flex-1" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+    <SearchPalette client:visible patterns={patternIndex} />
+  </body>
+</html>

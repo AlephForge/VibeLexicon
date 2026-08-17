@@ -1,0 +1,57 @@
+---
+title: Multi-page Website
+titleZh: 多页网站
+slug: multi-page-website
+category: page-structure
+order: 12
+summary: 通过多个独立 URL 页面组织内容，为每条信息提供稳定地址与清晰层级的网站结构。
+tags:
+  - 多页结构
+  - 独立 URL
+  - 信息架构
+  - 内容扩展
+preview: multi-page-website
+whatIs: |
+  多页网站（Multi-page Website）将内容拆分为多个拥有独立 URL 的页面，每个页面聚焦一个主题，
+  通过主导航、面包屑与页脚等路径把它们连接成完整的信息体系。它给每条内容一个稳定的地址，
+  适合内容量大、持续增长或需要独立分享与索引的站点；代价是需要维护清晰一致的结构，否则
+  深层级页面之间容易产生迷失与死链。
+useCases:
+  - 内容量大且持续增长的站点需要独立地址
+  - 需要独立分享、收藏或搜索引擎收录的页面
+  - 多主题、多栏目需要清晰层级结构支撑
+  - 文档站、后台或流程页需要精确控制访问路径
+limitations:
+  - 页面间跳转会打断长文沉浸式的阅读体验
+  - 维护多页面层级比单页更易出现死链与内容重复
+  - 主导航不完整时用户在深层页面容易迷路
+prompt: |
+  请实现一个 Multi-page Website 多页网站，让内容分散在多个拥有独立 URL 的页面中：
+
+  - 结构位置：顶部为全站导航栏，使用 <nav> 与 aria-label；正文区每页以唯一 <main> 包裹，
+    页面可包含侧边导航或面包屑定位当前位置，底部为统一 footer。
+  - 关键行为：链接必须使用真实 href 而非 JS 劫持；全站导航与面包屑一致地反映当前页面位置，
+    当前项用 aria-current="page" 标注；面包屑中间的页面继续链接到其上级。
+  - Desktop / Mobile 差异：桌面端主导航横排平铺；窄屏折叠为汉堡菜单，深度页面提供明确的
+    返回路径；多列页脚在移动端改为纵向堆叠或折叠分组。
+  - 可访问性：提供 Skip Link 直达 <main>；每个页面只有一个 h1 且与其 <title> 呼应；重复的
+    站点区块不重复阅读；键盘焦点顺序与视觉顺序一致。
+  - 易错点：不要为每个页面重复粘贴整套导航标记而无差异点；避免在新标签中打开内部链接；
+    不要用容易被复制或分享意外的临时 URL 作为页面地址。
+related:
+  - single-page-website
+  - breadcrumb
+  - sidebar-navigation
+  - pagination
+  - mega-menu
+  - footer
+compare:
+  - single-page-website
+  - landing-page
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Document_and_website_structure
+  note: 页面结构与语义元素参考 MDN 文档，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

@@ -1,0 +1,50 @@
+---
+title: Sidebar Layout
+titleZh: 侧边栏布局
+slug: sidebar-layout
+category: layout
+order: 7
+summary: 主内容旁常驻一条侧栏承载次级导航或辅助信息，是桌面阅读型界面的经典骨架。
+tags:
+  - 侧边栏
+  - 文档布局
+  - 次级导航
+  - 分栏
+preview: sidebar-layout
+whatIs: |
+  侧边栏布局（Sidebar Layout）在主内容区一侧保留一条常驻或可跟随滚动的侧栏，用来承载
+  目录、筛选、操作或辅助信息，与主内容构成不对称的双栏骨架。它是文档站、后台系统与
+  阅读类应用的常见结构，利用固定侧栏提供持续可及的导航上下文；在小屏幕设备上，侧栏
+  通常收起为抽屉式导航，以免挤占正文宽度。
+useCases:
+  - 文档站的目录与章节跳转
+  - 后台系统的二级导航与个人信息入口
+  - 电商与后台等产品中的筛选器面板
+  - 博客资讯站中放标签、归档等辅助模块
+limitations:
+  - 侧栏会挤占主栏宽度，内容密集型站点需要权衡
+  - 窄屏上常驻侧栏不可行，需要额外的收起机制
+  - 侧栏内容过长时自身也要处理滚动与层级问题
+  - 不对称分栏对信息密度敏感，加载缓慢的内容容易失衡
+prompt: |
+  请实现一个 Sidebar Layout 侧边栏布局：
+
+  - 结构位置：左侧固定宽度（约 260–300px）的侧栏存放导航或目录，右侧流体区域承载主内容，两者置于同一个网格或 flex 容器中。
+  - 关键行为：桌面端侧栏常驻，滚动时用 position: sticky 让侧栏跟随视口；窄屏时侧栏隐藏，通过汉堡按钮切换为抽屉面板，打开期间锁定背景滚动。
+  - Desktop / Mobile 差异：桌面端左右并排，侧栏不随主内容滚动消失；移动端侧栏转为抽屉，关闭后焦点与背景滚动恢复正常。
+  - 可访问性：侧栏导航使用 <nav> 并给当前项标注 aria-current；抽屉形态需要焦点管理与 Esc 关闭；正文保持可读的行长与字号。
+  - 易错点：不要把宽度写死导致窄屏溢出，侧栏要有收缩策略与 min-width: 0；使用 sticky 时注意父容器高度；避免整页出现双滚动条。
+related:
+  - sidebar-navigation
+  - dashboard-layout
+  - responsive-layout
+  - hamburger-menu
+compare:
+  - drawer
+source:
+  author: Akash Hamirwasia
+  url: https://akashhamirwasia.com/blog/how-to-and-not-to-build-sidebar-layouts/
+  note: 定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

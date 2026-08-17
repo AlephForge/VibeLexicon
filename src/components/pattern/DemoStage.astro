@@ -1,0 +1,144 @@
+---
+// Pattern Detail 统一 Live Demo Stage（Detail / Issue #10）
+//
+// 统一组件，40 个 Pattern 都用（PRD §9.2 / §13）：
+// - 容器 surface-panel；标题行：Demo 名称 + 状态徽标 + Reset + Desktop/Mobile 视口切换；
+// - 内容分支（服务端决定，保证「Static First」）：
+//     hasFull(preview) 且 fullComponents[preview] 已合入 → DemoStageControls（client:visible 懒激活），
+//     由 Vue 岛在视口内管理 viewport / resetSignal，并把 Full Demo 作为子组件响应式渲染；
+//     否则 → miniComponents[preview] 纯静态展示（放大），零 JS。
+// - 绝不出现 TODO / 空白：Full 未合入前走 Mini（当前 fullComponents 为空映射，40 页全部静态可访问）。
+//
+// Demo Registry 契约：本组件只 import components.ts（key → 组件唯一映射，其内部禁止修改），
+// 不直接引用任何 demos/<key>/full.vue 文件路径。
+import { miniComponents, fullComponents } from '@/demos/components';
+import { hasFull, isFullDemoKey, type PreviewKey } from '@/demos/registry';
+import DemoStageControls from './DemoStageControls.vue';
+
+interface Props {
+  title: string;
+  titleZh: string;
+  preview: PreviewKey;
+}
+
+const { title, titleZh, preview } = Astro.props;
+
+// 交互版门槛：Registry 声明 + 映射已就绪（Integration 合入 fullComponents 后自动生效）
+const interactive =
+  hasFull(preview) && isFullDemoKey(preview) && Boolean(fullComponents[preview]);
+
+const Mini = miniComponents[preview];
+---
+
+<section
+  class="demo-stage surface-panel overflow-hidden"
+  aria-label={`${title} · ${titleZh} 示例演示`}
+>
+  <h2 class="sr-only">示例演示</h2>
+
+  {interactive ? (
+    <DemoStageControls
+      client:visible
+      title={title}
+      titleZh={titleZh}
+      preview={preview}
+    />
+  ) : (
+    <>
+      <!-- 静态示例：无交互，无 JS；重置 / 视口切换按钮禁用展示（诚实表达能力边界） -->
+      <header class="demo-stage__header">
+        <div class="demo-stage__meta">
+          <span class="section-label">Live Demo</span>
+          <span class="demo-stage__name">
+            {title}<span class="demo-stage__name-zh">{titleZh}</span>
+          </span>
+          <span class="tag">静态示例</span>
+        </div>
+        <div class="demo-stage__tools">
+          <div
+            class="demo-stage__viewport"
+            role="group"
+            aria-label="视口切换"
+          >
+            <button type="button" class="chip" disabled aria-disabled="true">桌面</button>
+            <button type="button" class="chip" disabled aria-disabled="true">移动</button>
+          </div>
+          <button
+            type="button"
+            class="btn btn--ghost"
+            disabled
+            aria-disabled="true"
+          >
+            重置
+          </button>
+        </div>
+      </header>
+
+      <!-- Mini 静态展示（放大）：以 Stage 宽度呈现 16:9 预览 -->
+      <div class="demo-stage__body">
+        <Mini />
+      </div>
+    </>
+  )}
+</section>
+
+<style>
+  /* Stage 与 DemoStageControls.vue 共用同一套视觉类（两侧各自声明，避免全局污染） */
+  .demo-stage__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.625rem 1rem;
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.75rem 1rem;
+  }
+  @media (min-width: 40rem) {
+    .demo-stage__header {
+      padding-inline: 1.25rem;
+    }
+  }
+  .demo-stage__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  .demo-stage__name {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+  .demo-stage__name-zh {
+    margin-left: 0.375rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-muted);
+  }
+  .demo-stage__tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .demo-stage__viewport {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .demo-stage__body {
+    padding: 1rem;
+  }
+  @media (min-width: 40rem) {
+    .demo-stage__body {
+      padding: 1.5rem;
+    }
+  }
+  /* Mobile 视口模拟 ≈ 375px，居中且不产生横向滚动 */
+  .demo-stage__body--mobile {
+    max-width: 23.4375rem;
+    margin-inline: auto;
+  }
+</style>

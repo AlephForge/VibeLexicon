@@ -1,0 +1,51 @@
+---
+// Gallery Pattern Card（W3 / Issue #7）
+// - 顶层是真实 <a>，跳转 Detail（trailingSlash: always → 链接以 / 结尾）
+// - Mini Preview 由 miniComponents 静态渲染，零 hydration
+// - 服务端初始过滤时由 index.astro 传入 hidden，客户端 GalleryFilters 岛再接管
+// - data-pattern-card / data-slug 是 GalleryFilters 的过滤锚点
+import { miniComponents } from '@/demos/components';
+import type { PreviewKey } from '@/demos/registry';
+import { getCategory } from '@/lib/categories';
+import type { PatternIndex } from '@/lib/patterns';
+
+interface Props {
+  pattern: PatternIndex;
+  href: string;
+  hidden?: boolean;
+}
+
+const { pattern, href, hidden = false } = Astro.props;
+
+const Mini = miniComponents[pattern.preview as PreviewKey];
+const categoryNameZh = getCategory(pattern.category)?.nameZh ?? '';
+const hiddenAttr = hidden ? true : undefined;
+---
+
+<a
+  href={href}
+  data-pattern-card
+  data-slug={pattern.slug}
+  hidden={hiddenAttr}
+  class="card-surface group flex flex-col gap-3 rounded-card p-4 text-ink no-underline"
+  aria-label={`${pattern.title} · ${pattern.titleZh}`}
+>
+  <!-- Preview 区域：hover 时预览区轻微放大（Content-First：动效发生在预览内部） -->
+  <div class="overflow-hidden rounded-control border border-line">
+    <div class="origin-center transition-transform duration-200 ease-out group-hover:scale-[1.02]">
+      <Mini />
+    </div>
+  </div>
+
+  <div class="flex flex-1 flex-col gap-2">
+    <h3 class="text-base font-medium leading-snug tracking-tight text-ink transition-colors duration-feedback ease-feedback group-hover:text-accent-deep">
+      {pattern.title}
+      <span class="ml-1.5 text-sm font-normal text-muted">{pattern.titleZh}</span>
+    </h3>
+    <p class="text-sm leading-relaxed text-muted line-clamp-2">{pattern.summary}</p>
+    <div class="mt-auto flex flex-wrap items-center gap-1.5 pt-1.5">
+      {pattern.tags.slice(0, 3).map((tag) => <span class="tag">{tag}</span>)}
+      <span class="tag ml-auto">{categoryNameZh}</span>
+    </div>
+  </div>
+</a>

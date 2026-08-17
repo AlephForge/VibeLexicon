@@ -1,0 +1,49 @@
+---
+title: Bento Grid
+titleZh: 便当盒布局
+slug: bento-grid
+category: layout
+order: 3
+summary: 面积大小不一的圆角卡片在同一网格中错落铺满，用面积对比组织页面的主次信息。
+tags:
+  - 便当盒
+  - 卡片网格
+  - 不对称
+  - 信息层级
+preview: bento-grid
+whatIs: |
+  便当盒布局（Bento Grid）借鉴日式便当盒分格的意象，把界面划分为面积大小不一的多个
+  圆角区块，再由整组区块拼成一个完整的网格。大区块承载核心卖点或首屏主角，小区块补充
+  细节与辅助信息，形成富有节奏感的错落层次，常用于产品特性页、概览看板与个人主页。
+useCases:
+  - 产品首页展示一组特性并突出主推能力
+  - 仪表盘与数据看板用不同面积组织指标
+  - 个人主页、作品集与内容聚合页营造个性视觉
+  - 在有限首屏内呈现主次分明的多类信息
+limitations:
+  - 区块错位多，不适合需要严格行列对齐的数据密集界面
+  - 面积不均会放大信息权重差异，处理不当反而令人困惑
+  - 手机上大区块缩成单列，面积层级基本消失
+  - 区块越多，留白与实现成本越高
+prompt: |
+  请实现一个 Bento Grid 便当盒卡片布局：
+
+  - 结构位置：主内容区使用 CSS Grid 划分多行多列；一个大面积主卡片占据左上区域，若干中、小卡片环绕填充，区块间保持统一间隙与圆角。
+  - 关键行为：卡片使用 grid-column / grid-row 的 span 控制大小；面板内部内容随区块大小自适应，不允许溢出；hover 只做轻量内部反馈。
+  - Desktop / Mobile 差异：桌面端保持不对称的多列网格；窄屏降为单列顺序堆叠，保证大卡片优先展示且内容不折损。
+  - 可访问性：卡片的标题与正文保持正常文档顺序；可点击区域使用语义化链接；不要用背景图承载唯一的文字信息。
+  - 易错点：不要把所有卡片做成同样大小（那就退化成普通网格）；不要用绝对定位手工对缝；跨度与断点要先规划好再写媒体查询。
+related:
+  - card-based-layout
+  - dashboard-layout
+  - css-grid-layout
+  - responsive-layout
+compare:
+  - card-based-layout
+source:
+  author: Steve McKinney
+  url: https://iamsteve.me/blog/bento-layout-css-grid
+  note: 概念启发自公开资料，定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

@@ -1,0 +1,48 @@
+---
+title: Accordion
+titleZh: 手风琴
+slug: accordion
+category: components
+order: 33
+summary: 把一组相关内容折叠为可展开与收起的面板，用较小空间承载更多信息，用户按需逐条展开。
+tags:
+  - 折叠面板
+  - 展开收起
+  - FAQ
+  - 节省空间
+preview: accordion
+whatIs: |
+  手风琴（Accordion）将一组同类的标题与其内容组织成多个可展开、可收起的面板，
+  垂直排列在页面上。每次只展示标题行，点击或聚焦后展开对应内容，从而在有限的
+  纵向空间里容纳更多信息。它特别适合问答、术语或设置分组这类"用户不会一次性
+  看完所有内容"的场景。
+useCases:
+  - 常见问题（FAQ）问答列表
+  - 设置页面的分组选项
+  - 长文档的章节目录式折叠
+  - 移动端节省纵向空间的二级内容收纳
+limitations:
+  - 默认收起会隐藏关键信息，降低内容可发现性
+  - 不适合需要并排对照多个面板内容的场景
+  - 多层嵌套手风琴会显著增加认知负担
+prompt: |
+  请在页面实现一个 Accordion 手风琴：
+
+  - 结构位置：一组纵向堆叠的面板，每个由标题行（button）与内容区组成；置于正文内容区中。
+  - 行为：点击标题行展开对应内容，再次点击收起；可单开或根据需求允许多开，但同一处交互需保持一致；过渡动画 150–250ms 并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端可并排两列以节省空间（可选）；移动端保持单列纵向堆叠，展开动画不宜过长以免抖动。
+  - 可访问性：标题行使用 button 并设置 aria-expanded 与 aria-controls 关联内容面板；支持 Tab 进入面板组后用 Up/Down 方向键在标题间移动、Space/Enter 切换展开状态；内容区可用 role="region" 与 aria-labelledby 命名。
+  - 易错点：不要用 div 替 button；展开时不要改变已完成 DOM 顺序和 Tab 顺序；收起动画瞬间内容不可见性要可预期。
+related:
+  - faq-section
+  - tabs
+  - mega-menu
+compare:
+  - tabs
+source:
+  author: W3C WAI-ARIA Authoring Practices Guide（APG）
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/accordion/
+  note: 定义与示例为本项目重新整理，无障碍规范参考 APG Accordion 模式
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

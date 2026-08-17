@@ -1,0 +1,50 @@
+---
+title: Modal
+titleZh: 模态框
+slug: modal
+category: components
+order: 31
+summary: 覆盖在主内容之上的居中对话框，通过遮罩阻断背景交互，让用户先完成当前任务再关闭。
+tags:
+  - 对话框
+  - 浮层
+  - 焦点管理
+  - 阻断交互
+preview: modal
+whatIs: |
+  模态框（Modal）是一种居中显示在遮罩之上的对话框，专门用于承载一个需要用户立即
+  确认或录入的独立任务，例如删除确认、登录表单或升级提示。与抽屉不同，模态框的
+  面板窄而居中，遮罩会盖住整个背景并阻断与背景内容的交互，强制用户先完成任务或
+  明确关闭后才能继续操作主页面。
+useCases:
+  - 删除、发布等不可逆操作的二次确认
+  - 需要在当前上下文内完成的简短表单录入
+  - 展示必须被看到的重要提示或升级邀请
+  - 需要强制用户做出选择的关键决策点
+limitations:
+  - 频繁弹出会打断用户心流，造成强干扰
+  - 不适合承载需要滚动阅读的长内容
+  - 手机小屏上内容较多时操作与阅读空间紧张
+prompt: |
+  请在页面实现一个 Modal 模态框：
+
+  - 结构位置：对话框垂直水平居中，覆盖半透明遮罩，关闭按钮位于右上角；触发按钮置于页面正文中。
+  - 行为：打开时遮罩淡入、面板轻微放大出现，动画 180–240ms 且尊重 prefers-reduced-motion；点击遮罩、按 Esc 或点击关闭按钮均可关闭；打开期间锁定背景滚动。
+  - Desktop / Mobile 差异：桌面端面板最大宽度约 480px；窄屏下面板改为近全宽并保留上下安全边距，内容过多时面板内部滚动。
+  - 可访问性：容器使用 role="dialog" 与 aria-modal="true"，标题关联 aria-labelledby；打开后焦点移入面板并建立焦点陷阱（Tab 循环于面板内），关闭后焦点归还触发按钮（focus return）；Esc 关闭且焦点正确归还。
+  - 易错点：不要只给遮罩加点击事件而漏掉面板内滚动；关闭动画前后注意焦点时序，避免焦点落入已隐藏的背景。
+related:
+  - drawer
+  - toast
+  - form
+  - lightbox
+compare:
+  - drawer
+  - lightbox
+source:
+  author: W3C WAI-ARIA Authoring Practices Guide（APG）
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+  note: 定义与示例为本项目重新整理，无障碍规范参考 APG Dialog 模式
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

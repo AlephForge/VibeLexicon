@@ -1,0 +1,58 @@
+---
+title: Landing Page
+titleZh: 落地页
+slug: landing-page
+category: page-structure
+order: 13
+summary: 以单一转化目标组织的独立页面，用聚焦的信息与明确行动号召引导访客完成一次具体动作。
+tags:
+  - 营销页面
+  - 转化目标
+  - 行动号召
+  - 独立页面
+preview: landing-page
+whatIs: |
+  落地页（Landing Page）是围绕一个核心转化目标（注册、下载、购买、预约）单独设计的页面，
+  通常承接广告或推广带来的流量。它弱化全局导航，把价值主张、证据与行动按钮组织成一条清晰的
+  决策路径；与信息全览型首页不同，落地页刻意收敛篇幅，让访客在最小干扰下完成一次明确动作，
+  因此也是营销效果与文案测试的常用载体。
+useCases:
+  - 广告投放或活动推广的目标承接页
+  - 产品发布、注册、试用与资料下载页
+  - 会议、课程等预约型单目标场景
+  - 需要 A/B 测试价值主张与 CTA 文案的页面
+limitations:
+  - 过度收敛内容会拒绝需要深挖的理性访客
+  - 单一目标不适合承载复杂或长期决策的信息
+  - 信任证据不足时，再精美的布局也难提升转化
+prompt: |
+  请实现一个 Landing Page 落地页，围绕单一转化目标组织整页信息：
+
+  - 结构位置：自顶向下为 Hero（价值主张与主 CTA）、2–6 条核心卖点、证据区块（数据或评价）
+    与转化表单；弱化全局导航，只保留必要返回入口，末端为 footer。
+  - 关键行为：页面只突出一个主行动按钮，次要动作以文本链接呈现；CTA 指向真实可用的目标；
+    桌面端 CTA 位于首屏内，滚动后可在吸顶条中保留；移动端可用吸附在底部的主按钮，但不能
+    遮挡主体内容或表单聚焦。
+  - Desktop / Mobile 差异：桌面端信息并排布局压缩首屏；窄屏改为单列并缩短文案，CTA 触达范围
+    不小于 44×44px。
+  - 可访问性：标题按 h1–h3 递进且有层次；表单控件带 label 与可见错误提示；图片有替代文本；
+    内容不依赖悬停等非触控操作理解。
+  - 易错点：不要堆满装饰动画与弹窗打断决策；避免把多个彼此竞争的行动按钮并排；不要为了
+    篇幅删除支撑判断的信任证据。
+related:
+  - hero-section
+  - feature-grid
+  - form
+  - full-bleed-layout
+  - single-page-website
+compare:
+  - single-page-website
+  - multi-page-website
+  - case-study-page
+source:
+  author: Wikipedia contributors
+  url: https://en.wikipedia.org/wiki/Landing_page
+  note: 落地页概念参考维基百科公开条目，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

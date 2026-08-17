@@ -1,0 +1,55 @@
+---
+title: Bottom Navigation
+titleZh: 底部导航
+slug: bottom-navigation
+category: navigation
+order: 28
+summary: 固定在移动端屏幕底部的导航栏，把 3–5 个最重要目的地放在拇指可及的范围。
+tags:
+  - 移动端
+  - 拇指可达
+  - 一级导航
+  - 常驻操作
+preview: bottom-navigation
+whatIs: |
+  底部导航（Bottom Navigation）是固定在移动端屏幕底部的横向导航栏，放置 3–5 个最核心
+  的一级目的地，每个条目由图标与标签组成。它把高频操作放在拇指自然可及的区域，减少
+  用户伸手到顶部切换页面的成本，是移动应用与移动优先站点组织顶层结构的标准方式。
+useCases:
+  - 移动端应用与移动优先站点的一级导航
+  - 需要单手拇指可达的核心页面切换
+  - 页面间切换频繁、目的地相对固定的场景
+  - 与汉堡菜单或抽屉组合承载更多二级入口
+limitations:
+  - 条目超过 5 个时标签拥挤、选中态难以分辨
+  - 会持续占用底部空间，影响滚动内容与悬浮按钮
+  - 不适合层级复杂、目的地众多的内容型站点
+  - 桌面端布局一般不适用，仅移动端与窄视口保留
+prompt: |
+  请在移动端页面底部实现一个 Bottom Navigation 底部导航：
+
+  - 结构位置：导航栏固定于视口底部，高约 56–80px，横向排列 3–5 个目的地，每项由图标
+    + 标签文本组成，均匀或按权重分配宽度；底部留有 safe-area-inset 以适配全面屏手势条。
+  - 行为：点击条目切换到对应目的地并更新选中态；当前目的地以图标与标签颜色/粗细变化
+    表达（不只靠颜色）；切页时保持导航常驻；内容滚动时导航始终可见。
+  - Desktop / Mobile 差异：窄屏（<768px）显示底部导航；桌面端可切换到顶部或侧边导航，
+    两种形态不要同时可见。
+  - 可访问性：导航用 <nav> 包裹并加 aria-label；每个条目为文本+图标的按钮或链接，当前
+    条目用 aria-current="page"；标签文本不应隐藏以免读屏丢失信息；焦点可见、可 Tab
+    到达；图标不与文字语义重复时注意替代文本策略。
+  - 易错点：选中态不要只以颜色区分；不要让内容或悬浮球遮住导航；不要把无意义的纯图标
+    条目（读屏无法理解）放进导航；避免在键盘导航下焦点被遮挡。
+related:
+  - sticky-navbar
+  - hamburger-menu
+  - drawer
+  - floating-action-button
+compare:
+  - sticky-navbar
+source:
+  author: Material Design
+  url: https://m3.material.io/components/navigation-bar/overview
+  note: 条目数量与拇指可达原则参考 Material 3，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

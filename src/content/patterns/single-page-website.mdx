@@ -1,0 +1,56 @@
+---
+title: Single-page Website
+titleZh: 单页网站
+slug: single-page-website
+category: page-structure
+order: 11
+summary: 将全部核心内容组织在一个可滚动页面中，通过锚点把叙事串成一条连续阅读路径的网站结构。
+tags:
+  - 单页结构
+  - 长滚动
+  - 锚点导航
+  - 叙事式
+preview: single-page-website
+whatIs: |
+  单页网站（Single-page Website）把所有内容集中在一个长页面内，章节之间通过
+  锚点链接与平滑滚动切换，而不是跳转到独立 URL。它适合信息量可控、强调连贯阅读
+  体验的场景，让访问者顺着一条明确的路径往下走；配合固定导航时，当前章节的位置
+  与可达性需要额外设计，避免滚动路径失控。
+useCases:
+  - 作品集或简历等强调连贯叙事的个人站点
+  - 单一产品、活动或项目的集中介绍页
+  - 章节逻辑紧密、适合一口气读完的内容
+  - 依托锚点导航组织多个同名层次的信息流
+limitations:
+  - 内容量增长后页面过长，加载与记忆负担上升
+  - 不利于需要独立 URL 分享或 SEO 的多主题内容
+  - 深层内容容易失去位置感，需要固定导航辅助
+prompt: |
+  请实现一个 Single-page Website 单页网站，将全部内容放在一个可滚动页面内：
+
+  - 结构位置：顶部为固定导航栏，导航项以锚点链接指向页面下方各个 section，页面末尾为
+    footer。
+  - 关键行为：点击导航项平滑滚动到对应章节并同步 URL hash；滚动时通过监听器高亮当前章节
+    对应的导航项；提供返回顶部控件。
+  - Desktop / Mobile 差异：桌面端固定导航横排显示；移动端折叠为汉堡菜单，锚点跳转需为固定
+    导航预留偏移量，避免标题被遮挡。
+  - 可访问性：章节使用 section 与可访问名称组织，锚点链接保持自然焦点顺序，平滑滚动尊重
+    prefers-reduced-motion。
+  - 易错点：不要为每个章节维护一份重复内容副本；避免整页加载前的大段装饰动画；确保 hash
+    与章节实际位置一致。
+related:
+  - multi-page-website
+  - sticky-navbar
+  - anchor-link
+  - hero-section
+  - landing-page
+compare:
+  - multi-page-website
+  - landing-page
+source:
+  author: Nielsen Norman Group
+  url: https://www.nngroup.com/articles/scrolling-and-attention/
+  note: 引用 NN/g 关于长滚动页面与注意力研究；定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

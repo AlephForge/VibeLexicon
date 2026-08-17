@@ -1,0 +1,25 @@
+---
+// Mini Preview: lightbox（图片灯箱）-- 纯静态，零 JS，Gallery/Stream 用
+// 从缩略图进入聚焦大图，遮罩 + 前后切换
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4 relative">
+  <!-- 缩略图（打开前） -->
+  <div class="absolute inset-4 rounded-control bg-card border border-line p-3 flex items-center justify-center">
+    <div class="w-2/5 h-4/5 rounded-md bg-tag-bg flex items-center justify-center text-xs text-muted">
+      ◫ 缩略图
+    </div>
+  </div>
+  <!-- 灯箱遮罩 + 大图 -->
+  <div class="absolute inset-0 rounded-card bg-ink/70 flex items-center justify-center">
+    <div class="w-3/4 h-3/4 relative">
+      <div class="absolute inset-0 rounded-control bg-surface/90 flex items-center justify-center text-xl text-ink">
+        <span class="text-[11px] text-muted mr-2">◱ 大图浏览</span>
+      </div>
+      <!-- 左右箭头 -->
+      <span class="absolute left-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-ink/40 text-white flex items-center justify-center text-[10px]">‹</span>
+      <span class="absolute right-2 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-ink/40 text-white flex items-center justify-center text-[10px]">›</span>
+      <!-- 关闭 -->
+      <span class="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center text-xs">×</span>
+    </div>
+  </div>
+</div>

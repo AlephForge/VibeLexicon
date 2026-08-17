@@ -1,0 +1,49 @@
+---
+title: Lightbox
+titleZh: 图片灯箱
+slug: lightbox
+category: components
+order: 37
+summary: 点击缩略图后在深色遮罩中放大查看原图的浮层，聚焦单张图片并支持前后切换。
+tags:
+  - 图片查看
+  - 放大原图
+  - 浮层画廊
+  - 深色遮罩
+preview: lightbox
+whatIs: |
+  图片灯箱（Lightbox）在用户点击一张缩略图或小图后，于覆盖全屏的深色遮罩上放大
+  展示原图，使视觉焦点集中在单张图片上。它常用于商品图、作品集与新闻图集，并通常
+  提供前后切换与关闭能力，本质上是围绕图片浏览定制的模态对话框。灯箱适合快速查看
+  细节而不离开页面，但当画廊规模较大时应考虑更轻量的浏览方式。
+useCases:
+  - 电商商品图点击放大查看细节
+  - 作品集与案例展示中的原图浏览
+  - 新闻图集的单图放大阅读
+  - 对比图片局部的纹理或文字细节
+limitations:
+  - 深色遮罩会切断与页面其他内容的联系
+  - 大量图片时逐张切换不如网格浏览高效
+  - 移动端需要兼顾手势与键盘两种操作路径
+prompt: |
+  请在页面实现一个 Lightbox 图片灯箱：
+
+  - 结构位置：点击缩略图后，全屏深色遮罩上居中显示大图，右上角有关闭按钮，左右各有一个前后切换按钮；底部显示"n / total"计数。
+  - 行为：打开后图片以轻量缩放淡入；按 Esc 或点击关闭按钮关闭，点击左右按钮或按左右方向键切换前后图片，循环或到头停住按设计选择；动画 180–240ms 并尊重 prefers-reduced-motion。
+  - Desktop / Mobile 差异：桌面端用方向键与按钮切换；移动端支持左右滑动手势，并保留可见的关闭与切换按钮作为兜底。
+  - 可访问性：容器使用 role="dialog" 与 aria-modal="true"，标题经 aria-labelledby 关联；打开后建立焦点陷阱，关闭后焦点归还触发缩略图（focus return）；Esc 关闭、方向键前后切换。
+  - 易错点：关闭后不要丢失焦点导致键盘用户"迷路"；大图加载失败时要给出可理解的错误占位；不要忽略 reduced-motion 仍保留硬切。
+related:
+  - carousel
+  - modal
+  - masonry-layout
+compare:
+  - carousel
+  - modal
+source:
+  author: W3C WAI-ARIA Authoring Practices Guide（APG）
+  url: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+  note: 定义与示例为本项目重新整理，灯箱的无障碍要求以 APG Dialog 模式为基线
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

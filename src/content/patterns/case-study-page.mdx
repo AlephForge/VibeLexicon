@@ -1,0 +1,56 @@
+---
+title: Case Study Page
+titleZh: 案例研究页
+slug: case-study-page
+category: page-structure
+order: 14
+summary: 以叙事结构完整呈现一个项目从背景、问题到方案与成果的全过程，用证据支撑可信度。
+tags:
+  - 案例复盘
+  - 叙事结构
+  - 证据支撑
+  - 作品展示
+preview: case-study-page
+whatIs: |
+  案例研究页（Case Study Page）把某个真实项目的背景、挑战、过程、方案、结果与反思组织成一段
+  完整的叙事，让读者不仅看到成品，还能理解决策依据与方法路径。它常按「问题 → 假设 → 实施 →
+  验证」展开，用数据、截图与评价作为证据；相比一页式作品展示，案例研究页篇幅更长、结构更
+  稳定，适合承载需要为结论提供论证的场景。
+useCases:
+  - 作品集中完整呈现设计或工程项目的复盘过程
+  - 服务或软件销售中用真实案例证明方法可行
+  - 团队内部沉淀可复用的项目经验与教训
+  - 教育培训中展示问题解决的推理链条
+limitations:
+  - 篇幅较长，写作与维护成本高于普通作品页
+  - 缺乏真实数据时容易沦为自我评价式宣传
+  - 过度描述过程会淹没读者最关心的结果
+prompt: |
+  请实现一个 Case Study Page 案例研究页，用叙事结构展开某个真实项目：
+
+  - 结构位置：顶部 Hero 显示项目名称、一句话成果与关键指标；正文按「背景与问题 → 方案与
+    决策 → 实施过程 → 结果与反思」划分章节；可在侧边放置章节目录，末尾附相关案例跳转。
+  - 关键行为：章节使用锚点链接并同步 URL hash，方便单独分享某一节；关键节点可用 Timeline
+    呈现，数据用可见的图表或指标卡展示而非仅靠文字断言。
+  - Desktop / Mobile 差异：桌面端章节目录固定在侧边；窄屏收起目录、正文单列，长图与数据卡
+    改为可横向滚动而不是缩小到不可读。
+  - 可访问性：标题层级清晰；图表提供文本摘要；截图有说明文字而非只贴图；章节之间的链接
+    顺序符合阅读顺序。
+  - 易错点：不要为凑篇幅塞入无关过程；避免「结果」章节只写主观评价而无数据支撑；不要把
+    同一套正文复制成多个变体页面。
+related:
+  - hero-section
+  - timeline
+  - feature-grid
+  - single-page-website
+  - footer
+compare:
+  - landing-page
+  - single-page-website
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article
+  note: 独立成篇的内容语义参考 MDN <article>，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

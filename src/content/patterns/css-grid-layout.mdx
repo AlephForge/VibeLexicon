@@ -1,0 +1,49 @@
+---
+title: CSS Grid Layout
+titleZh: CSS 网格布局
+slug: css-grid-layout
+category: layout
+order: 5
+summary: 用行与列组成的二维栅格定位内容，既是页面骨架，也是卡片与区块组合的底层能力。
+tags:
+  - CSS Grid
+  - 二维布局
+  - 栅格
+  - 分栏
+preview: css-grid-layout
+whatIs: |
+  CSS Grid 是一种面向二维的布局系统，同时控制行与列两条轴线，把内容放入由轨道组成的
+  网格单元格中。它适合搭建页面的整体骨架，也适合安排卡片与区块的纵横位置；与只处理
+  单维序列的弹性布局互补，是现代响应式页面最基本的布局语言之一。
+useCases:
+  - 搭建页面整体骨架，如头部、内容区与侧栏的组合
+  - 实现卡片墙、便当盒等网格型内容排布
+  - 用 grid-template-areas 直白描述区块分布
+  - 让内容跨行跨列形成宽窄结合的视觉节奏
+limitations:
+  - 概念数量多，需要理解轨道、线与区域之间的差异
+  - 不适合一行内形式自由的局部控件排布
+  - 大量手动命名的网格线会增加维护成本
+  - 过度嵌套网格会让结构与样式难以阅读
+prompt: |
+  请实现一个基于 CSS Grid Layout 的页面布局：
+
+  - 结构位置：用 display: grid 定义页面骨架，包含主要内容区与辅助栏；内容区内用 repeat(auto-fit, minmax(...)) 生成自适应列。
+  - 关键行为：用 grid-template-areas 语义化描述头部、主体、侧栏与页脚区域；卡片宽度由列轨道决定，间距统一使用 gap；跨列条目用 grid-column 的 span。
+  - Desktop / Mobile 差异：桌面端使用多列（可按设计稿的比例划分轨道），窄屏切换为单列文档流。
+  - 可访问性：网格视觉顺序必须与 DOM 顺序一致，避免视觉重排破坏键盘与屏幕阅读器顺序；不要用空 div 占位轨道去强制对齐。
+  - 易错点：不要用 Grid 强求逐像素对齐的装饰细节；轨道用 minmax 与 auto-fit 防止内容溢出容器；不要把一个超长的 grid-template 堆成不可维护的代码。
+related:
+  - flexbox
+  - bento-grid
+  - dashboard-layout
+  - responsive-layout
+compare:
+  - flexbox
+source:
+  author: MDN contributors（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout
+  note: 定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

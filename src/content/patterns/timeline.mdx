@@ -1,0 +1,55 @@
+---
+title: Timeline
+titleZh: 时间线
+slug: timeline
+category: page-structure
+order: 18
+summary: 沿一条时间轴排布事件或节点，用先后顺序清晰呈现进程、沿革与里程碑。
+tags:
+  - 时间轴
+  - 事件顺序
+  - 里程碑
+  - 进程展示
+preview: timeline
+whatIs: |
+  时间线（Timeline）把一组带时间属性的事件或阶段沿一条主轴顺序排布，每个节点由时间点与简短
+  说明构成，让读者快速把握先后关系与整体进程。它适合呈现项目里程碑、版本沿革、事件编年等
+  「顺序即信息」的内容；实现重点是保持节点语义清晰、时间可读，并避免大段文本把轴线压成
+  普通列表。
+useCases:
+  - 项目里程碑或产品版本的演进过程
+  - 品牌故事、公司沿革等活动复盘
+  - 事件编年与人物履历的线性展示
+  - 案例研究页中关键步骤的时间回顾
+limitations:
+  - 事件过多或时间参数不规整时内容易拥挤
+  - 大段描述混入节点会破坏轴线节奏
+  - 窄屏下横轴或复杂分支会降低可读性
+prompt: |
+  请实现一个 Timeline 时间线区块，把有先后关系的事件组织成一条清晰时间轴：
+
+  - 结构位置：一条主轴贯穿区块，节点沿轴排列；每个节点包含时间标签与对应标题、简短说明；
+    区块内可有自己的分组标题（h2），节点标题为 h3。
+  - 关键行为：内容用有序语义承载（ol + 节点），时间标签用 <time> 与可读的日期文本；默认
+    全部展开、重要节点可跳转，不做自动播放；节点数量超过一屏时允许分章节。
+  - Desktop / Mobile 差异：桌面端可取垂直单列或交替左右布局；窄屏固定为单列、时间贴左或
+    贴行首，避免横轴在小屏上横向滚动。
+  - 可访问性：轴线与节点作为视觉装饰不影响语义顺序；时间文本供读屏直接读取；节点标题层级
+    合理；局部动效尊重 prefers-reduced-motion。
+  - 易错点：不要只画一条 CSS 线而丢失可读的文本顺序；避免把非时间序列的内容硬套进时间线；
+    不要把大段文字塞进节点导致轴线消失。
+related:
+  - sticky-storytelling
+  - case-study-page
+  - anchor-link
+  - single-page-website
+compare:
+  - sticky-storytelling
+  - carousel
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol
+  note: 时间节点作为有序序列的语义参考 MDN <ol>，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

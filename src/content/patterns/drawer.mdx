@@ -1,0 +1,49 @@
+---
+title: Drawer
+titleZh: 抽屉
+slug: drawer
+category: components
+order: 32
+summary: 从屏幕侧边滑出的面板，用于承载次级导航或操作内容，而不打断当前页面的主任务。
+tags:
+  - 侧边面板
+  - 导航
+  - 移动端
+  - 操作面板
+preview: drawer
+whatIs: |
+  抽屉（Drawer）是一种从屏幕边缘滑入的侧边面板，通常从右侧或左侧进入，并覆盖在
+  部分内容之上。它用于在不离开当前页面的前提下，承载导航、筛选、操作项或设置等
+  次级内容；与模态框不同，抽屉的宽面板更适合容纳列表式内容，用户在关闭前仍能保留
+  当前页面的语境。
+useCases:
+  - 移动端收起主导航，打开时滑出菜单面板
+  - 展示筛选器或高级设置，不离开当前页面
+  - 承载与当前任务相关的操作清单
+  - 需要比模态框更大横向空间的内容
+limitations:
+  - 只适合单一面板，不适合多层级深度导航
+  - 内容过多时依赖滚动，层级与可达性容易失控
+  - 会遮挡页面内容，不适合需要对照上下文的操作
+prompt: |
+  请在页面右侧实现一个 Drawer 抽屉面板：
+
+  - 结构位置：面板从视口右缘滑入，宽度约 320px，遮罩覆盖其余区域；触发按钮位于页面右上角。
+  - 行为：打开时面板带遮罩滑入，关闭时反向滑出；点击遮罩、按 Esc 或点击关闭按钮均可关闭；打开期间锁定背景滚动。
+  - Desktop / Mobile 差异：桌面端可叠加在内容之上；窄屏下可占满约 85% 宽度，避免完全遮住上下文。
+  - 可访问性：面板使用 role="dialog" 与 aria-modal="true"，初始焦点移入面板，焦点限制在面板内，关闭后焦点归还触发按钮。
+  - 易错点：不要忘记背景滚动锁定与焦点陷阱；动画时长 220–280ms 且尊重 prefers-reduced-motion；内容过多时面板内部需可滚动。
+related:
+  - modal
+  - sidebar-navigation
+  - hamburger-menu
+compare:
+  - modal
+  - sidebar-layout
+source:
+  author: Material Design
+  url: https://m3.material.io/components/navigation-drawer/overview
+  note: 定义与示例为本项目重新整理，行为约定参考 Material Design Navigation Drawer
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

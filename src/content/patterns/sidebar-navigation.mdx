@@ -1,0 +1,56 @@
+---
+title: Sidebar Navigation
+titleZh: 侧边导航
+slug: sidebar-navigation
+category: navigation
+order: 26
+summary: 常驻页面或应用侧边的垂直导航栏，长期展示多级导航、目录与当前会话状态。
+tags:
+  - 垂直导航
+  - 目录
+  - 多级结构
+  - 桌面端布局
+preview: sidebar-navigation
+whatIs: |
+  侧边导航（Sidebar Navigation）是固定在内容区左侧（少数为右侧）的垂直导航栏，长期保持
+  可见。它与顶栏导航相比能容纳更多层级与条目，并同时展示父级与当前展开的子级，适合文档、
+  SaaS 后台、仪表盘等以任务为主导、需要并排阅读目录与正文的界面。
+useCases:
+  - 文档站、管理后台等需要长期展示多级导航的场景
+  - 与内容区域并排、可随时对照的固定目录
+  - 仪表盘等任务导向、状态丰富的工具界面
+  - 需要同时呈现导航层级与当前激活状态的桌面布局
+limitations:
+  - 在窄屏上常驻侧栏会明显挤压内容宽度
+  - 层级过深时垂直滚动与「收起/展开」逻辑变复杂
+  - 信息架构简单时使用侧栏反而笨重
+  - 移动端一般需退化为抽屉或底部导航
+prompt: |
+  请在页面左侧实现一个 Sidebar Navigation 侧边导航：
+
+  - 结构位置：侧栏位于内容区左侧，固定宽度约 240–280px，高度与视口等长，内部可滚动；
+    一级导航可展开子级，展开项高亮；内容区向右自动留出侧栏宽度。
+  - 行为：侧栏常驻可见，滚动时与内容区独立滚动或整体同步；一级导航支持「展开/收起」
+    子项，子项激活后侧栏保持该组展开；当前项以背景色与 aria-current 双重表达。
+  - Desktop / Mobile 差异：桌面端侧栏常驻；窄屏下折叠为抽屉或 Drawer，通过汉堡按钮
+    打开，打开期间锁定背景滚动、关闭后焦点归还触发按钮。
+  - 可访问性：侧栏用 <nav> 包裹并加 aria-label（如「文档目录」）；可折叠组按 Disclosure
+    语义实现，触发按钮用 aria-expanded 表达状态；焦点可见并可键盘到达每一层；
+    aria-current="page" 用于当前条目；为正文提供跳过导航的 Skip Link。
+  - 易错点：不要用 div+JS 模拟 <nav>；折叠组禁用时不要移除其子项的键盘可达性；吸顶
+    与锚点配合时注意目标偏移；不要在窄屏同时打开多个独立导航面板。
+related:
+  - drawer
+  - dashboard-layout
+  - hamburger-menu
+  - breadcrumb
+  - tabs
+compare:
+  - mega-menu
+source:
+  author: MDN Web Docs（Mozilla）
+  url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
+  note: 导航区语义参考 MDN <nav>，定义、场景与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

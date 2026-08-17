@@ -1,0 +1,85 @@
+---
+// Pattern Detail 相关模式（Detail / Issue #10）
+// PRD §9.2「Related（related+compare；compare 标'对比相关'）」：
+// - related 正常展示；compare 项带「对比相关」角标；
+// - 同 slug 同时出现在 related 与 compare 时按 compare 处理（对比语义更精确）；
+// - 防御性：缺失 / 指向自身的 slug 直接跳过。
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  related: string[];
+  compare: string[];
+  patterns: CollectionEntry<'patterns'>[];
+  currentSlug: string;
+  base: string;
+}
+
+const { related, compare, patterns, currentSlug, base } = Astro.props;
+
+const bySlug = new Map(patterns.map((p) => [p.data.slug, p]));
+const compareSet = new Set(compare);
+
+type RelatedItem = {
+  entry: CollectionEntry<'patterns'>;
+  kind: 'related' | 'compare';
+};
+
+const items: RelatedItem[] = [];
+for (const slug of related) {
+  const entry = bySlug.get(slug);
+  if (!entry || entry.data.slug === currentSlug || compareSet.has(slug)) continue;
+  items.push({ entry, kind: 'related' });
+}
+for (const slug of compare) {
+  const entry = bySlug.get(slug);
+  if (!entry || entry.data.slug === currentSlug) continue;
+  items.push({ entry, kind: 'compare' });
+}
+
+const hasItems = items.length > 0;
+---
+
+{hasItems && (
+  <section aria-labelledby="related-heading" class="mt-14">
+    <h2 id="related-heading" class="font-serif text-2xl font-bold text-ink">
+      相关模式
+    </h2>
+    <p class="mt-1.5 text-sm text-muted-strong">看看这些与当前模式相近或可对照的模式。</p>
+    <ul class="mt-4 flex flex-col gap-2.5">
+      {
+        items.map(({ entry, kind }) => {
+          const d = entry.data;
+          return (
+            <li>
+              <a
+                href={`${base}patterns/${d.slug}/`}
+                class="card-surface group flex items-center gap-4 rounded-card p-4 text-ink no-underline sm:p-5"
+              >
+                <div class="min-w-0 flex-1">
+                  <p class="text-base font-semibold leading-snug text-ink">
+                    {d.title}
+                    <span class="ml-1.5 font-sans text-sm font-normal text-muted">
+                      {d.titleZh}
+                    </span>
+                  </p>
+                  <p class="mt-1 truncate text-sm text-muted">{d.summary}</p>
+                </div>
+                {kind === 'compare' && (
+                  <span class="tag shrink-0 bg-accent-soft text-accent-deep">
+                    对比相关
+                  </span>
+                )}
+                <span
+                  aria-hidden="true"
+                  class="shrink-0 text-muted transition-colors duration-feedback ease-feedback group-hover:text-accent-deep"
+                >
+                  →
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+)}

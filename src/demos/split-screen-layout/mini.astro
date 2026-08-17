@@ -1,0 +1,20 @@
+---
+// Mini Preview: split-screen-layout（分屏布局）-- 纯静态，零 JS，Gallery/Stream 用
+---
+<div class="w-full aspect-[16/9] bg-canvas border border-line rounded-card overflow-hidden p-4">
+  <div class="grid grid-cols-2 gap-2 h-full">
+    <div class="rounded-control bg-accent-soft/70 border border-accent-soft flex items-center justify-center">
+      <span class="text-lg text-accent-deep">◧</span>
+    </div>
+    <div class="card-surface rounded-control p-3 flex flex-col justify-center gap-2">
+      <div class="h-2 w-2/3 rounded-full bg-accent"></div>
+      <div class="h-1.5 w-full rounded-full bg-line"></div>
+      <div class="h-1.5 w-11/12 rounded-full bg-line"></div>
+      <div class="h-1.5 w-3/4 rounded-full bg-line"></div>
+      <div class="flex gap-1.5 mt-1">
+        <span class="h-5 w-14 rounded-control bg-dark-bg"></span>
+        <span class="h-5 w-14 rounded-control border border-line"></span>
+      </div>
+    </div>
+  </div>
+</div>

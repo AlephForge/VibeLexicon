@@ -1,0 +1,57 @@
+---
+title: Feature Grid
+titleZh: 功能网格
+slug: feature-grid
+category: page-structure
+order: 16
+summary: 用规整网格排布一组功能或特性卡片，让用户快速扫描、比较并吸收核心价值。
+tags:
+  - 网格卡片
+  - 功能罗列
+  - 快速扫描
+  - 落地页区块
+preview: feature-grid
+whatIs: |
+  功能网格（Feature Grid）把一组功能、特性或优势组织成行列规整的卡片区块，每个单元通常由
+  图标、标题与简短描述构成。网格的均匀节奏利用视线的扫描规律，让读者在短时间内比较相邻条目
+  并把握整体能力边界；它是落地页与产品页对「我们提供什么」的高密度又克制的表达方式，依赖
+  一致的卡片结构与恰到好处的护栏约束。
+useCases:
+  - 落地页或主页集中罗列产品核心功能
+  - 定价或套餐页并排比较不同能力组合
+  - 把服务能力拆解为易于扫描的条目化表达
+  - 需要同时呈现多条目又避免手风琴层层收纳时
+limitations:
+  - 条目过多时信息被摊平，重点难以凸显
+  - 卡片文案长短不一会破坏网格节奏
+  - 纯装饰图标占用视觉空间却无信息增量
+prompt: |
+  请实现一个 Feature Grid 功能网格区块，用于集中呈现一组功能或特性：
+
+  - 结构位置：区块包含一个分组标题（h2），下方为 3–12 个结构一致的卡片；每张卡片由图标、
+    短标题（h3）与一句话描述组成，整体使用 CSS Grid 按需定义列数。
+  - 关键行为：卡片为静态展示，可包含跳转链接；整卡可点时仍需保留可读的文本链接；条目
+    均等对齐，不因为某项内容多而歪曲网格节奏。
+  - Desktop / Mobile 差异：桌面端 3–4 列并排；窄屏降到 1–2 列，图标与标题收缩，避免横向
+    溢出；触控目标不小于 44×44px。
+  - 可访问性：标题层级从区块 h2 到卡片 h3 严格递进；图标为装饰性时使用 aria-hidden；
+    对比度满足正文可读标准；卡片间不使用仅靠颜色的分组。
+  - 易错点：不要用不平衡的强烈卡片样式让功能条目互相争抢焦点；避免把相邻网格当豪华特效
+    舞台；条目超过一屏时优先做分类或分区而非无限加列。
+related:
+  - hero-section
+  - card-based-layout
+  - bento-grid
+  - css-grid-layout
+  - landing-page
+compare:
+  - card-based-layout
+  - bento-grid
+  - masonry-layout
+source:
+  author: Nielsen Norman Group
+  url: https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content/
+  note: 网格式排布依赖视线扫描规律，参考 NN/g 的 F 型视线模式文章；定义与示例为本项目重新整理
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}

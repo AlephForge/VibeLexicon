@@ -1,0 +1,48 @@
+---
+title: Carousel
+titleZh: 轮播图
+slug: carousel
+category: components
+order: 36
+summary: 在固定区域内轮番展示多张图片或卡片，让有限空间承载更多内容的浏览组件。
+tags:
+  - 轮播
+  - 滑动切换
+  - 图片展示
+  - 内容浏览
+preview: carousel
+whatIs: |
+  轮播图（Carousel）在页面中一片固定的区域内，通过左右滑动、按钮或自动播放逐个
+  展示一组图片或卡片，用于在有限空间内浏览多张视觉内容。它常见于首屏焦点图、
+  商品画廊与卡片推荐位；但自动轮播与不可控的切换会给可访问性和信息读取带来明显
+  代价，因此每一项自动行为都应提供用户控制。
+useCases:
+  - 网站首页的焦点图位轮播
+  - 商品多角度图片的切换浏览
+  - 横向排布的多张内容卡片推荐
+  - 案例集与作品集的翻页展示
+limitations:
+  - 自动轮播让内容难以读完，尤其对手动辅助用户
+  - 一次只显示一张，关键信息容易被藏在后面
+  - 页面加载时的轮播不友好于 SEO 与内容抓取
+prompt: |
+  请在页面实现一个 Carousel 轮播图：
+
+  - 结构位置：一个横向轨道容器承载多张 slide，左右各一个切换按钮，底部含分页指示器；置于首屏焦点图或商品图区域。
+  - 行为：点击左右按钮或拖拽滑动切换 slide；启用自动播放时必须提供暂停/继续按钮，且鼠标悬停或键盘聚焦时自动暂停；切换动画约 250–350ms 并尊重 prefers-reduced-motion（关闭动画时直接切换）。
+  - Desktop / Mobile 差异：桌面端一次展示 1 张或多张（响应式可见数量）；移动端以单屏滑动为主，保留按钮与触摸手势双通道。
+  - 可访问性：轨道使用 role="group" 与 aria-roledescription="carousel"，每张 slide 用 aria-label 编号命名；左右按钮可键盘操作；自动轮播需聚焦或悬停暂停（焦点进入即停止）。
+  - 易错点：不要让自动播放没有暂停入口；循环切换时不要丢失当前索引状态；不要把跳转链接的文案都写成"了解更多"。
+related:
+  - lightbox
+  - hero-section
+  - card-based-layout
+compare:
+  - lightbox
+source:
+  author: web.dev（Google）
+  url: https://web.dev/articles/carousels
+  note: 定义与示例为本项目重新整理，可访问性实践参考 web.dev Carousel 最佳实践
+---
+
+{/* 增强正文（MVP 可选）：常见变体、Accessibility Notes、Do / Don't */}
